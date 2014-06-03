@@ -11,7 +11,7 @@
 	cob = checkout -b
 	com = commit -m
 	t = tag -l
-	b = branch -a
+	b = branch
 	r = remote -v
 
 [core]
