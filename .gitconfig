@@ -1,6 +1,6 @@
 [alias]
-	l = log --pretty=oneline -n 20 --graph
-	a = add
+	l = log --pretty=format:"%H%x09%an%x09%ad%x09%s" --date=short -n 100
+	a = add --all
 	m = merge
 	s = status
 	d = diff 
@@ -13,6 +13,7 @@
 	t = tag -l
 	b = branch
 	r = remote -v
+	psu = push -u origin HEAD
 
 [core]
 	excludesfile = /Users/wolf/.gitignore
