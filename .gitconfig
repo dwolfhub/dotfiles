@@ -1,63 +1,34 @@
-[alias]
-	l = log --pretty=oneline -n 20 --graph
-	a = add
-	m = merge
-	s = status
-	d = diff 
-	pl = pull
-	ps = push	
-	c = clone
-	co = checkout
-	cob = checkout -b
-	com = commit -m
-	t = tag -l
-	b = branch
-	r = remote -v
-
-[core]
-	excludesfile = /Users/wolf/.gitignore
-	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
-	whitespace = space-before-tab,indent-with-non-tab,trailing-space
-
-[color]
-	# Use colors in Git commands that are capable of colored output when outputting to the terminal
-	ui = auto
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
-[merge]
-	# Include summaries of merged commits in newly created merge commit messages
-	log = true
-
-# Use `origin` as the default remote on the `master` branch in all cases
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master
-
-[credential]
-	helper = osxkeychain
 [user]
-	email = danielrwolf5@gmail.com
 	name = Daniel Wolf
+	email = daniel.wolf@punchkickinteractive.com
 [push]
-        default = simple
+	default = simple
 [core]
-        excludesfile = /Users/danielwolf/.gitignore_global
+	excludesfile = /Users/danielwolf/.gitignore_global
 [rerere]
-        enabled = 1
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	enabled = 1
+[merge]
+        tool = sourcetree
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[alias]
+        l = log --pretty=format:"%H%x09%an%x09%ad%x09%s" --date=short -n 100 
+        a = add --all
+        m = merge
+        s = status
+        d = diff
+        pl = pull
+        ps = push
+        c = clone
+        co = checkout
+        cob = checkout -b
+        com = commit -m
+        coma = commit --amend -m
+        t = tag -l
+        b = branch
+        r = remote -v
+        psu = push -u origin HEAD
+        
+[color]
+        ui = true
