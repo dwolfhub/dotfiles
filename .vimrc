@@ -6,7 +6,7 @@ set ignorecase
 set smartcase
 set autoindent
 set visualbell
-set mouse=a
+set mouse=c
 set number
 set shiftwidth=4
 set softtabstop=4
