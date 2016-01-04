@@ -6,7 +6,7 @@
 	s = status
 	d = diff 
 	pl = pull
-	ps = push
+	ps = push -u origin HEAD
 	c = clone
 	co = checkout
 	cob = checkout -b
@@ -14,10 +14,9 @@
 	t = tag -l
 	b = branch
 	r = remote -v
-	psu = push -u origin HEAD
 
 [core]
-	excludesfile = /Users/wolf/.gitignore
+	excludesfile = ~/dotfiles/.gitignore
 	# Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
 	whitespace = space-before-tab,indent-with-non-tab,trailing-space
 
