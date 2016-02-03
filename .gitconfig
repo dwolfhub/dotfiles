@@ -9,8 +9,8 @@
 	ps = push -u origin HEAD
 	c = clone
 	co = checkout
-	cob = checkout -b
-	com = commit -m
+	cb = checkout -b
+	cm = commit -m
 	t = tag -l
 	b = branch
 	r = remote -v

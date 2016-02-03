@@ -1,3 +1,4 @@
 dev-to-uat.sh
 master-to-dev.sh
 .idea/
+.DS_Store
