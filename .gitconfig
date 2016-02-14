@@ -11,6 +11,7 @@
 	co = checkout
 	cb = checkout -b
 	cm = commit -m
+        ca = commit --ammend
 	t = tag -l
 	b = branch
 	r = remote -v
