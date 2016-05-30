@@ -12,9 +12,11 @@
 	cb = checkout -b
 	cm = commit -m
         ca = commit --amend
-	t = tag -l
+	tl = tag -l
 	b = branch
 	r = remote -v
+        t = tag
+        db = branch -d
 
 [core]
 	excludesfile = ~/dotfiles/.gitignore
