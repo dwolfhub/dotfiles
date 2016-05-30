@@ -1,5 +1,5 @@
 [alias]
-	l = log --pretty=format:"%H%x09%an%x09%ad%x09%s" --date=short -n 100
+	l = log --pretty=format:"%H%x09%an%x09%ad%x09%s" -n 100
 	a = add --all
         ap = add -p
 	m = merge
@@ -7,13 +7,17 @@
 	d = diff 
 	pl = pull
 	ps = push -u origin HEAD
+        pf = push -u origin HEAD -f
 	c = clone
 	co = checkout
 	cb = checkout -b
 	cm = commit -m
 	t = tag -l
 	b = branch
+        bd = branch -d
 	r = remote -v
+        mb = merge-base
+        rb = rebase -i
 
 [core]
 	excludesfile = ~/dotfiles/.gitignore
