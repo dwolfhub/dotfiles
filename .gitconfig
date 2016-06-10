@@ -12,6 +12,7 @@
 	co = checkout
 	cb = checkout -b
 	cm = commit -m
+        cl = checkout -- .
         ca = commit --amend
 	tl = tag -l
 	b = branch
