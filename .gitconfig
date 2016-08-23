@@ -60,6 +60,6 @@
 [push]
     default = simple
 [core]
-   excludesfile = /Users/danielwolf/.gitignore_global
+   excludesfile = ~/dotfiles/.gitignore
 [rerere]
     enabled = 1
