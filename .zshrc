@@ -14,6 +14,23 @@ ZSH_THEME="robbyrussell"
 # Git
 alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
+# nginx
+alias nginx_start='sudo launchctl load -w /Library/LaunchDaemons/org.macports.nginx.plist'
+alias nginx_stop='sudo launchctl unload -w /Library/LaunchDaemons/org.macports.nginx.plist'
+alias nginx_restart='nginx_stop; nginx_start;'
+
+#php-fpm
+alias fpm_start='sudo launchctl load -w /Library/LaunchDaemons/org.macports.php56-fpm.plist'
+alias fpm_stop='sudo launchctl unload -w /Library/LaunchDaemons/org.macports.php56-fpm.plist'
+alias fpm_restart='fpm_stop; fpm_start'
+
+# ctags using macports version
+alias ctags="/opt/local/bin/ctags"
+
+# don't capture ctrl-s so we can use it to save in vim
+alias vim="stty stop '' -ixoff ; vim"
+ttyctl -f
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -57,7 +74,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Applications/MAMP/bin/php/php5.4.4/bin:/Users/wolf/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/wolf/pear/bin:/Applications/MAMP/Library/bin"
+export PATH="/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Applications/MAMP/bin/php/php5.4.4/bin:/Users/wolf/.rbenv/shims:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/wolf/pear/bin:/Applications/MAMP/Library/bin:/opt/local/bin:/usr/local/mysql-5.6.19-osx10.7-x86/bin:/Users/danielwolf/.composer/vendor/bin:/opt/local/sbin:/usr/local/mysql-5.7.12-osx10.11-x86_64/bin"
+# export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Applications/MAMP/bin/php/php5.4.4/bin:/Users/wolf/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/wolf/pear/bin:/Applications/MAMP/Library/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -75,3 +93,6 @@ export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frame
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+export NVM_DIR="/Users/danielwolf/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
