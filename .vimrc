@@ -12,7 +12,7 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-# folding
+"folding
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
