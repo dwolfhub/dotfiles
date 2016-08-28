@@ -52,19 +52,14 @@
     remote = origin
     merge = refs/heads/master
 
-# [credential]
-#   helper = osxkeychain
+[credential]
+    helper = osxkeychain
 [user]
     name = Daniel Wolf
     email = danielrwolf5@gmail.com
 [push]
     default = simple
-#[core]
-#   excludesfile = /Users/danielwolf/.gitignore_global
+[core]
+   excludesfile = ~/dotfiles/.gitignore
 [rerere]
     enabled = 1
-#[merge]
-#        tool = sourcetree
-#[mergetool "sourcetree"]
-#   cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-#   trustExitCode = true
