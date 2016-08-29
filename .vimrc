@@ -3,9 +3,6 @@ filetype off
 
 let mapleader = ","
 
-" map ctrl+s to save
-inoremap <c-s> <Esc>:update<CR>
-
 "let g:neocomplete#enable_at_startup = 1
 "let g:phpcomplete_index_composer_command='/opt/local/bin/composer'
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
@@ -40,6 +37,7 @@ set expandtab
 " make backspace work like other programs
 set backspace=indent,eol,start
 
+"folding
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
@@ -59,3 +57,6 @@ set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
+
+"ctrl-s saves from visual mode
+inoremap <c-s> <Esc>:w<CR>
