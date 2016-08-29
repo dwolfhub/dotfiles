@@ -11,8 +11,21 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
 Bundle 'gmarik/vundle'
-Bundle 'wincent/command-t'
-Bundle 'lumiliet/vim-twig'
+
+"command-t for finding files
+Bundle 'wincent/command-t' 
+
+"twig syntax
+Bundle 'lumiliet/vim-twig' 
+
+"emmet short cuts
+Bundle 'mattn/emmet-vim' 
+
+"phpdoc generator
+Bundle 'tobyS/vmustache'
+Bundle 'tobyS/pdv'
+
+"TODO these need vetting
 "Bundle 'Shougo/vimproc'
 "Bundle 'Shougo/unite.vim'
 "Bundle 'm2mdas/phpcomplete-extended'
@@ -59,4 +72,12 @@ set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
 
 "ctrl-s saves from visual mode
-inoremap <c-s> <Esc>:w<CR>
+inoremap <c-s> <Esc>:update<CR>
+
+"set emmet short cut
+let g:user_emmet_leader_key='<leader>'
+
+"pdv (phpdoc) templates directory
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates"
+"shortcut for pdv (phpdoc)
+nnoremap <buffer> <C-p> :call pdv#DocumentCurrentLine()<CR>
