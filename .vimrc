@@ -6,7 +6,6 @@ let mapleader = ","
 "let g:neocomplete#enable_at_startup = 1
 "let g:phpcomplete_index_composer_command='/opt/local/bin/composer'
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
@@ -59,17 +58,17 @@ set foldlevel=1
 " always show status line
 set laststatus=2
 
-set statusline=%t       "tail of the filename
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=\ %{&ff}] "file format
-set statusline+=\ %h      "help file flag
-set statusline+=\ %m      "modified flag
-set statusline+=\ %r      "read only flag
-set statusline+=\ %y      "filetype
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
+set statusline=%t                                   "tail of the filename
+set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},   "file encoding
+set statusline+=\ %{&ff}]                           "file format
+set statusline+=\ %h                                "help file flag
+set statusline+=\ %m                                "modified flag
+set statusline+=\ %r                                "read only flag
+set statusline+=\ %y                                "filetype
+set statusline+=%=                                  "left/right separator
+set statusline+=%c,                                 "cursor column
+set statusline+=%l/%L                               "cursor line/total lines
+set statusline+=\ %P                                "percent through file
 
 "ctrl-s saves from visual mode
 inoremap <c-s> <Esc>:update<CR>

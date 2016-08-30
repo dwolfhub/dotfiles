@@ -28,7 +28,7 @@ alias fpm_restart='fpm_stop; fpm_start'
 alias ctags="/opt/local/bin/ctags"
 
 # don't capture ctrl-s so we can use it to save in vim
-alias vim="stty stop '' -ixoff ; vim"
+alias vim="stty stop '' -ixoff ; /opt/local/bin/vim"
 ttyctl -f
 
 # Uncomment the following line to use case-sensitive completion.
