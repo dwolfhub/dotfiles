@@ -54,7 +54,7 @@ set backspace=indent,eol,start
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
-set foldlevel=1
+set foldlevel=5
 
 " always show status line
 set laststatus=2
