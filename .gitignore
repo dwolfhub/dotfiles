@@ -3,4 +3,5 @@ master-to-dev.sh
 .idea/
 .DS_Store
 *.swp
+*.swo
 tags
