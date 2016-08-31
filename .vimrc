@@ -78,10 +78,11 @@ let g:user_emmet_leader_key='<leader>'
 "pdv (phpdoc) templates directory
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 "shortcut for pdv (phpdoc)
-nnoremap <buffer> <C-p> :call pdv#DocumentCurrentLine()<CR>
+nnoremap <buffer> <C-m> :call pdv#DocumentWithSnip()<CR>
 
 "ultisnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="horizontal"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME . "/dotfiles/vim_snips"]
