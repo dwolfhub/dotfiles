@@ -21,6 +21,7 @@ Bundle 'lumiliet/vim-twig'
 Bundle 'mattn/emmet-vim' 
 
 "phpdoc generator
+Plugin 'SirVer/ultisnips'
 Bundle 'tobyS/vmustache'
 Bundle 'tobyS/pdv'
 
@@ -51,9 +52,7 @@ set backspace=indent,eol,start
 
 "folding
 set foldmethod=indent
-set foldnestmax=10
 set nofoldenable
-set foldlevel=5
 
 " always show status line
 set laststatus=2
@@ -77,6 +76,12 @@ inoremap <c-s> <Esc>:update<CR>
 let g:user_emmet_leader_key='<leader>'
 
 "pdv (phpdoc) templates directory
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates"
+let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 "shortcut for pdv (phpdoc)
 nnoremap <buffer> <C-p> :call pdv#DocumentCurrentLine()<CR>
+
+"ultisnips configuration
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="horizontal"
