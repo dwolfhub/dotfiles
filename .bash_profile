@@ -7,9 +7,9 @@ update_prompt() {
     _VC_PROMPT=$(vcprompt --format="%b%m%a")
     if [ -z "$_VC_PROMPT" ]
     then
-    export PS1="\[\033[0;97m\]\W > \[\033[0;37m\]"
+    export PS1="\[\033[0;97m\]\W \[\033[0;47m\]💣  \[\033[0;37m\]"
     else
-    export PS1="\[\033[0;97m\]\W ($_VC_PROMPT) > \[\033[0;37m\]"
+    export PS1="\[\033[0;97m\]\W \[\033[0;91m\]$_VC_PROMPT \[\033[0;107m\]💣 \[\033[40m\] \[\033[0;37m\]"
     fi
 }
 PROMPT_COMMAND=update_prompt
