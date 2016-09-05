@@ -4,4 +4,5 @@ master-to-dev.sh
 .DS_Store
 *.swp
 *.swo
+*.pyc
 tags
