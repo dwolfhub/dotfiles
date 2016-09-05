@@ -15,17 +15,18 @@
     cl = checkout -- .
     ca = commit --amend
     tl = tag -l
-    b = branch
+    b = branch -vr
     bd = branch -d
     r = remote -v
+    t = tag -a
     mb = merge-base
     rb = rebase -i
-    t = tag
 
 [core]
     excludesfile = ~/dotfiles/.gitignore
     # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
     whitespace = space-before-tab,indent-with-non-tab,trailing-space
+    editor = vim
 
 [color]
     # Use colors in Git commands that are capable of colored output when outputting to the terminal
