@@ -3,16 +3,16 @@
 export PATH="/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Applications/MAMP/bin/php/php5.4.4/bin:/Users/wolf/.rbenv/shims:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/wolf/pear/bin:/Applications/MAMP/Library/bin:/opt/local/bin:/usr/local/mysql-5.6.19-osx10.7-x86/bin:/Users/danielwolf/.composer/vendor/bin:/opt/local/sbin:/usr/local/mysql-5.7.12-osx10.11-x86_64/bin:/opt/vagrant/embedded/gems/bin/:/Users/danielwolf/bin"
 
 # command prompt
-update_prompt() {
+prompt_command() {
     _VC_PROMPT=$(vcprompt --format="%b%m%a")
     if [ -z "$_VC_PROMPT" ]
     then
-    export PS1="\[\033[0;97m\]\W \[\033[0;47m\]💣  \[\033[0;37m\]"
+    export PS1="\[\033[0;97m\]\W 💣 \[\033[0;37m\] "
     else
-    export PS1="\[\033[0;97m\]\W \[\033[0;91m\]$_VC_PROMPT \[\033[0;107m\]💣 \[\033[40m\] \[\033[0;37m\]"
+    export PS1="\[\033[0;97m\]\W \[\033[0;91m\]$_VC_PROMPT 💣  \[\033[0;37m\]"
     fi
 }
-PROMPT_COMMAND=update_prompt
+PROMPT_COMMAND=prompt_command
 
 # case-insensitive auto-complete with tab
 bind "set completion-ignore-case on"
