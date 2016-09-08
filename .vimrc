@@ -80,6 +80,9 @@ let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 "shortcut for pdv (phpdoc)
 nnoremap <buffer> <C-m> :call pdv#DocumentWithSnip()<CR>
 
+"shortcut for removing highlighting
+nnoremap <buffer> <leader>n :nohl<CR>
+
 "ultisnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
