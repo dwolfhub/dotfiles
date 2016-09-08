@@ -29,8 +29,7 @@ vim()
 }
 
 # listing directory shortcuts
-alias ll="ls -l"
-alias la="ls -a"
+alias ll="ls -la"
 
 # clear git branches that are already merged
 alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
