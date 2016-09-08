@@ -71,6 +71,11 @@ set statusline+=\ %P                                "percent through file
 
 "ctrl-s saves from visual mode
 inoremap <c-s> <Esc>:update<CR>
+nnoremap <Leader>n :nohl<CR>
+
+"cycle through grep results with C-n and C-p
+nmap <silent> <C-N> :cn<CR>zv
+nmap <silent> <C-P> :cp<CR>zv
 
 "set emmet short cut
 let g:user_emmet_leader_key='<leader>'
@@ -78,7 +83,7 @@ let g:user_emmet_leader_key='<leader>'
 "pdv (phpdoc) templates directory
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 "shortcut for pdv (phpdoc)
-nnoremap <buffer> <C-m> :call pdv#DocumentWithSnip()<CR>
+nnoremap <buffer> <C-d> :call pdv#DocumentWithSnip()<CR>
 
 "ultisnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"

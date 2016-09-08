@@ -3,6 +3,7 @@ master-to-dev.sh
 .idea/
 .DS_Store
 *.swp
+*.swn
 *.swo
 *.pyc
 tags
