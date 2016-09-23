@@ -73,7 +73,7 @@ set statusline+=\ %P                                "percent through file
 inoremap <c-s> <Esc>:update<CR>
 
 "set emmet short cut
-let g:user_emmet_leader_key='<leader>'
+let g:user_emmet_leader_key='<Leader>'
 
 "pdv (phpdoc) templates directory
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
@@ -81,7 +81,7 @@ let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-m> :call pdv#DocumentWithSnip()<CR>
 
 "shortcut for removing highlighting
-nnoremap <buffer> <leader>n :nohl<CR>
+nnoremap <Leader>n :nohl<CR>
 
 "ultisnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"
