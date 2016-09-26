@@ -21,6 +21,7 @@
     t = tag -a
     mb = merge-base
     rb = rebase -i
+    rb = reset head
 
 [core]
     excludesfile = ~/dotfiles/.gitignore
