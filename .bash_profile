@@ -7,9 +7,19 @@ prompt_command() {
     _VC_PROMPT=$(~/dotfiles/bin/vcprompt --format="%b%m%a")
     if [ -z "$_VC_PROMPT" ]
     then
-    export PS1="\[\033[0;97m\]\W 💣 \[\033[0;37m\] "
+        if [ -z "$VIRTUAL_ENV" ]
+        then
+            export PS1="\[\033[0;97m\]\W 💣 \[\033[0;37m\] "
+        else
+            export PS1="\[\033[0;97m\]\W  \[\033[1;32m\]v 💣 \[\033[0;37m\] "
+        fi
     else
-    export PS1="\[\033[0;97m\]\W \[\033[0;91m\]$_VC_PROMPT 💣  \[\033[0;37m\]"
+        if [ -z "$VIRTUAL_ENV" ]
+        then
+            export PS1="\[\033[0;97m\]\W \[\033[0;91m\]$_VC_PROMPT 💣  \[\033[0;37m\]"
+        else
+            export PS1="\[\033[0;97m\]\W \[\033[0;91m\]$_VC_PROMPT \[\033[1;32m\]v 💣  \[\033[0;37m\]"
+        fi
     fi
 }
 PROMPT_COMMAND=prompt_command
