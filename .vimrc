@@ -83,7 +83,7 @@ let g:user_emmet_leader_key='<Leader>'
 "pdv (phpdoc) templates directory
 let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
 "shortcut for pdv (phpdoc)
-nnoremap <buffer> <C-d> :call pdv#DocumentWithSnip()<CR>
+nnoremap <buffer> <leader>d :call pdv#DocumentWithSnip()<CR>
 
 "shortcut for removing highlighting
 nnoremap <Leader>n :nohl<CR>

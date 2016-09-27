@@ -2,8 +2,11 @@ dev-to-uat.sh
 master-to-dev.sh
 .idea/
 .DS_Store
-*.swp
+*.swk
+*.swl
+*.swm
 *.swn
 *.swo
+*.swp
 *.pyc
 tags
