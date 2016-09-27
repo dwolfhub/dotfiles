@@ -1,9 +1,15 @@
 snippet pubf
-${1:public} function ${2:someFunction}($3)
+public function $1($2)
 {
-    $4
+    $3
 }
 endsnippet
+
+snippet prof
+protected function $1($2)
+{
+    $3
+}
 
 snippet cls
 class ${1:ClassName}${2: extends ${3:SomeClass}}${4: implements ${5:SomeInterface}}
