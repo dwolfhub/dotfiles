@@ -24,6 +24,7 @@ Bundle 'mattn/emmet-vim'
 Plugin 'SirVer/ultisnips'
 Bundle 'tobyS/vmustache'
 Bundle 'tobyS/pdv'
+Bundle 'godlygeek/tabular'
 
 "TODO these need vetting
 "Bundle 'Shougo/vimproc'
@@ -90,7 +91,7 @@ nnoremap <Leader>n :nohl<CR>
 
 "ultisnips configuration
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="horizontal"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME . "/dotfiles/vim_snips"]

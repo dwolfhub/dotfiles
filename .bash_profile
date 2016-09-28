@@ -50,6 +50,9 @@ alias ctags="/opt/local/bin/ctags"
 # php should use newest macport php7 version
 alias php="/opt/local/bin/php70"
 
+# git autocomplete
+source ~/dotfiles/git-completion.bash
+
 # NVM
 if [ -s ~/.nvm/nvm.sh ]; then
     NVM_DIR=~/.nvm

@@ -10,6 +10,14 @@ protected function $1($2)
 {
     $3
 }
+endsnippet
+
+snippet prif
+private function $1($2)
+{
+    $3
+}
+endsnippet
 
 snippet cls
 class ${1:ClassName}${2: extends ${3:SomeClass}}${4: implements ${5:SomeInterface}}
@@ -49,3 +57,18 @@ endsnippet
 snippet vd
 var_dump($1);die();
 endsnippet
+
+snippet /**m
+/**${1:
+ * @param $2 \$$3}${4:
+ * @return $5}
+ */
+endsnippet
+
+snippet /**v
+/**
+ * @var $1
+ */
+endsnippet
+
+
