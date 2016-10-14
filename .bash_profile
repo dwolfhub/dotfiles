@@ -22,7 +22,7 @@ prompt_command() {
         fi
     fi
 }
-PROMPT_COMMAND=prompt_command
+PROMPT_COMMAND="prompt_command; $PROMPT_COMMAND"
 
 # case-insensitive auto-complete with tab
 bind "set completion-ignore-case on"
