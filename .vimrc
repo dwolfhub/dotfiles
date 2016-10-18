@@ -24,7 +24,12 @@ Bundle 'mattn/emmet-vim'
 Plugin 'SirVer/ultisnips'
 Bundle 'tobyS/vmustache'
 Bundle 'tobyS/pdv'
+
+"align content
 Bundle 'godlygeek/tabular'
+
+" color schemes
+Plugin 'flazz/vim-colorschemes'
 
 "TODO these need vetting
 "Bundle 'Shougo/vimproc'
@@ -47,6 +52,9 @@ set number
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+"color scheme
+colorscheme Tomorrow-Night-Bright
 
 " make backspace work like other programs
 set backspace=indent,eol,start
