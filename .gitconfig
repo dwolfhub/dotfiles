@@ -22,6 +22,7 @@
     mb = merge-base
     rb = rebase -i
     rh = reset head
+    rao = remote add origin
 
 [core]
     excludesfile = ~/dotfiles/.gitignore
