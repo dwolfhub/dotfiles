@@ -25,6 +25,9 @@ Plugin 'SirVer/ultisnips'
 Bundle 'tobyS/vmustache'
 Bundle 'tobyS/pdv'
 
+"surrounding
+Bundle 'tpope/vim-surround'
+
 "align content
 Bundle 'godlygeek/tabular'
 
@@ -52,6 +55,7 @@ set number
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+set noeol
 
 "color scheme
 colorscheme Tomorrow-Night-Bright

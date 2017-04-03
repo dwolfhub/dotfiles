@@ -9,4 +9,4 @@ master-to-dev.sh
 *.swo
 *.swp
 *.pyc
-tags
+venv35
