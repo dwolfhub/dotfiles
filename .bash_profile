@@ -47,8 +47,10 @@ alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git bran
 # ctags using macports version
 alias ctags="/opt/local/bin/ctags"
 
-# php should use newest macport php7 version
-alias php="/opt/local/bin/php70"
+# vagrant
+alias vu="vagrant up --provision"
+alias vd="vagrant suspend"
+alias vs="vagrant ssh"
 
 # git autocomplete
 source ~/dotfiles/git-completion.bash
