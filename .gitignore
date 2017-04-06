@@ -10,3 +10,5 @@ master-to-dev.sh
 *.swp
 *.pyc
 tags
+venv35
+venv27
