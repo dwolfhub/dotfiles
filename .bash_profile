@@ -5,7 +5,7 @@ export PATH="/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin
 # command prompt
 prompt_command() {
     _VC_PROMPT=$(~/dotfiles/bin/vcprompt --format="%b%m%a")
-    _PS1_PREFIX="\[\033[0;36m\]\h \[\033[0;97m\]\W "
+    _PS1_PREFIX="\[\033[0;36m\]\h: \[\033[0;97m\]\W/ "
     if [ -z "$_VC_PROMPT" ]
     then
         if [ -z "$VIRTUAL_ENV" ]
@@ -17,9 +17,9 @@ prompt_command() {
     else
         if [ -z "$VIRTUAL_ENV" ]
         then
-            export PS1=$_PS1_PREFIX"\[\033[0;91m\]$_VC_PROMPT \[\033[0;37m\]$ "
+            export PS1=$_PS1_PREFIX"\[\033[0;91m\]($_VC_PROMPT) \[\033[0;37m\]$ "
         else
-            export PS1=$_PS1_PREFIX"\[\033[0;91m\]$_VC_PROMPT \[\033[1;32m\]v \[\033[0;37m\]$ "
+            export PS1=$_PS1_PREFIX"\[\033[0;91m\]($_VC_PROMPT) \[\033[1;32m\]v \[\033[0;37m\]$ "
         fi
     fi
 }
@@ -51,6 +51,7 @@ alias ctags="/opt/local/bin/ctags"
 # vagrant
 alias vu="vagrant up --provision"
 alias vd="vagrant suspend"
+alias vdf="vagrant destroy -f"
 alias vs="vagrant ssh"
 
 # git autocomplete
