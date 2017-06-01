@@ -61,3 +61,23 @@ if [ -s ~/.nvm/nvm.sh ]; then
     NVM_DIR=~/.nvm
     source ~/.nvm/nvm.sh
 fi
+
+# MongoDB Start/Stop
+alias mongostart="sudo mongod -f /opt/local/etc/mongodb/mongod.conf --httpinterface --rest"
+
+mongostop_func () {
+    local mongopid=`less /opt/local/var/db/mongodb_data/mongod.lock`;
+    if [[ $mongopid =~ [[:digit:]] ]]; then
+        sudo kill -15 $mongopid;
+        echo mongod process $mongopid terminated;
+    else
+        echo mongo process $mongopid not exist;
+    fi
+}
+
+alias mongostop="mongostop_func"
+
+# Android Studio Env Vars
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
