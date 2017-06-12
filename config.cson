@@ -1,10 +1,16 @@
 "*":
   core:
     telemetryConsent: "no"
+  docblockr:
+    return_description: false
   editor:
+    fontFamily: "Source Code Pro"
     tabLength: 4
   "exception-reporting":
     userId: "f22a1057-ca08-4ed9-801d-fdbb92c8d2f4"
+  "node-debugger":
+    debugPort: 9229
+    nodePath: "/Users/danielwolf/.nvm/versions/node/v8.1.0/bin/node"
   welcome:
     showOnStartup: false
   whitespace:

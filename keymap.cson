@@ -30,18 +30,18 @@
 # If you are unfamiliar with CSON, you can read more about it in the
 # Atom Flight Manual:
 # http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
-'body':
-  'cmd-alt-2': 'pane:split-right-and-copy-active-item'
-'atom-text-editor':
-  'cmd-alt-l': 'editor:auto-indent'
-'atom-workspace':
-  'ctrl-i': 'cursor-history:next'
-  'ctrl-o': 'cursor-history:prev'
-  'ctrl-cmd-i': 'cursor-history:next-within-editor'
-  'ctrl-cmd-o': 'cursor-history:prev-within-editor'
 '.platform-darwin atom-text-editor:not([mini])':
-  'ctrl-i': 'unset!'
-
+    'ctrl-i': 'unset!'
+'atom-text-editor':
+    'cmd-alt-l': 'atom-beautify:beautify-editor'
+    'ctrl-alt-b': 'unset!',
+'atom-workspace':
+    'ctrl-i': 'cursor-history:next'
+    'ctrl-o': 'cursor-history:prev'
+    'ctrl-cmd-i': 'cursor-history:next-within-editor'
+    'ctrl-cmd-o': 'cursor-history:prev-within-editor'
+'body':
+    'cmd-alt-2': 'pane:split-right-and-copy-active-item'
 
 
 
