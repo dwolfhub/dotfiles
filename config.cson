@@ -1,16 +1,54 @@
 "*":
+  "atom-autocomplete-php":
+    binComposer: "/opt/local/bin/composer"
+  "atom-beautify":
+    js:
+      preserve_newlines: false
+    php: {}
+  "atom-material-ui":
+    colors:
+      abaseColor: "#607d8b"
+      paintCursor: true
+      predefinedColor: "Blue Grey"
+    fonts: {}
+    tabs:
+      compactTabs: true
+    ui:
+      panelContrast: true
+      panelShadows: true
+      useAnimations: false
   core:
+    excludeVcsIgnoredPaths: false
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "Thumbs.db"
+      "desktop.ini"
+      ".idea"
+      ".vagrant"
+    ]
     telemetryConsent: "no"
   docblockr:
     return_description: false
   editor:
     fontFamily: "Source Code Pro"
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
     tabLength: 4
+    tabType: "soft"
   "exception-reporting":
     userId: "f22a1057-ca08-4ed9-801d-fdbb92c8d2f4"
   "node-debugger":
     debugPort: 9229
     nodePath: "/Users/danielwolf/.nvm/versions/node/v8.1.0/bin/node"
+  "linter-ui-default": {}
+  "tree-view":
+    hideIgnoredNames: true
   welcome:
     showOnStartup: false
   whitespace:
