@@ -34,7 +34,13 @@
       ".vagrant"
     ]
     telemetryConsent: "no"
+    themes: [
+      "atom-material-ui"
+      "one-dark-syntax"
+    ]
   docblockr:
+    align_tags: "no"
+    param_description: false
     return_description: false
   editor:
     fontFamily: "Source Code Pro"
@@ -46,6 +52,8 @@
     ]
   "exception-reporting":
     userId: "f22a1057-ca08-4ed9-801d-fdbb92c8d2f4"
+  "git-diff": {}
+  "linter-php": {}
   "linter-ui-default": {}
   "node-debugger":
     debugPort: 9229
