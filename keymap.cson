@@ -42,8 +42,8 @@
     'ctrl-cmd-o': 'cursor-history:prev-within-editor'
 'body':
     'cmd-alt-2': 'pane:split-right-and-copy-active-item'
-
-
+'atom-text-editor[data-grammar~="jsx"]:not([mini])':
+  'tab': 'emmet:expand-abbreviation-with-tab'
 
 
 

@@ -4,6 +4,9 @@
   "atom-beautify":
     js:
       preserve_newlines: false
+    jsx:
+      brace_style: "collapse-preserve-inline"
+      default_beautifier: "JS Beautify"
     php: {}
   "atom-material-ui":
     colors:
@@ -35,18 +38,18 @@
     return_description: false
   editor:
     fontFamily: "Source Code Pro"
+    tabLength: 4
+    tabType: "soft"
     themes: [
       "atom-material-ui"
       "atom-material-syntax"
     ]
-    tabLength: 4
-    tabType: "soft"
   "exception-reporting":
     userId: "f22a1057-ca08-4ed9-801d-fdbb92c8d2f4"
+  "linter-ui-default": {}
   "node-debugger":
     debugPort: 9229
     nodePath: "/Users/danielwolf/.nvm/versions/node/v8.1.0/bin/node"
-  "linter-ui-default": {}
   "tree-view":
     hideIgnoredNames: true
   welcome:
