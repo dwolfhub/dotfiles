@@ -1,6 +1,6 @@
 "*":
   "atom-autocomplete-php":
-    binComposer: "/opt/local/bin/composer"
+    binComposer: "composer"
   "atom-beautify":
     js:
       preserve_newlines: false
@@ -44,6 +44,7 @@
     return_description: false
   editor:
     fontFamily: "Source Code Pro"
+    fontSize: 18
     tabLength: 4
     tabType: "soft"
     themes: [

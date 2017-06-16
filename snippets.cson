@@ -28,4 +28,4 @@
         'body': 'var_dump($1);die();'
     'Public Function':
         'prefix': 'pubf'
-        'body': 'public function $1($2)\n{\n$3\n}'
+        'body': 'public function $1($2)\n{\n    $3\n}'
