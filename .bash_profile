@@ -53,6 +53,7 @@ alias vu="vagrant up --provision"
 alias vd="vagrant suspend"
 alias vdf="vagrant destroy -f"
 alias vs="vagrant ssh"
+alias vgs="vagrant global-status"
 
 # git autocomplete
 source ~/dotfiles/git-completion.bash
