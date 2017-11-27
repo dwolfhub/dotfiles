@@ -16,6 +16,7 @@
     ca = commit --amend
     tl = tag -l
     b = branch -vr
+    bn = branch -vr --no-merged
     bd = branch -d
     r = remote -v
     t = tag -a
