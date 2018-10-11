@@ -54,11 +54,10 @@ set mouse=c
 set number
 set shiftwidth=4
 set softtabstop=4
-set expandtab
 set noeol
 
 "color scheme
-colorscheme Tomorrow-Night-Bright
+"colorscheme Tomorrow-Night-Bright
 
 " make backspace work like other programs
 set backspace=indent,eol,start

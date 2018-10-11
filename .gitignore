@@ -1,6 +1,5 @@
-dev-to-uat.sh
-master-to-dev.sh
-.idea/
+.idea
+.vscode
 .DS_Store
 *.swk
 *.swl
@@ -11,3 +10,6 @@ master-to-dev.sh
 *.pyc
 venv35
 venv27
+env
+env27
+env35

@@ -1,5 +1,5 @@
 [alias]
-    l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 100
+    l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     a = add --all
     ap = add -p
     m = merge
