@@ -13,3 +13,5 @@ venv27
 env
 env27
 env35
+
+*.sketch
