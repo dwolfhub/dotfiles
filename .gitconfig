@@ -11,7 +11,7 @@
     c = clone
     co = checkout
     cb = checkout -b
-    cm = commit -m
+    cm = commit
     cl = checkout --
     ca = commit --amend
     tl = tag -l
@@ -50,6 +50,8 @@
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
     log = true
+[commit]
+    template = ~/dotfiles/.gitmessage
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
