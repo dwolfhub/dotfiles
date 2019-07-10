@@ -1,29 +1,33 @@
 [alias]
-    l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     a = add --all
     ap = add -p
-    m = merge
-    s = status
+    b = branch -vr
+    bd = branch -d
+    bn = branch -vr --no-merged
+    c = clone
+    ca = commit --amend
+    cb = checkout -b
+    cl = checkout --
+    cm = commit
+    cmq = commit -m
+    co = checkout
     d = diff 
+    l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
+    m = merge
+    mb = merge-base
+    pf = push -u origin HEAD -f
     pl = pull
     ps = push -u origin HEAD
-    pf = push -u origin HEAD -f
-    c = clone
-    co = checkout
-    cb = checkout -b
-    cm = commit
-    cl = checkout --
-    ca = commit --amend
-    tl = tag -l
-    b = branch -vr
-    bn = branch -vr --no-merged
-    bd = branch -d
     r = remote -v
-    t = tag -a
-    mb = merge-base
+    rp = remote prune
+    rao = remote add origin
     rb = rebase -i
     rh = reset head
-    rao = remote add origin
+    s = status
+    t = tag -a
+    tl = tag -l
+    wip = commit -m "wip"
+
 
 [core]
     excludesfile = ~/dotfiles/.gitignore
