@@ -6,33 +6,35 @@ let mapleader = ","
 "let g:neocomplete#enable_at_startup = 1
 "let g:phpcomplete_index_composer_command='/opt/local/bin/composer'
 "autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+autocmd FileType gitcommit set textwidth=50
+autocmd FileType gitcommit set colorcolumn=51
 set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+"call vundle#begin()
 
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 "command-t for finding files
-Bundle 'wincent/command-t' 
+"Bundle 'wincent/command-t' 
 
 "twig syntax
-Bundle 'lumiliet/vim-twig' 
+"Bundle 'lumiliet/vim-twig' 
 
 "emmet short cuts
-Bundle 'mattn/emmet-vim' 
+"Bundle 'mattn/emmet-vim' 
 
 "phpdoc generator
-Plugin 'SirVer/ultisnips'
-Bundle 'tobyS/vmustache'
-Bundle 'tobyS/pdv'
+"Plugin 'SirVer/ultisnips'
+"Bundle 'tobyS/vmustache'
+"Bundle 'tobyS/pdv'
 
 "surrounding
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 
 "align content
-Bundle 'godlygeek/tabular'
+"Bundle 'godlygeek/tabular'
 
 " color schemes
-Plugin 'flazz/vim-colorschemes'
+"Plugin 'flazz/vim-colorschemes'
 
 "TODO these need vetting
 "Bundle 'Shougo/vimproc'
@@ -40,7 +42,7 @@ Plugin 'flazz/vim-colorschemes'
 "Bundle 'm2mdas/phpcomplete-extended'
 "Bundle 'Shougo/neocomplete.vim'
 
-call vundle#end()
+"call vundle#end()
 
 filetype on
 syntax on

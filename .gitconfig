@@ -11,6 +11,7 @@
     cm = commit
     cmq = commit -m
     co = checkout
+    cp = cherry-pick
     d = diff 
     l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     m = merge
@@ -66,10 +67,12 @@
     helper = osxkeychain
 [user]
     name = Daniel Wolf
-    email = danielrwolf5@gmail.com
+    email = danwolf@fastmail.com
 [push]
     default = simple
 [core]
    excludesfile = ~/dotfiles/.gitignore
 [rerere]
     enabled = 1
+[url "git@github.com:"]
+	insteadOf = https://github.com/
