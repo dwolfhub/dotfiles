@@ -1,110 +1,335 @@
-set nocompatible
-filetype off
-
-let mapleader = ","
-
-"let g:neocomplete#enable_at_startup = 1
-"let g:phpcomplete_index_composer_command='/opt/local/bin/composer'
-"autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
-autocmd FileType gitcommit set textwidth=50
-autocmd FileType gitcommit set colorcolumn=51
-set rtp+=~/.vim/bundle/vundle/
-"call vundle#begin()
-
-"Bundle 'gmarik/vundle'
-
-"command-t for finding files
-"Bundle 'wincent/command-t' 
-
-"twig syntax
-"Bundle 'lumiliet/vim-twig' 
-
-"emmet short cuts
-"Bundle 'mattn/emmet-vim' 
-
-"phpdoc generator
-"Plugin 'SirVer/ultisnips'
-"Bundle 'tobyS/vmustache'
-"Bundle 'tobyS/pdv'
-
-"surrounding
-"Bundle 'tpope/vim-surround'
-
-"align content
-"Bundle 'godlygeek/tabular'
-
-" color schemes
-"Plugin 'flazz/vim-colorschemes'
-
-"TODO these need vetting
-"Bundle 'Shougo/vimproc'
-"Bundle 'Shougo/unite.vim'
-"Bundle 'm2mdas/phpcomplete-extended'
-"Bundle 'Shougo/neocomplete.vim'
-
-"call vundle#end()
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 filetype on
-syntax on
-set showcmd
-set hlsearch
-set ignorecase
-set smartcase
+syntax enable
 set autoindent
-set visualbell
-set mouse=c
-set number
-set shiftwidth=4
-set softtabstop=4
-set noeol
-
-"color scheme
-"colorscheme Tomorrow-Night-Bright
-
-" make backspace work like other programs
-set backspace=indent,eol,start
-
-"folding
-set foldmethod=indent
-set nofoldenable
-
-" always show status line
+set encoding=utf-8
+set expandtab
+set foldcolumn=1
+set hidden
+set nohlsearch
+set ignorecase
 set laststatus=2
+set linespace=4
+set mouse=c
+set nobackup
+set noeol
+set nowritebackup
+set noshowmode
+set number
+set norelativenumber
+set ruler
+set shiftwidth=4
+set showcmd
+set smartcase
+set shortmess+=c
+set signcolumn=number
+set softtabstop=4
+set termguicolors
+set updatetime=300
+set visualbell
+set wildignorecase
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=**/node_modules/**,**/vendor/**
+set guifont=FiraCode-Retina:h14
+set macligatures
+set path+=**
+set visualbell t_vb=
+set novisualbell
+set foldmethod=indent
+set foldlevel=5
 
-set statusline=%t                                   "tail of the filename
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},   "file encoding
-set statusline+=\ %{&ff}]                           "file format
-set statusline+=\ %h                                "help file flag
-set statusline+=\ %m                                "modified flag
-set statusline+=\ %r                                "read only flag
-set statusline+=\ %y                                "filetype
-set statusline+=%=                                  "left/right separator
-set statusline+=%c,                                 "cursor column
-set statusline+=%l/%L                               "cursor line/total lines
-set statusline+=\ %P                                "percent through file
+packadd! dracula
+colorscheme dracula
 
-"ctrl-s saves from visual mode
-inoremap <c-s> <Esc>:update<CR>
-nnoremap <Leader>n :nohl<CR>
+let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
-"cycle through grep results with C-n and C-p
-nmap <silent> <C-N> :cn<CR>zv
-nmap <silent> <C-P> :cp<CR>zv
+set fillchars+=vert:│
 
-"set emmet short cut
-let g:user_emmet_leader_key='<Leader>'
+call plug#begin('~/.vim/plugged')
 
-"pdv (phpdoc) templates directory
-let g:pdv_template_dir = $HOME ."/.vim/bundle/pdv/templates_snip"
-"shortcut for pdv (phpdoc)
-nnoremap <buffer> <leader>d :call pdv#DocumentWithSnip()<CR>
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'easymotion/vim-easymotion'
+Plug 'mileszs/ack.vim'
 
-"shortcut for removing highlighting
+Plug 'preservim/nerdtree'
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'lumiliet/vim-twig'
+
+Plug 'mattn/emmet-vim'
+Plug 'SirVer/ultisnips'
+
+Plug 'vim-vdebug/vdebug'
+
+Plug 'janko-m/vim-test'
+Plug 'tpope/vim-dispatch'
+Plug 'haginaga/vim-compiler-phpunit'
+call plug#end()
+
+let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
+let g:test#strategy = 'dispatch'
+
+let g:dispatch_compilers = {
+  \ 'symfony php ./bin/phpunit': 'phpunit',
+  \}
+
+" edit vimrc
+nnoremap <leader>v :e ~/.vimrc<CR>
+
+" tcd
+nnoremap <leader>d :tcd ~/dev/
+
+" new line with indenting in insert mode
+inoremap <c-l> <CR><esc>kA<CR>
+
+" open terminal
+nnoremap <leader>T :vert term<CR>
+
+" netrw
+let g:netrw_gx="<cWORD>"
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --literal --vimgrep --hidden --skip-vcs-ignores --ignore .git --ignore "*.swp" --ignore "*.sql"'
+endif
+nmap <leader>F :Ack<space>
+
+" fzf
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --skip-vcs-ignores --ignore .git --ignore "*.swp" -l -g ""'
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
+let g:fzf_preview_window = []
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+nnoremap <leader>t :Files .<CR>
+
+" Save shortcut
+nnoremap <leader>w :w<CR>
+nnoremap <leader>W :wq<CR>
+
+" Trim white space on save
+autocmd BufWritePre * %s/\s\+$//e
+
+" COC
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+fu GetCwd()
+  return substitute(getcwd(), "/Users/danielwolf/dev/", "", "")
+endfu
+
+fu LightlineDateTime()
+  return strftime('%a %b %d %-l:%M%p')
+endfu
+
+let g:lightline = {
+            \ 'colorscheme': 'dracula',
+            \ 'active': {
+            \   'left': [ [ 'bufnum', 'mode' ],
+            \             [ 'filename' ], [ 'readonly', 'modified' ] ],
+            \   'right': [ [ 'gitbranch' ], [ 'cwd', 'datetime' ] ]
+            \ },
+            \ 'inactive': {
+            \    'left': [ [ 'bufnum', 'filename' ] ],
+            \    'middle': [ [ 'bufnum', 'filename' ] ],
+            \    'right': [ [ 'bufnum' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'FugitiveHead',
+            \   'cwd': 'GetCwd',
+            \   'datetime': 'LightlineDateTime'
+            \ }
+            \ }
+
+" Use autocmd to force lightline update.
+" autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" cycle through grep results with C-n and C-p
+nmap <silent> <C-J> :cn<CR>zv
+nmap <silent> <C-K> :cp<CR>zv
+
+" set emmet short cut
+let g:user_emmet_leader_key='<c-e>'
+
+" remove search highlighting
 nnoremap <Leader>n :nohl<CR>
 
 "ultisnips configuration
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="horizontal"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME . "/dotfiles/vim_snips"]
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsEditSplit="vertical"
+let g:snips_author="DWolf"
+nnoremap <leader>ue :UltiSnipsEdit<CR>
+
+" nerdtree
+nnoremap <leader>e :NERDTreeToggle<cr>
+nnoremap <leader>E :NERDTreeToggle %<cr>
+let NERDTreeQuitOnOpen=1
+
+" easy-motion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+map <Leader>s <Plug>(easymotion-s)
+nmap <Leader>s <Plug>(easymotion-s)
+
+" Vdebug
+if !exists('g:vdebug_options')
+    let g:vdebug_options = {}
+endif
+let g:vdebug_options.port = 9000
+" let g:vdebug_options.break_on_open = 0
+
+
+" File specific
+autocmd FileType gitcommit 1 | startinsert
+autocmd FileType gitcommit set textwidth=50

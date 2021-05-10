@@ -31,7 +31,7 @@
 
 
 [core]
-    excludesfile = ~/dotfiles/.gitignore
+    excludesfile = ~/dev/dotfiles/.gitignore
     # Treat spaces before tabs, lines that are indented with 8 or more spaces, and all kinds of trailing whitespace as an error
     whitespace = space-before-tab,indent-with-non-tab,trailing-space
     editor = vim
@@ -56,7 +56,7 @@
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 [commit]
-    template = ~/dotfiles/.gitmessage
+    template = ~/dev/dotfiles/.gitmessage
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
@@ -68,11 +68,12 @@
 [user]
     name = Daniel Wolf
     email = danwolf@fastmail.com
+	signingKey = ABD7F1E12265795E0A706736DBA93EC64618C7FE
 [push]
     default = simple
-[core]
-   excludesfile = ~/dotfiles/.gitignore
 [rerere]
     enabled = 1
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[tag]
+	forceSignAnnotated = true

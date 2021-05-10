@@ -7,6 +7,7 @@
 *.swn
 *.swo
 *.swp
+.*.swp
 *.pyc
 venv35
 venv27
@@ -15,3 +16,4 @@ env27
 env35
 
 *.sketch
+.php_cs.cache

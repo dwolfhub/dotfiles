@@ -1,5 +1,5 @@
 
-# Path 
+# Path
 export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$/usr/local/go/bin:/opt/local/bin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Users/wolf/.rbenv/shims:/usr/local/sbin:/bin:/usr/sbin:/sbin:/Users/wolf/pear/bin:/usr/local/mysql-5.6.19-osx10.7-x86/bin:/Users/danielwolf/.composer/vendor/bin:/opt/local/sbin:/usr/bin:/usr/local/mysql-5.7.12-osx10.11-x86_64/bin:/opt/vagrant/embedded/gems/bin/:/Users/danielwolf/bin:/usr/local/share/dotnet:/Users/danielwolf/Downloads/flutter/bin:/Applications/Postgres.app/Contents/Versions/11/bin:$HOME/.dotnet/tools:/usr/local/go/bin:$HOME/go/bin"
 
 # case-insensitive auto-complete with tab
@@ -14,19 +14,25 @@ alias sudo='sudo '
 # listing directory shortcuts
 alias ll="ls -la"
 
+# Docker shortcuts
 alias dcu="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dlf="docker-compose logs -f"
 
 # Symfony shortcuts
 alias sc='symfony console'
-alias sstart='symfony local:server:start'
+alias sstart='symfony local:server:start -d'
+alias slist='symfony local:server:list'
+alias sstat="symfony server:status"
+alias sstop="symfony server:stop"
+alias srun="symfony run -d"
+alias sdoc="symfony run -d docker-compose up"
+alias slog="symfony local:server:log"
 
-# what is listening on port?
+# Random Helpers
 portsearch() {
     lsof -nP -i4TCP:$1 | grep LISTEN
 }
-
 parseurl() {
     python ~/dotfiles/url-parser.py $1
 }
@@ -37,19 +43,10 @@ alias my-ips="ifconfig | grep \"inet \" | cut -f2 | cut -d\" \" -f 2"
 # clear git branches that are already merged
 alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
-# xdebug remote start/stop
-alias xdebug-start='sed -i "" "s/xdebug.remote_autostart=0/xdebug.remote_autostart=1/g" $(php --ini | sed -n "2p" | cut -d" " -f 12)'
-alias xdebug-stop='sed -i "" "s/xdebug.remote_autostart=1/xdebug.remote_autostart=0/g" $(php --ini | sed -n "2p" | cut -d" " -f 12)'
+# hub aliased to git
+eval "$(hub alias -s)"
 
-# ctags using macports version
-#alias ctags="/opt/local/bin/ctags"
-
-# vagrant
-alias vu="vagrant up --provision"
-alias vd="vagrant suspend"
-alias vdf="vagrant destroy -f"
-alias vs="vagrant ssh"
-alias vgs="vagrant global-status"
+export GITHUB_TOKEN=9382e31d7f3440652f20314bc8b11cb92fbf1c5d
 
 PROMPT='%(?.%F{green}☀️.%F{red}⛈)%f  %B%F{blue}%1~%f%b %# '
 
@@ -61,7 +58,7 @@ RPROMPT="%F{green}["\$vcs_info_msg_0_"]%f"
 #PROMPT=\$vcs_info_msg_0_'%# '
 zstyle ':vcs_info:git:*' formats '%b'
 
-# basic 
+# basic
 #PS1='\[\e[0;36m\]$\[\e[0;39m\] '
 
 autoload -Uz compinit && compinit
@@ -71,6 +68,8 @@ if [ -s ~/.nvm/nvm.sh ]; then
     NVM_DIR=~/.nvm
     source ~/.nvm/nvm.sh
 fi
+
+export PATH=$PATH:$(npm config --global get prefix)/bin
 
 # Android Studio Env Vars
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -97,27 +96,6 @@ compinit
 
 # Stop at slashes when jumping around with option+somekey
 export WORDCHARS=${WORDCHARS/\/}
-# export PATH="/usr/local/opt/php@7.3/bin:$PATH"
-# export PATH="/usr/local/opt/php@7.3/sbin:$PATH"
-
-
-export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/openssl@1.1/lib -L/usr/local/opt/readline/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/readline/include"
-export CFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/readline/include"
-
-
-export PATH=/Users/danielwolf/.pyenv/versions/3.7.2/bin:$PATH
-export PATH="/Users/danielwolf/.ebcli-virtual-env/executables:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/danielwolf/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danielwolf/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/danielwolf/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/danielwolf/google-cloud-sdk/completion.zsh.inc'; fi
-
-hash -d projects=~/Projects
-setopt auto_cd
-
 
 _direnv_hook() {
   trap -- '' SIGINT;
@@ -132,3 +110,20 @@ typeset -ag chpwd_functions;
 if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
   chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
 fi
+
+# export PATH="/usr/local/opt/php@7.4/bin:$PATH"
+# export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
+
+export PATH="/usr/local/opt/python@3.7/bin:/Users/danielwolf/Library/Python/3.7/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
+export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/danielwolf/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danielwolf/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/danielwolf/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/danielwolf/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+export TERM=xterm-256color-italic
