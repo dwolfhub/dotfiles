@@ -3,6 +3,7 @@ let mapleader=" "
 
 filetype on
 syntax enable
+set backspace=indent,eol,start
 set autoindent
 set encoding=utf-8
 set expandtab
@@ -34,7 +35,7 @@ set wildmenu
 set wildmode=longest:full,full
 set wildignore+=**/node_modules/**,**/vendor/**
 set guifont=FiraCode-Retina:h14
-set macligatures
+"set macligatures
 set path+=**
 set visualbell t_vb=
 set novisualbell
@@ -95,9 +96,6 @@ nnoremap <leader>d :tcd ~/dev/
 " new line with indenting in insert mode
 inoremap <c-l> <CR><esc>kA<CR>
 
-" open terminal
-nnoremap <leader>T :vert term<CR>
-
 nnoremap <leader>1 :!!<CR>
 
 " netrw
@@ -105,12 +103,12 @@ let g:netrw_gx="<cWORD>"
 
 " ack.vim
 if executable('ag')
-  let g:ackprg = 'ag --literal --vimgrep --hidden --skip-vcs-ignores --ignore .git --ignore "*.swp" --ignore "*.sql"'
+  let g:ackprg = 'ag --literal --vimgrep --hidden --skip-vcs-ignores --ignore .git --ignore "*.swp" --ignore "*.sql" --ignore node_modules'
 endif
 nmap <leader>F :Ack<space>
 
 " fzf
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --skip-vcs-ignores --ignore .git --ignore "*.swp" -l -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
 let g:fzf_preview_window = []
 let g:fzf_colors =
@@ -193,6 +191,9 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  :CocCommand prettier.formatFile<CR>
+" nmap <leader>f  :CocCommand prettier.formatFile<CR>
+
 
 augroup mygroup
   autocmd!
