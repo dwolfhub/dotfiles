@@ -98,6 +98,8 @@ inoremap <c-l> <CR><esc>kA<CR>
 " open terminal
 nnoremap <leader>T :vert term<CR>
 
+nnoremap <leader>1 :!!<CR>
+
 " netrw
 let g:netrw_gx="<cWORD>"
 
@@ -329,7 +331,12 @@ endif
 let g:vdebug_options.port = 9000
 " let g:vdebug_options.break_on_open = 0
 
+" corsorline only on current buffer
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
 
 " File specific
-autocmd FileType gitcommit 1 | startinsert
 autocmd FileType gitcommit set textwidth=50
