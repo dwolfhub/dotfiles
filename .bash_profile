@@ -48,7 +48,7 @@ eval "$(hub alias -s)"
 
 export GITHUB_TOKEN=9382e31d7f3440652f20314bc8b11cb92fbf1c5d
 
-PROMPT='%(?.%F{green}☀️.%F{red}⛈)%f  %B%F{blue}%1~%f%b %# '
+PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }

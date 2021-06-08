@@ -21,6 +21,7 @@
     ps = push -u origin HEAD
     r = remote -v
     rp = remote prune
+    rpo = remote prune origin
     rao = remote add origin
     rb = rebase -i
     rh = reset head

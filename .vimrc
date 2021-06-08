@@ -54,14 +54,12 @@ set fillchars+=vert:│
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'easymotion/vim-easymotion'
 Plug 'mileszs/ack.vim'
 
 Plug 'preservim/nerdtree'
 
 Plug 'itchyny/lightline.vim'
 
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
@@ -96,7 +94,7 @@ nnoremap <leader>d :tcd ~/dev/
 " new line with indenting in insert mode
 inoremap <c-l> <CR><esc>kA<CR>
 
-nnoremap <leader>1 :!!<CR>
+nnoremap <leader>rr :w<CR>:!!<CR>
 
 " netrw
 let g:netrw_gx="<cWORD>"
@@ -261,7 +259,7 @@ let g:lightline = {
             \ 'active': {
             \   'left': [ [ 'bufnum', 'mode' ],
             \             [ 'filename' ], [ 'readonly', 'modified' ] ],
-            \   'right': [ [ 'gitbranch' ], [ 'cwd', 'datetime' ] ]
+            \   'right': [ [ 'cwd', 'datetime' ] ]
             \ },
             \ 'inactive': {
             \    'left': [ [ 'bufnum', 'filename' ] ],
@@ -269,7 +267,6 @@ let g:lightline = {
             \    'right': [ [ 'bufnum' ] ]
             \ },
             \ 'component_function': {
-            \   'gitbranch': 'FugitiveHead',
             \   'cwd': 'GetCwd',
             \   'datetime': 'LightlineDateTime'
             \ }
@@ -319,11 +316,11 @@ nnoremap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader>E :NERDTreeToggle %<cr>
 let NERDTreeQuitOnOpen=1
 
-" easy-motion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s)
-map <Leader>s <Plug>(easymotion-s)
-nmap <Leader>s <Plug>(easymotion-s)
+" " easy-motion
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" nmap s <Plug>(easymotion-s)
+" map <Leader>s <Plug>(easymotion-s)
+" nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
