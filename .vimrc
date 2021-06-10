@@ -44,6 +44,7 @@ set foldlevel=5
 
 packadd! dracula
 colorscheme dracula
+hi Normal guibg=NONE ctermbg=NONE
 
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
@@ -54,7 +55,6 @@ set fillchars+=vert:│
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mileszs/ack.vim'
 
 Plug 'preservim/nerdtree'
 
@@ -68,14 +68,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'lumiliet/vim-twig'
 
-Plug 'mattn/emmet-vim'
-Plug 'SirVer/ultisnips'
-
 Plug 'vim-vdebug/vdebug'
 
-Plug 'janko-m/vim-test'
-Plug 'tpope/vim-dispatch'
-Plug 'haginaga/vim-compiler-phpunit'
 call plug#end()
 
 let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
@@ -85,32 +79,23 @@ let g:dispatch_compilers = {
   \ 'symfony php ./bin/phpunit': 'phpunit',
   \}
 
+" make
+nnoremap <leader>m :w<CR>:make<CR>
+
 " edit vimrc
 nnoremap <leader>v :e ~/.vimrc<CR>
 
 " tcd
 nnoremap <leader>d :tcd ~/dev/
 
-" new line with indenting in insert mode
-inoremap <c-l> <CR><esc>kA<CR>
-
 nnoremap <leader>rr :w<CR>:!!<CR>
-
-" netrw
-let g:netrw_gx="<cWORD>"
-
-" ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --literal --vimgrep --hidden --skip-vcs-ignores --ignore .git --ignore "*.swp" --ignore "*.sql" --ignore node_modules'
-endif
-nmap <leader>F :Ack<space>
 
 " fzf
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
 let g:fzf_preview_window = []
-let g:fzf_colors =
-            \ { 'fg':      ['fg', 'Normal'],
+" let g:fzf_colors =
+ "           \ { 'fg':      ['fg', 'Normal'],
             \ 'bg':      ['bg', 'Normal'],
             \ 'hl':      ['fg', 'Comment'],
             \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
@@ -124,6 +109,8 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 nnoremap <leader>t :Files .<CR>
+nnoremap <leader>b :Buffers .<CR>
+nnoremap <leader>F :Ag .<CR>
 
 " Save shortcut
 nnoremap <leader>w :w<CR>

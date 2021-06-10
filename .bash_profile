@@ -63,13 +63,8 @@ zstyle ':vcs_info:git:*' formats '%b'
 
 autoload -Uz compinit && compinit
 
-# NVM
-if [ -s ~/.nvm/nvm.sh ]; then
-    NVM_DIR=~/.nvm
-    source ~/.nvm/nvm.sh
-fi
 
-export PATH=$PATH:$(npm config --global get prefix)/bin
+# export PATH=$PATH:$(npm config --global get prefix)/bin
 
 # Android Studio Env Vars
 export ANDROID_HOME=$HOME/Library/Android/sdk
@@ -115,8 +110,11 @@ fi
 # export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 
 export PATH="/usr/local/opt/python@3.7/bin:/Users/danielwolf/Library/Python/3.7/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
+#export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
 export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/danielwolf/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danielwolf/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -127,3 +125,5 @@ if [ -f '/Users/danielwolf/Downloads/google-cloud-sdk/completion.zsh.inc' ]; the
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export TERM=xterm-256color-italic
+
+. /usr/local/opt/asdf/asdf.sh

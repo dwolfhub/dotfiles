@@ -12,7 +12,7 @@
     cmq = commit -m
     co = checkout
     cp = cherry-pick
-    d = diff 
+    d = diff
     l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     m = merge
     mb = merge-base
@@ -29,7 +29,9 @@
     t = tag -a
     tl = tag -l
     wip = commit -m "wip"
-
+[user]
+    name=Daniel Wolf
+	email = daniel_wolf@external.mckinsey.com
 [pull]
     ff = only
 [core]
@@ -58,7 +60,7 @@
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 [commit]
-    template = ~/dev/dotfiles/.gitmessage
+	template = /Users/dwolf/.git-author-template
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
@@ -67,10 +69,6 @@
 
 [credential]
     helper = osxkeychain
-[user]
-    name = Daniel Wolf
-    email = danwolf@fastmail.com
-	signingKey = ABD7F1E12265795E0A706736DBA93EC64618C7FE
 [push]
     default = simple
 [rerere]
@@ -79,3 +77,10 @@
 	insteadOf = https://github.com/
 [tag]
 	forceSignAnnotated = true
+[include]
+	path = /Users/dwolf/.git-together
+[git-together]
+	active = dw
+[git-together "user"]
+	name = Daniel Wolf
+	email = danwolf@fastmail.com
