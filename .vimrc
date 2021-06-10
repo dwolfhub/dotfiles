@@ -91,23 +91,22 @@ nnoremap <leader>d :tcd ~/dev/
 nnoremap <leader>rr :w<CR>:!!<CR>
 
 " fzf
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
-let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
-let g:fzf_preview_window = []
-" let g:fzf_colors =
- "           \ { 'fg':      ['fg', 'Normal'],
-            \ 'bg':      ['bg', 'Normal'],
-            \ 'hl':      ['fg', 'Comment'],
-            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-            \ 'hl+':     ['fg', 'Statement'],
-            \ 'info':    ['fg', 'PreProc'],
-            \ 'border':  ['fg', 'Ignore'],
-            \ 'prompt':  ['fg', 'Conditional'],
-            \ 'pointer': ['fg', 'Exception'],
-            \ 'marker':  ['fg', 'Keyword'],
-            \ 'spinner': ['fg', 'Label'],
-            \ 'header':  ['fg', 'Comment'] }
+"let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
+"let g:fzf_preview_window = []
+let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 nnoremap <leader>t :Files .<CR>
 nnoremap <leader>b :Buffers .<CR>
 nnoremap <leader>F :Ag .<CR>
