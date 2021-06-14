@@ -31,7 +31,7 @@
     wip = commit -m "wip"
 [user]
     name=Daniel Wolf
-	email = daniel_wolf@external.mckinsey.com
+    email=dan@wolfco.us
 [pull]
     ff = only
 [core]
@@ -59,8 +59,8 @@
 [merge]
     # Include summaries of merged commits in newly created merge commit messages
     log = true
-[commit]
-	template = /Users/dwolf/.git-author-template
+#$[commit]
+        #template = /Users/dwolf/.git-author-template
 
 # Use `origin` as the default remote on the `master` branch in all cases
 [branch "master"]
