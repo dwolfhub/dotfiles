@@ -50,7 +50,7 @@ export GITHUB_TOKEN=9382e31d7f3440652f20314bc8b11cb92fbf1c5d
 
 export FZF_DEFAULT_OPTS='--height 30%'
 export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
-export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
+export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
 # export FZF_COMPLETION_TRIGGER="'"
 #

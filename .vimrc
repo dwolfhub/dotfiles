@@ -44,7 +44,6 @@ set foldlevel=5
 
 packadd! dracula
 colorscheme dracula
-hi Normal guibg=NONE ctermbg=NONE
 
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
@@ -82,6 +81,12 @@ let g:dispatch_compilers = {
 " make
 nnoremap <leader>m :w<CR>:make<CR>
 
+" jump list
+nnoremap <BS> <Nop>
+nnoremap <BS> <C-o>
+nnoremap <Tab> <Nop>
+nnoremap <Tab> <C-i>
+
 " edit vimrc
 nnoremap <leader>v :e ~/.vimrc<CR>
 
@@ -91,8 +96,6 @@ nnoremap <leader>d :tcd ~/dev/
 nnoremap <leader>rr :w<CR>:!!<CR>
 
 " fzf
-"let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.3 } }
-"let g:fzf_preview_window = []
 let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
@@ -286,16 +289,13 @@ nmap <silent> <C-K> :cp<CR>zv
 " set emmet short cut
 let g:user_emmet_leader_key='<c-e>'
 
-" remove search highlighting
-nnoremap <Leader>n :nohl<CR>
-
 "ultisnips configuration
-let g:UltiSnipsExpandTrigger="<nop>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsEditSplit="vertical"
-let g:snips_author="DWolf"
-nnoremap <leader>ue :UltiSnipsEdit<CR>
+" let g:UltiSnipsExpandTrigger="<nop>"
+" let g:UltiSnipsJumpForwardTrigger="<c-n>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+" let g:UltiSnipsEditSplit="vertical"
+" let g:snips_author="DWolf"
+" nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
 nnoremap <leader>e :NERDTreeToggle<cr>
