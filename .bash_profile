@@ -26,7 +26,7 @@ alias slist='symfony local:server:list'
 alias sstat="symfony server:status"
 alias sstop="symfony server:stop"
 alias srun="symfony run -d"
-alias sdoc="symfony run -d docker-compose up"
+alias sdoc="symfony run -d docker compose up"
 alias slog="symfony local:server:log"
 
 # Random Helpers
