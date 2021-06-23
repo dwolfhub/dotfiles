@@ -69,6 +69,8 @@ Plug 'lumiliet/vim-twig'
 
 Plug 'vim-vdebug/vdebug'
 
+Plug 'haya14busa/incsearch.vim'
+
 call plug#end()
 
 let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
@@ -120,6 +122,11 @@ nnoremap <leader>W :wq<CR>
 
 " Trim white space on save
 autocmd BufWritePre * %s/\s\+$//e
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 " COC
 inoremap <silent><expr> <TAB>
