@@ -19,7 +19,7 @@ set noeol
 set nowritebackup
 set noshowmode
 set number
-set norelativenumber
+set relativenumber
 set ruler
 set shiftwidth=4
 set showcmd
@@ -70,6 +70,8 @@ Plug 'lumiliet/vim-twig'
 Plug 'vim-vdebug/vdebug'
 
 Plug 'haya14busa/incsearch.vim'
+
+Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 

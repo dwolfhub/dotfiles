@@ -28,6 +28,7 @@ alias sstop="symfony server:stop"
 alias srun="symfony run -d"
 alias sdoc="symfony run -d docker compose up"
 alias slog="symfony local:server:log"
+alias sprox="symfony local:proxy:start"
 
 # Random Helpers
 portsearch() {
@@ -137,3 +138,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export TERM=xterm-256color-italic
 
 . /usr/local/opt/asdf/asdf.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
