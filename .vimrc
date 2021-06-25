@@ -69,8 +69,8 @@ Plug 'lumiliet/vim-twig'
 
 Plug 'vim-vdebug/vdebug'
 
-Plug 'haya14busa/incsearch.vim'
-
+" Plug 'haya14busa/incsearch.vim'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
@@ -124,9 +124,9 @@ nnoremap <leader>W :wq<CR>
 autocmd BufWritePre * %s/\s\+$//e
 
 " incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
 " COC
 inoremap <silent><expr> <TAB>
@@ -310,10 +310,10 @@ nnoremap <leader>E :NERDTreeToggle %<cr>
 let NERDTreeQuitOnOpen=1
 
 " " easy-motion
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap s <Plug>(easymotion-s)
-" map <Leader>s <Plug>(easymotion-s)
-" nmap <Leader>s <Plug>(easymotion-s)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap r <Plug>(easymotion-s)
+map <Leader>r <Plug>(easymotion-s)
+nmap <Leader>r <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
