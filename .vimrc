@@ -52,7 +52,6 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 set fillchars+=vert:│
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'preservim/nerdtree'
@@ -72,6 +71,7 @@ Plug 'vim-vdebug/vdebug'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-dispatch'
 
 call plug#end()
 
@@ -97,7 +97,8 @@ nnoremap <leader>v :e ~/.vimrc<CR>
 " tcd
 nnoremap <leader>d :tcd ~/dev/
 
-nnoremap <leader>rr :w<CR>:!!<CR>
+" dispatch
+nnoremap <leader>rrn :w<CR>:Dispatch npm test<CR>
 
 " fzf
 let g:fzf_colors =
