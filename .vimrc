@@ -19,7 +19,7 @@ set noeol
 set nowritebackup
 set noshowmode
 set number
-set relativenumber
+set norelativenumber
 set ruler
 set shiftwidth=4
 set showcmd
@@ -82,23 +82,8 @@ let g:dispatch_compilers = {
   \ 'symfony php ./bin/phpunit': 'phpunit',
   \}
 
-" make
-nnoremap <leader>m :w<CR>:make<CR>
-
-" jump list
-nnoremap <BS> <Nop>
-nnoremap <BS> <C-o>
-nnoremap <Tab> <Nop>
-nnoremap <Tab> <C-i>
-
 " edit vimrc
 nnoremap <leader>v :e ~/.vimrc<CR>
-
-" tcd
-nnoremap <leader>d :tcd ~/dev/
-
-" dispatch
-nnoremap <leader>rrn :w<CR>:Dispatch npm test<CR>
 
 " fzf
 let g:fzf_colors =
@@ -120,8 +105,8 @@ nnoremap <leader>b :Buffers .<CR>
 nnoremap <leader>F :Ag .<CR>
 
 " Save shortcut
-nnoremap <leader>w :w<CR>
-nnoremap <leader>W :wq<CR>
+" nnoremap <leader>w :w<CR>
+" nnoremap <leader>W :wq<CR>
 
 " Trim white space on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -185,13 +170,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" xmap <leader>f  :CocCommand prettier.formatFile<CR>
-" nmap <leader>f  :CocCommand prettier.formatFile<CR>
-
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -200,26 +178,26 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" " Applying codeAction to the selected region.
+" " Example: `<leader>aap` for current paragraph
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+" nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+" xmap if <Plug>(coc-funcobj-i)
+" omap if <Plug>(coc-funcobj-i)
+" xmap af <Plug>(coc-funcobj-a)
+" omap af <Plug>(coc-funcobj-a)
+" xmap ic <Plug>(coc-classobj-i)
+" omap ic <Plug>(coc-classobj-i)
+" xmap ac <Plug>(coc-classobj-a)
+" omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -233,17 +211,18 @@ endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+" nmap <silent> <C-s> <Plug>(coc-range-select)
+" xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+" command! -nargs=0 Format :call CocAction('format')
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
 
 fu GetCwd()
   return substitute(getcwd(), "/Users/danielwolf/dev/", "", "")
@@ -278,26 +257,26 @@ let g:lightline = {
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+"nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+"nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 " nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 " nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " cycle through grep results with C-n and C-p
-nmap <silent> <C-J> :cn<CR>zv
-nmap <silent> <C-K> :cp<CR>zv
+" nmap <silent> <C-J> :cn<CR>zv
+" nmap <silent> <C-K> :cp<CR>zv
 
 " set emmet short cut
-let g:user_emmet_leader_key='<c-e>'
+" let g:user_emmet_leader_key='<c-e>'
 
 "ultisnips configuration
 " let g:UltiSnipsExpandTrigger="<nop>"
@@ -313,10 +292,11 @@ nnoremap <leader>E :NERDTreeToggle %<cr>
 let NERDTreeQuitOnOpen=1
 
 " " easy-motion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap r <Plug>(easymotion-s)
-map <Leader>r <Plug>(easymotion-s)
-nmap <Leader>r <Plug>(easymotion-s)
+"map <Leader> <Plug>(easymotion-prefix)
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" nmap r <Plug>(easymotion-s)
+" map <Leader>r <Plug>(easymotion-s)
+" nmap <Leader>r <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
