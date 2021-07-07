@@ -54,33 +54,28 @@ set fillchars+=vert:│
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'preservim/nerdtree'
-
 Plug 'itchyny/lightline.vim'
 
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'lumiliet/vim-twig'
-
-Plug 'vim-vdebug/vdebug'
-
 Plug 'easymotion/vim-easymotion'
-
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-dispatch'
 
 call plug#end()
 
-let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
-let g:test#strategy = 'dispatch'
+" vdebug
+"
+" let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
+" let g:test#strategy = 'dispatch'
 
-let g:dispatch_compilers = {
-  \ 'symfony php ./bin/phpunit': 'phpunit',
-  \}
+" let g:dispatch_compilers = {
+"   \ 'symfony php ./bin/phpunit': 'phpunit',
+"   \}
 
 " edit vimrc
 nnoremap <leader>v :e ~/.vimrc<CR>
@@ -102,11 +97,11 @@ let g:fzf_colors =
       \ 'header':  ['fg', 'Comment'] }
 nnoremap <leader>t :Files .<CR>
 nnoremap <leader>b :Buffers .<CR>
-nnoremap <leader>F :Ag .<CR>
+nnoremap <leader>f :Ag .<CR>
 
 " Save shortcut
-" nnoremap <leader>w :w<CR>
-" nnoremap <leader>W :wq<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>W :wq<CR>
 
 " Trim white space on save
 autocmd BufWritePre * %s/\s\+$//e
@@ -225,30 +220,34 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 
 fu GetCwd()
-  return substitute(getcwd(), "/Users/danielwolf/dev/", "", "")
+  return substitute(getcwd(), "/Users/d.*wolf/dev/", "dev/", "")
 endfu
 
-fu LightlineDateTime()
-  return strftime('%a %b %d %-l:%M%p')
-endfu
+" fu LightlineDateTime()
+"   return strftime('%a %b %d %-l:%M%p')
+" endfu
+
+
+" fu LightlineFilename()
+"   let root =
+" endfu
 
 let g:lightline = {
-            \ 'colorscheme': 'dracula',
-            \ 'active': {
-            \   'left': [ [ 'bufnum', 'mode' ],
-            \             [ 'filename' ], [ 'readonly', 'modified' ] ],
-            \   'right': [ [ 'cwd', 'datetime' ] ]
-            \ },
-            \ 'inactive': {
-            \    'left': [ [ 'bufnum', 'filename' ] ],
-            \    'middle': [ [ 'bufnum', 'filename' ] ],
-            \    'right': [ [ 'bufnum' ] ]
-            \ },
-            \ 'component_function': {
-            \   'cwd': 'GetCwd',
-            \   'datetime': 'LightlineDateTime'
-            \ }
-            \ }
+    \ 'colorscheme': 'dracula',
+    \ 'active': {
+    \   'left': [ [ 'bufnum', 'mode' ],
+    \             [ 'readonly', 'modified' ] ],
+    \   'right': [ [ 'relativepath' ], ]
+    \ },
+    \ 'inactive': {
+    \    'left': [ [ 'bufnum' ] ],
+    \    'middle': [ ],
+    \    'right': [ [ 'relativepath' ] ]
+    \ },
+    \ 'component_function': {
+    \   'cwd': 'GetCwd',
+    \ }
+    \ }
 
 " Use autocmd to force lightline update.
 " autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -287,16 +286,16 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
-nnoremap <leader>e :NERDTreeToggle<cr>
-nnoremap <leader>E :NERDTreeToggle %<cr>
-let NERDTreeQuitOnOpen=1
+" nnoremap <leader>e :NERDTreeToggle<cr>
+" nnoremap <leader>E :NERDTreeToggle %<cr>
+" let NERDTreeQuitOnOpen=1
 
 " " easy-motion
 "map <Leader> <Plug>(easymotion-prefix)
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap r <Plug>(easymotion-s)
-" map <Leader>r <Plug>(easymotion-s)
-" nmap <Leader>r <Plug>(easymotion-s)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+map <Leader>s <Plug>(easymotion-s)
+nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
