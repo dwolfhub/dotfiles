@@ -95,13 +95,40 @@ let g:fzf_colors =
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
+let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.4 } }
+let g:fzf_preview_window = ['right:hidden', '?']
+
 nnoremap <leader>t :Files .<CR>
 nnoremap <leader>b :Buffers .<CR>
-nnoremap <leader>f :Ag .<CR>
+nnoremap <leader>F :AgIn<space>
+nnoremap <leader>f :Ag<CR>
+
+" AgIn: Start ag in the specified directory
+" :AgIn .. foo
+" @see https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
+function! s:ag_in(bang, ...)
+  if !isdirectory(a:1)
+    throw 'not a valid directory: ' .. a:1
+  endif
+
+  " Press `?' to enable preview window.
+  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
+
+  " If you don't want preview option, use this
+  "call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+endfunction
+
+command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+
+
+
 
 " Save shortcut
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
+
+
+
 
 " Trim white space on save
 autocmd BufWritePre * %s/\s\+$//e
