@@ -65,6 +65,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
+Plug 'SirVer/ultisnips'
 
 call plug#end()
 
@@ -169,6 +170,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :vsp<CR>gd
 nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -230,7 +232,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
-
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 " nmap <silent> <C-s> <Plug>(coc-range-select)
@@ -305,12 +306,12 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " let g:user_emmet_leader_key='<c-e>'
 
 "ultisnips configuration
-" let g:UltiSnipsExpandTrigger="<nop>"
-" let g:UltiSnipsJumpForwardTrigger="<c-n>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-" let g:UltiSnipsEditSplit="vertical"
-" let g:snips_author="DWolf"
-" nnoremap <leader>ue :UltiSnipsEdit<CR>
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsEditSplit="vertical"
+let g:snips_author="DWolf"
+nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
 " nnoremap <leader>e :NERDTreeToggle<cr>

@@ -48,7 +48,7 @@ alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git bran
 eval "$(hub alias -s)"
 
 export FZF_DEFAULT_OPTS='--height 30%'
-export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
 # export FZF_COMPLETION_TRIGGER="'"
