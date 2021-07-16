@@ -79,7 +79,10 @@ call plug#end()
 "   \}
 
 " edit vimrc
-nnoremap <leader>v :e ~/.vimrc<CR>
+nnoremap <leader>v :vsplit ~/.vimrc<CR>
+
+" rerun command
+nnoremap <leader>rr :w<CR>:!!<CR>
 
 " fzf
 let g:fzf_colors =
@@ -122,13 +125,9 @@ endfunction
 command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
 
-
-
 " Save shortcut
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
-
-
 
 
 " Trim white space on save
