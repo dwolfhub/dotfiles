@@ -42,6 +42,7 @@ set novisualbell
 set foldmethod=indent
 set foldlevel=5
 
+let g:dracula_italic = 0
 packadd! dracula
 colorscheme dracula
 
@@ -65,7 +66,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
+
 Plug 'SirVer/ultisnips'
+
+Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -77,6 +81,11 @@ call plug#end()
 " let g:dispatch_compilers = {
 "   \ 'symfony php ./bin/phpunit': 'phpunit',
 "   \}
+
+" dispatch
+nnoremap <leader>d :Dispatch<space>
+nnoremap <leader>D :Copen<bar>Dispatch<CR>
+let g:dispatch_quickfix_height = 15
 
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
@@ -340,3 +349,5 @@ augroup END
 
 " File specific
 autocmd FileType gitcommit set textwidth=50
+
+autocmd FileType python nnoremap <leader>y m':0,$!yapf<Cr><C-o>
