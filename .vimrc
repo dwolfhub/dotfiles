@@ -44,6 +44,7 @@ set foldlevel=5
 
 packadd! dracula
 colorscheme dracula
+let g:dracula_italic = 0
 
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
