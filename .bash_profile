@@ -30,6 +30,9 @@ alias sdoc="symfony run -d docker compose up"
 alias slog="symfony local:server:log"
 alias sprox="symfony local:proxy:start"
 
+alias k="kubectl"
+alias kn="kubens"
+
 # Random Helpers
 portsearch() {
     lsof -nP -i4TCP:$1 | grep LISTEN
