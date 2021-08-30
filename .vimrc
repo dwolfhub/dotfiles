@@ -7,7 +7,7 @@ set backspace=indent,eol,start
 set autoindent
 set encoding=utf-8
 set expandtab
-set foldcolumn=1
+set foldcolumn=0
 set hidden
 set nohlsearch
 set ignorecase
@@ -18,14 +18,14 @@ set nobackup
 set noeol
 set nowritebackup
 set noshowmode
-set number
-set norelativenumber
+"set number
+"set norelativenumber
 set ruler
 set shiftwidth=4
 set showcmd
 set smartcase
 set shortmess+=c
-set signcolumn=number
+set signcolumn=yes
 set softtabstop=4
 set termguicolors
 set updatetime=300
@@ -39,8 +39,8 @@ set guifont=FiraCode-Retina:h14
 set path+=**
 set visualbell t_vb=
 set novisualbell
-set foldmethod=indent
-set foldlevel=5
+set foldmethod=manual
+set foldlevel=9
 
 let g:dracula_italic = 0
 packadd! dracula
@@ -68,9 +68,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'SirVer/ultisnips'
-
-Plug 'unblevable/quick-scope'
-
 call plug#end()
 
 " vdebug
@@ -83,15 +80,16 @@ call plug#end()
 "   \}
 
 " dispatch
-nnoremap <leader>d :Dispatch<space>
-nnoremap <leader>D :Copen<bar>Dispatch<CR>
+nnoremap <leader>D :w<CR>:Dispatch<space>
+nnoremap <leader>d :w<CR>:Copen<bar>Dispatch<CR>
 let g:dispatch_quickfix_height = 15
+nnoremap <leader>n 3<c-w>jG
 
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
 
 " rerun command
-nnoremap <leader>rr :w<CR>:!!<CR>
+" nnoremap <leader>rr :w<CR>:!!<CR>
 
 " fzf
 let g:fzf_colors =
@@ -110,6 +108,18 @@ let g:fzf_colors =
       \ 'header':  ['fg', 'Comment'] }
 let g:fzf_layout = { 'window': { 'width': 0.6, 'height': 0.4 } }
 let g:fzf_preview_window = ['right:hidden', '?']
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+    \ 'ctrl-q': function('s:build_quickfix_list'),
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
+let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 
 nnoremap <leader>t :Files .<CR>
 nnoremap <leader>b :Buffers .<CR>
@@ -137,6 +147,14 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 " Save shortcut
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
+
+" esc insert mode
+inoremap jk <ESC>
+inoremap kj <ESC>
+
+" command mode
+nnoremap ; :
+vnoremap ; :
 
 
 " Trim white space on save
@@ -328,10 +346,10 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " " easy-motion
 "map <Leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s)
-map <Leader>s <Plug>(easymotion-s)
-nmap <Leader>s <Plug>(easymotion-s)
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" nmap s <Plug>(easymotion-s)
+" map <Leader>s <Plug>(easymotion-s)
+" nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
