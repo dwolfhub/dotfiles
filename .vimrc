@@ -18,8 +18,8 @@ set nobackup
 set noeol
 set nowritebackup
 set noshowmode
-"set number
-"set norelativenumber
+set number
+set relativenumber
 set ruler
 set shiftwidth=4
 set showcmd
@@ -148,14 +148,6 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 " Save shortcut
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
-
-" esc insert mode
-inoremap jk <ESC>
-inoremap kj <ESC>
-
-" command mode
-nnoremap ; :
-vnoremap ; :
 
 
 " Trim white space on save
