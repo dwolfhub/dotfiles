@@ -68,7 +68,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 call plug#end()
 
 " vdebug
