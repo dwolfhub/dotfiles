@@ -1,0 +1,1 @@
+{"title":"Send C-c if left control pressed alone","rules":[{"description":"Send C-c if left control pressed alone","manipulators":[{"type":"basic","from":{"modifiers":{"optional":["any"]},"key_code":"left_control"},"to":[{"key_code":"left_control","lazy":true}],"to_if_alone":[{"key_code":"c", "modifiers":["left_control"]}]}]}]}

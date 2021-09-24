@@ -362,3 +362,4 @@ augroup END
 autocmd FileType gitcommit set textwidth=50
 
 autocmd FileType python nnoremap <leader>y m':0,$!yapf<Cr><C-o>
+autocmd FileType python let b:coc_root_patterns = ['app.py', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
