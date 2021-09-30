@@ -12,7 +12,13 @@ export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$/usr/local/go/bin:/
 alias sudo='sudo '
 
 # listing directory shortcuts
-alias ll="ls -la"
+alias ll="ls -lah"
+
+# jump to path and open vim
+jv() {
+    j $1
+    vi .
+}
 
 # Docker shortcuts
 alias dcu="docker-compose up -d"

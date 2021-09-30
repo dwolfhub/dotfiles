@@ -86,6 +86,8 @@ nnoremap <leader>d :w<CR>:Copen<bar>Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
+nnoremap Y y$
+
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
 
