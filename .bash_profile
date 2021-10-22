@@ -7,6 +7,8 @@ export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$/usr/local/go/bin:/
 
 # if tab auto-complete ambiguous, just show options
 #bind "set show-all-if-ambiguous on"
+#
+alias pmu='python -m unittest'
 
 # allows running aliases as sudo
 alias sudo='sudo '

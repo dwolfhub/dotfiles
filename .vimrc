@@ -58,8 +58,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'itchyny/lightline.vim'
 
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
@@ -363,5 +365,5 @@ augroup END
 " File specific
 autocmd FileType gitcommit set textwidth=50
 
-autocmd FileType python nnoremap <leader>y m':0,$!yapf<Cr><C-o>
+autocmd FileType python nnoremap <leader>y :call CocAction('format')<CR>
 autocmd FileType python let b:coc_root_patterns = ['app.py', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
