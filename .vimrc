@@ -70,7 +70,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
 
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
 call plug#end()
 
 " vdebug
@@ -329,12 +330,12 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " let g:user_emmet_leader_key='<c-e>'
 
 "ultisnips configuration
-" let g:UltiSnipsExpandTrigger="<nop>"
-" let g:UltiSnipsJumpForwardTrigger="<c-n>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-" let g:UltiSnipsEditSplit="vertical"
-" let g:snips_author="DWolf"
-" nnoremap <leader>ue :UltiSnipsEdit<CR>
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsEditSplit="vertical"
+let g:snips_author="DWolf"
+nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
 " nnoremap <leader>e :NERDTreeToggle<cr>

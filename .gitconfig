@@ -13,6 +13,7 @@
     co = checkout
     cp = cherry-pick
     d = diff
+    dn = diff --name-only
     l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     m = merge
     mb = merge-base
