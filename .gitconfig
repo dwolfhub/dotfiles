@@ -27,6 +27,8 @@
     rb = rebase -i
     rh = reset head
     s = status
+    st = stash
+    sta = stash apply
     t = tag -a
     tl = tag -l
     wip = commit -m "wip"

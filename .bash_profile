@@ -29,6 +29,7 @@ alias dlf="docker-compose logs -f"
 
 # Symfony shortcuts
 alias sc='symfony console'
+alias stest='symfony php ./vendor/bin/phpunit'
 alias sstart='symfony local:server:start -d'
 alias slist='symfony local:server:list'
 alias sstat="symfony server:status"
