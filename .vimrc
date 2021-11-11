@@ -73,6 +73,12 @@ Plug 'easymotion/vim-easymotion'
 "Plug 'SirVer/ultisnips'
 call plug#end()
 
+" fugitive
+nmap <leader>gs :G<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gj :diffget //3<CR>
+
+
 " vdebug
 "
 " let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
