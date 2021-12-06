@@ -42,7 +42,7 @@ set novisualbell
 set foldmethod=manual
 set foldlevel=9
 
-let g:dracula_italic = 0
+let g:dracula_italic = 1
 packadd! dracula
 colorscheme dracula
 let g:dracula_italic = 0
@@ -76,8 +76,9 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'SirVer/ultisnips'
-Plug 'mlaursen/vim-react-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'mlaursen/vim-react-snippets'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " fugitive
@@ -96,8 +97,8 @@ nmap <leader>gj :diffget //3<CR>
 "   \}
 
 " dispatch
-nnoremap <leader>D :w<CR>:Dispatch<space>
-nnoremap <leader>d :w<CR>:Copen<bar>Dispatch<CR>
+nnoremap <leader>D :w<CR>:Focus<space>
+nnoremap <leader>d :w<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
