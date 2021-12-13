@@ -70,8 +70,8 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'SirVer/ultisnips'
-Plug 'mlaursen/vim-react-snippets'
+"Plug 'SirVer/ultisnips'
+"Plug 'mlaursen/vim-react-snippets'
 call plug#end()
 
 " fugitive
@@ -90,8 +90,8 @@ nmap <leader>gj :diffget //3<CR>
 "   \}
 
 " dispatch
-nnoremap <leader>D :w<CR>:Dispatch<space>
-nnoremap <leader>d :w<CR>:Copen<bar>Dispatch<CR>
+nnoremap <leader>D :w<CR>:Focus<space>
+nnoremap <leader>d :w<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
@@ -293,9 +293,9 @@ endfu
 let g:lightline = {
     \ 'colorscheme': 'dracula',
     \ 'active': {
-    \   'left': [ [ 'bufnum', 'mode' ],
+    \   'left': [ [ 'mode' ],[ 'gitbranch' ],
     \             [ 'readonly', 'modified' ] ],
-    \   'right': [ [ 'relativepath' ], ]
+    \   'right': [ [ 'relativepath' ] ]
     \ },
     \ 'inactive': {
     \    'left': [ [ 'bufnum' ] ],
@@ -303,6 +303,7 @@ let g:lightline = {
     \    'right': [ [ 'relativepath' ] ]
     \ },
     \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead',
     \   'cwd': 'GetCwd',
     \ }
     \ }
@@ -350,10 +351,10 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " " easy-motion
 "map <Leader> <Plug>(easymotion-prefix)
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap s <Plug>(easymotion-s)
-" map <Leader>s <Plug>(easymotion-s)
-" nmap <Leader>s <Plug>(easymotion-s)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+map <Leader>s <Plug>(easymotion-s)
+nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')

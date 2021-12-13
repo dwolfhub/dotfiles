@@ -19,6 +19,7 @@
     mb = merge-base
     pf = push -u origin HEAD -f
     pl = pull
+    pll = pull --ff
     ps = push -u origin HEAD
     r = remote -v
     rp = remote prune
