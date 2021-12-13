@@ -1,6 +1,6 @@
 
 # Path
-export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$/usr/local/go/bin:/opt/local/bin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Users/wolf/.rbenv/shims:/usr/local/sbin:/bin:/usr/sbin:/sbin:/Users/wolf/pear/bin:/usr/local/mysql-5.6.19-osx10.7-x86/bin:/Users/danielwolf/.composer/vendor/bin:/opt/local/sbin:/usr/bin:/usr/local/mysql-5.7.12-osx10.11-x86_64/bin:/opt/vagrant/embedded/gems/bin/:/Users/danielwolf/bin:/usr/local/share/dotnet:/Users/danielwolf/Downloads/flutter/bin:/Applications/Postgres.app/Contents/Versions/11/bin:$HOME/.dotnet/tools:/usr/local/go/bin:$HOME/go/bin"
+export PATH="/usr/local/opt/mysql-client/bin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$/usr/local/go/bin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Users/wolf/.rbenv/shims:/usr/local/sbin:/bin:/usr/sbin:/sbin:/Users/wolf/pear/bin:/usr/local/mysql-5.6.19-osx10.7-x86/bin:/Users/danielwolf/.composer/vendor/bin:/usr/bin:/usr/local/mysql-5.7.12-osx10.11-x86_64/bin:/opt/local/bin:/opt/local/sbin:/opt/vagrant/embedded/gems/bin/:/Users/danielwolf/bin:/usr/local/share/dotnet:$HOME/.symfony/bin:/Applications/Postgres.app/Contents/Versions/11/bin:$HOME/.dotnet/tools:/usr/local/go/bin:$HOME/go/bin"
 
 # case-insensitive auto-complete with tab
 #bind "set completion-ignore-case on"
@@ -112,20 +112,6 @@ compinit
 
 # Stop at slashes when jumping around with option+somekey
 export WORDCHARS=${WORDCHARS/\/}
-
-_direnv_hook() {
-  trap -- '' SIGINT;
-  eval "$("/usr/local/bin/direnv" export zsh)";
-  trap - SIGINT;
-}
-typeset -ag precmd_functions;
-if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
-  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
-fi
-typeset -ag chpwd_functions;
-if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
-  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
-fi
 
 # export PATH="/usr/local/opt/php@7.4/bin:$PATH"
 # export PATH="/usr/local/opt/php@7.4/sbin:$PATH"

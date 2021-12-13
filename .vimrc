@@ -42,7 +42,7 @@ set novisualbell
 set foldmethod=manual
 set foldlevel=9
 
-let g:dracula_italic = 0
+let g:dracula_italic = 1
 packadd! dracula
 colorscheme dracula
 let g:dracula_italic = 0
@@ -52,6 +52,12 @@ let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
 set fillchars+=vert:│
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -72,6 +78,7 @@ Plug 'easymotion/vim-easymotion'
 
 "Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " fugitive
