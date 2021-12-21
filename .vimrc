@@ -70,7 +70,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'easymotion/vim-easymotion'
 
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
 Plug 'leafgarland/typescript-vim'
 call plug#end()
@@ -91,8 +91,9 @@ nmap <leader>gj :diffget //3<CR>
 "   \}
 
 " dispatch
-nnoremap <leader>D :w<CR>:Focus<space>
-nnoremap <leader>d :w<CR>:Dispatch<CR>
+nnoremap <leader>D :Focus<space>
+nnoremap <leader>d :Dispatch<CR>
+nnoremap <leader>wd :w<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
@@ -135,7 +136,7 @@ let g:fzf_action = {
 let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 
 nnoremap <leader>t :Files .<CR>
-nnoremap <leader>b :Buffers .<CR>
+nnoremap <leader>l :Buffers<CR>
 nnoremap <leader>F :AgIn<space>
 nnoremap <leader>f :Ag<CR>
 
@@ -202,8 +203,8 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD :vsp<CR>gd
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gt <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
