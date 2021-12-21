@@ -53,6 +53,12 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 
 set fillchars+=vert:│
 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -295,9 +301,9 @@ endfu
 let g:lightline = {
     \ 'colorscheme': 'dracula',
     \ 'active': {
-    \   'left': [ [ 'bufnum', 'mode' ],
+    \   'left': [ [ 'mode' ],[ 'gitbranch' ],
     \             [ 'readonly', 'modified' ] ],
-    \   'right': [ [ 'relativepath' ], ]
+    \   'right': [ [ 'relativepath' ] ]
     \ },
     \ 'inactive': {
     \    'left': [ [ 'bufnum' ] ],
@@ -305,6 +311,7 @@ let g:lightline = {
     \    'right': [ [ 'relativepath' ] ]
     \ },
     \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead',
     \   'cwd': 'GetCwd',
     \ }
     \ }
@@ -352,10 +359,10 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " " easy-motion
 "map <Leader> <Plug>(easymotion-prefix)
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap s <Plug>(easymotion-s)
-" map <Leader>s <Plug>(easymotion-s)
-" nmap <Leader>s <Plug>(easymotion-s)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s)
+map <Leader>s <Plug>(easymotion-s)
+nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
