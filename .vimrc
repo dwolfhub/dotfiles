@@ -98,8 +98,7 @@ nmap <leader>gj :diffget //3<CR>
 
 " dispatch
 nnoremap <leader>D :Focus<space>
-nnoremap <leader>d :Dispatch<CR>
-nnoremap <leader>wd :w<CR>:Dispatch<CR>
+nnoremap <leader>d :w<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
