@@ -106,8 +106,7 @@ nmap <leader>S :call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
 nnoremap <leader>D :Focus<space>
-nnoremap <leader>d :Dispatch<CR>
-nnoremap <leader>wd :w<CR>:Dispatch<CR>
+nnoremap <leader>d :w<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
