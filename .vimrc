@@ -79,6 +79,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
 Plug 'leafgarland/typescript-vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 call plug#end()
 
 " fugitive
@@ -86,6 +88,12 @@ nmap <leader>gs :G<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gj :diffget //3<CR>
 
+
+" vim-session
+let g:session_autosave = 'yes'
+let g:session_default_to_last = 1
+let g:session_autoload = 'yes'
+nmap <leader>S :call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " vdebug
 "
