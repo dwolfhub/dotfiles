@@ -1,6 +1,3 @@
-# vim mode
-bindkey -v
-
 # Path
 export PATH="/usr/local/opt/mysql-client/bin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$/usr/local/go/bin:/usr/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/wolf/Downloads/mongodb-osx-x86_64-2.4.9/bin:/usr/local/share/npm/bin:/Users/wolf/.rbenv/shims:/usr/local/sbin:/bin:/usr/sbin:/sbin:/Users/wolf/pear/bin:/usr/local/mysql-5.6.19-osx10.7-x86/bin:/Users/danielwolf/.composer/vendor/bin:/usr/bin:/usr/local/mysql-5.7.12-osx10.11-x86_64/bin:/opt/local/bin:/opt/local/sbin:/opt/vagrant/embedded/gems/bin/:/Users/danielwolf/bin:/usr/local/share/dotnet:$HOME/.symfony/bin:/Applications/Postgres.app/Contents/Versions/11/bin:$HOME/.dotnet/tools:/usr/local/go/bin:$HOME/go/bin"
 
