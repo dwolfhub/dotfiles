@@ -106,7 +106,7 @@ nmap <leader>S :call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
 nnoremap <leader>D :Focus<space>
-nnoremap <leader>d :w<CR>:Dispatch<CR>
+nnoremap <leader>d :up<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
@@ -292,7 +292,7 @@ endif
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 
-fu GetCwd()
+fu! GetCwd()
   return substitute(getcwd(), "/Users/d.*wolf/dev/", "dev/", "")
 endfu
 
