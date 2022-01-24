@@ -19,3 +19,4 @@ env35
 *.sketch
 .php_cs.cache
 Session.vim
+.kompose
