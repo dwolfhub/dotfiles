@@ -175,6 +175,8 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
 
+" Delete all but current buffer
+nnoremap <leader>O :%bd\|e#\|bd#<cr>
 
 " Trim white space on save
 autocmd BufWritePre * %s/\s\+$//e
