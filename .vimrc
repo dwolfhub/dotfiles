@@ -111,7 +111,7 @@ nnoremap <leader>d :up<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
-nnoremap Y y$
+nnoremap Y yg_
 
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
@@ -392,4 +392,4 @@ augroup END
 autocmd FileType gitcommit set textwidth=50
 
 autocmd FileType python nnoremap <leader>y :call CocAction('format')<CR>
-autocmd FileType python let b:coc_root_patterns = ['app.py', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+autocmd FileType python let b:coc_root_patterns = ['app', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
