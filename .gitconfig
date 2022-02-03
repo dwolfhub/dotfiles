@@ -14,6 +14,7 @@
     cp = cherry-pick
     d = diff
     dn = diff --name-only
+    fe = fetch --all
     l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     m = merge
     mb = merge-base
@@ -25,7 +26,8 @@
     rp = remote prune
     rpo = remote prune origin
     rao = remote add origin
-    rb = rebase -i
+    rb = rebase -i origin/main
+    rbc = rebase --continue
     rh = reset head
     s = status
     st = stash

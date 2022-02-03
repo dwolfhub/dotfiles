@@ -67,6 +67,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -74,7 +75,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'easymotion/vim-easymotion'
+":Plug 'easymotion/vim-easymotion'
 
 Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
@@ -93,7 +94,7 @@ nmap <leader>gj :diffget //3<CR>
 let g:session_autosave = 'yes'
 let g:session_default_to_last = 1
 let g:session_autoload = 'yes'
-nmap <leader>S :call feedkeys(':OpenSession<space><tab>','t')<cr>
+nmap <leader>s :call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
 nnoremap <leader>D :Focus<space>
@@ -101,7 +102,7 @@ nnoremap <leader>d :up<CR>:Dispatch<CR>
 let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
-nnoremap Y y$
+nnoremap Y yg_
 
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
@@ -175,11 +176,21 @@ autocmd BufWritePre * %s/\s\+$//e
 " map g/ <Plug>(incsearch-stay)
 
 " COC
-inoremap <silent><expr> <TAB>
+let g:coc_global_extendsions = [
+    \ 'coc-prettier',
+    \ 'coc-eslint',
+    \ 'coc-tsserver',
+    \ 'coc-phpls',
+    \ 'coc-json',
+    \ 'coc-pyright',
+    \ 'coc-ultisnips',
+  \ ]
+
+inoremap <silent><expr> <C-j>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -335,18 +346,20 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " cycle through grep results with C-n and C-p
-" nmap <silent> <C-J> :cn<CR>zv
-" nmap <silent> <C-K> :cp<CR>zv
+nmap <silent> <C-n> :cnext<CR>
+nmap <silent> <C-p> :cprev<CR>
 
 " set emmet short cut
 " let g:user_emmet_leader_key='<c-e>'
 
 "ultisnips configuration
-let g:UltiSnipsExpandTrigger="<nop>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+" let g:UltiSnipsExpandTrigger="<nop>"
+" let g:UltiSnipsJumpForwardTrigger="<c-n>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 let g:UltiSnipsEditSplit="vertical"
 let g:snips_author="DWolf"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
+let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
 nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
@@ -356,10 +369,10 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " " easy-motion
 "map <Leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s)
-map <Leader>s <Plug>(easymotion-s)
-nmap <Leader>s <Plug>(easymotion-s)
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" nmap s <Plug>(easymotion-s)
+" map <Leader>s <Plug>(easymotion-s)
+" nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
@@ -379,4 +392,4 @@ augroup END
 autocmd FileType gitcommit set textwidth=50
 
 autocmd FileType python nnoremap <leader>y :call CocAction('format')<CR>
-autocmd FileType python let b:coc_root_patterns = ['app.py', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+autocmd FileType python let b:coc_root_patterns = ['app', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
