@@ -75,7 +75,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'easymotion/vim-easymotion'
+":Plug 'easymotion/vim-easymotion'
 
 Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
@@ -94,7 +94,7 @@ nmap <leader>gj :diffget //3<CR>
 let g:session_autosave = 'yes'
 let g:session_default_to_last = 1
 let g:session_autoload = 'yes'
-nmap <leader>S :call feedkeys(':OpenSession<space><tab>','t')<cr>
+nmap <leader>s :call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " vdebug
 "
@@ -381,10 +381,10 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " " easy-motion
 "map <Leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s)
-map <Leader>s <Plug>(easymotion-s)
-nmap <Leader>s <Plug>(easymotion-s)
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" nmap s <Plug>(easymotion-s)
+" map <Leader>s <Plug>(easymotion-s)
+" nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 if !exists('g:vdebug_options')
