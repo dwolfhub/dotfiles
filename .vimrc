@@ -96,15 +96,6 @@ let g:session_default_to_last = 1
 let g:session_autoload = 'yes'
 nmap <leader>s :call feedkeys(':OpenSession<space><tab>','t')<cr>
 
-" vdebug
-"
-" let g:test#php#phpunit#executable = 'symfony php ./bin/phpunit'
-" let g:test#strategy = 'dispatch'
-
-" let g:dispatch_compilers = {
-"   \ 'symfony php ./bin/phpunit': 'phpunit',
-"   \}
-
 " dispatch
 nnoremap <leader>D :Focus<space>
 nnoremap <leader>d :up<CR>:Dispatch<CR>
@@ -115,9 +106,6 @@ nnoremap Y yg_
 
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
-
-" rerun command
-" nnoremap <leader>rr :w<CR>:!!<CR>
 
 " fzf
 let g:fzf_colors =
