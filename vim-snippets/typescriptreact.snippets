@@ -7,8 +7,8 @@ export const ${1:Component}: FC${2:<{$3}>} = (${3:{}}) => {
 endsnippet
 
 snippet rfc "React Functional Component"
-export const ${1:Component}: FC${2:<{$3}>} = (${3:{}}) => {
-    return <>${4:hello}</>;
+${1:export }const ${2:Component}: FC${3:<{$4}>} = (${4:{}}) => {
+    return <>${5:hello}</>;
 };
 endsnippet
 
@@ -16,6 +16,20 @@ snippet lo "console.log()" b
 console.log({$0});
 endsnippet
 
-snippet disp "dispatch"
+snippet disp "useAppDispatch"
 const dispatch = useAppDispatch$1();
+endsnippet
+
+snippet sel "useAppSelector"
+const $1 = useAppSelector$2(select$3);
+endsnippet
+
+snippet st "useState"
+const [$1, set${1/^(.)(.+)/\u$1$2/}] = useState$3($4);
+endsnippet
+
+snippet eff "useEffect"
+useEffect(() => {
+    $1
+}, []);
 endsnippet
