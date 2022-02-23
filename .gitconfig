@@ -1,7 +1,7 @@
 [alias]
     a = add --all
     ap = add -p
-    b = branch -vr
+    b = branch -vr --sort=-committerdate
     bd = branch -d
     bn = branch -vr --no-merged
     c = clone
