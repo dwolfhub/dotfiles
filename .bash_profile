@@ -112,8 +112,8 @@ compinit
 # Stop at slashes when jumping around with option+somekey
 export WORDCHARS=${WORDCHARS/\/}
 
-# export PATH="/usr/local/opt/php@7.4/bin:$PATH"
-# export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
+export PATH="/usr/local/opt/php@7.4/bin:$PATH"
+export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 
 export PATH="/usr/local/opt/python@3.7/bin:/Users/danielwolf/Library/Python/3.7/bin:$PATH"
 #export LDFLAGS="-L/usr/local/opt/python@3.7/lib"

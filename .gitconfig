@@ -89,3 +89,5 @@
 [git-together "user"]
     name = Daniel Wolf
     email = danwolf@fastmail.com
+[init]
+	defaultBranch = main

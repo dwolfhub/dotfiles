@@ -82,6 +82,7 @@ Plug 'SirVer/ultisnips'
 Plug 'leafgarland/typescript-vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'lumiliet/vim-twig'
 call plug#end()
 
 " fugitive
@@ -176,15 +177,18 @@ autocmd BufWritePre * %s/\s\+$//e
 " map g/ <Plug>(incsearch-stay)
 
 " COC
-let g:coc_global_extendsions = [
+let g:coc_global_extensions = [
     \ 'coc-prettier',
     \ 'coc-eslint',
     \ 'coc-tsserver',
     \ 'coc-phpls',
     \ 'coc-json',
     \ 'coc-pyright',
+    \ 'coc-pyright',
     \ 'coc-ultisnips',
   \ ]
+" let g:coc_filetype_map = {
+"     \ }
 
 inoremap <silent><expr> <C-j>
       \ pumvisible() ? "\<C-n>" :
