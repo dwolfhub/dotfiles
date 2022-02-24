@@ -111,10 +111,10 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: IBM Plex Mono
+    family: Fira Code
 
     # The `style` can be specified to pick a specific face.
-    style: Medium
+    style: Retina
 
   # Bold font face
   bold:
@@ -122,7 +122,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: IBM Plex Mono
+    family: Fira Code
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -156,7 +156,7 @@ font:
   # of as modifying the line spacing, and `offset.x` as modifying the letter
   # spacing.
   offset:
-  #  x: 0
+    x: 0
     y: 8
 
   # Glyph offset determines the locations of the glyphs within their cells with
@@ -170,7 +170,7 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
-  #use_thin_strokes: true
+  use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false

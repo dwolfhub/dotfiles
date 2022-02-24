@@ -70,13 +70,13 @@ export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore 
 
 PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-RPROMPT="%F{green}["\$vcs_info_msg_0_"]%f"
-#PROMPT=\$vcs_info_msg_0_'%# '
-zstyle ':vcs_info:git:*' formats '%b'
+#autoload -Uz vcs_info
+#precmd_vcs_info() { vcs_info }
+#precmd_functions+=( precmd_vcs_info )
+#setopt prompt_subst
+#RPROMPT="%F{green}["\$vcs_info_msg_0_"]%f"
+##PROMPT=\$vcs_info_msg_0_'%# '
+#zstyle ':vcs_info:git:*' formats '%b'
 
 # basic
 #PS1='\[\e[0;36m\]$\[\e[0;39m\] '
