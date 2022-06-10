@@ -62,7 +62,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -75,7 +75,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-":Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'justinmk/vim-sneak'
 
 Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
@@ -101,7 +102,7 @@ nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 nnoremap <leader>D :Focus<space>
 nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
 nnoremap <leader>d :up<CR>:Dispatch<CR>
-let g:dispatch_quickfix_height = 15
+let g:dispatch_quickfix_height = 25
 nnoremap <leader>n 3<c-w>jG
 
 nnoremap Y yg_
@@ -187,6 +188,7 @@ let g:coc_global_extensions = [
     \ 'coc-pyright',
     \ 'coc-pyright',
     \ 'coc-ultisnips',
+    \ 'coc-react-refactor',
   \ ]
 " let g:coc_filetype_map = {
 "     \ }
@@ -255,24 +257,24 @@ augroup end
 
 " " Applying codeAction to the selected region.
 " " Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-" nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-" xmap if <Plug>(coc-funcobj-i)
-" omap if <Plug>(coc-funcobj-i)
-" xmap af <Plug>(coc-funcobj-a)
-" omap af <Plug>(coc-funcobj-a)
-" xmap ic <Plug>(coc-classobj-i)
-" omap ic <Plug>(coc-classobj-i)
-" xmap ac <Plug>(coc-classobj-a)
-" omap ac <Plug>(coc-classobj-a)
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -298,9 +300,9 @@ endif
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 
-fu! GetCwd()
-  return substitute(getcwd(), "/Users/d.*wolf/dev/", "dev/", "")
-endfu
+" fu! GetShortFilePath()
+"   return pathshorten(substitute(getcwd(), "/Users/d.*wolf/dev/", "~/dev/", "") . "/" . bufname())
+" endfu
 
 " fu LightlineDateTime()
 "   return strftime('%a %b %d %-l:%M%p')
@@ -311,23 +313,24 @@ endfu
 "   let root =
 " endfu
 
-let g:lightline = {
-    \ 'colorscheme': 'dracula',
-    \ 'active': {
-    \   'left': [ [ 'mode' ],[ 'gitbranch' ],
-    \             [ 'readonly', 'modified' ] ],
-    \   'right': [ [ 'relativepath' ] ]
-    \ },
-    \ 'inactive': {
-    \    'left': [ [ 'bufnum' ] ],
-    \    'middle': [ ],
-    \    'right': [ [ 'relativepath' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'FugitiveHead',
-    \   'cwd': 'GetCwd',
-    \ }
-    \ }
+" let g:lightline = {
+"     \ 'colorscheme': 'dracula',
+"     \ 'active': {
+"     \ 'left': [ [ 'mode', 'paste' ],
+"     \           [ 'readonly', 'modified' ] ],
+"     \ 'right': [ [ ],
+"     \            [ ],
+"     \            [ 'shortfilepath' ] ]
+"     \ },
+"     \ 'inactive': {
+"     \    'left': [ [ 'bufnum' ] ],
+"     \    'middle': [ ],
+"     \    'right': [ [ 'shortfilepath' ] ]
+"     \ },
+"     \ 'component_function': {
+"     \   'shortfilepath': 'GetShortFilePath',
+"     \ }
+"     \ }
 
 " Use autocmd to force lightline update.
 " autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
