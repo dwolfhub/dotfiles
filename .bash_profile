@@ -12,6 +12,8 @@ alias pmu='python -m unittest'
 # allows running aliases as sudo
 alias sudo='sudo '
 
+alias connmouse='blueutil --pair 04-f1-3e-f0-49-df'
+
 # listing directory shortcuts
 alias ll="ls -lah"
 
