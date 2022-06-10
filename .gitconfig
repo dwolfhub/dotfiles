@@ -13,9 +13,10 @@
     co = checkout
     cp = cherry-pick
     d = diff
+    dc = diff --cached
     dn = diff --name-only
     fe = fetch --all
-    l = log --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
+    l = log --graph --pretty=format:"%h%x09%an%x09%ar%x09%s" -n 1000
     m = merge
     mb = merge-base
     pf = push -u origin HEAD -f
