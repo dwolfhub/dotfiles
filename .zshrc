@@ -146,3 +146,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 setopt share_history          # share command history data
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
