@@ -96,7 +96,7 @@ nmap <leader>gj :diffget //3<CR>
 " vim-session
 let g:session_autosave = 'yes'
 let g:session_default_to_last = 1
-let g:session_autoload = 'yes'
+let g:session_autoload = 'prompt'
 nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
