@@ -23,13 +23,52 @@ jv() {
     vi .
 }
 
+# Git shortcuts
+alias gs="git status"
+alias gb="git branch"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+alias gr="git remote -v"
+alias grh="git reset head"
+alias gst="git stash"
+alias gsa="git stash apply"
+alias ga="git add -p"
+alias gd="git diff"
+alias gp="git push -u origin HEAD"
+alias gpl="git pull"
+alias gpll="git pull --ff"
+alias gbd="git branch -d"
+alias gpo="git push origin"
+alias gcl="git checkout -- "
+alias gcm="git commit -m"
+alias grb="git rebase -i origin/main"
+alias grbm="git rebase -i origin/master"
+alias grbp="git rebase -i origin/primary"
+
 # Docker shortcuts
 alias dcu="docker-compose up -d"
+alias dcud="docker-compose up -d"
 alias dcd="docker-compose down"
-alias dlf="docker-compose logs -f"
+alias dclf="docker-compose logs -f"
+alias dcl="docker-compose logs"
+
+# Yarn shortcuts
+alias y="yarn"
+alias ya="yarn add"
+alias yr="yarn remove"
+alias ys="yarn start"
+alias yb="yarn build"
+
+# nvm aliases
+alias nu="nvm use"
+
+# zsh shortcuts
+alias src="source ~/.zshrc"
+alias rmf="rm -rf"
 
 # Symfony shortcuts
 alias sc='symfony console'
+alias scomp='symfony composer'
 alias stest='symfony php ./vendor/bin/phpunit'
 alias sstart='symfony local:server:start -d'
 alias slist='symfony local:server:list'
