@@ -102,7 +102,7 @@ nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 nnoremap <leader>D :Focus<space>
 nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
 nnoremap <leader>d :up<CR>:Dispatch<CR>
-let g:dispatch_quickfix_height = 25
+let g:dispatch_quickfix_height = 15
 nnoremap <leader>n 3<c-w>jG
 
 nnoremap Y yg_
