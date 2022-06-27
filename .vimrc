@@ -77,6 +77,7 @@ Plug 'junegunn/fzf.vim'
 
 "Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
+Plug 'will133/vim-dirdiff'
 
 Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
