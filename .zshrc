@@ -23,36 +23,41 @@ jv() {
     vi .
 }
 
-# Git shortcuts
+# Git aliases
 alias gs="git status"
 alias gb="git branch"
 alias gcb="git checkout -b"
-alias gc="git checkout"
+alias gcom="git checkout main"
 alias gr="git remote -v"
 alias grh="git reset head"
 alias gst="git stash"
 alias gsa="git stash apply"
 alias ga="git add -p"
 alias gd="git diff"
+alias gdn="git diff --name-only"
+alias gdm="git diff origin/main"
+alias gdmn="git diff origin/main --name-only"
 alias gp="git push -u origin HEAD"
+alias gpf="git push -u origin HEAD -f"
 alias gpl="git pull"
 alias gpll="git pull --ff"
 alias gbd="git branch -d"
 alias gpo="git push origin"
 alias gcl="git checkout -- "
-alias gcm="git commit -m"
+alias gc="git commit -m"
 alias grb="git rebase -i origin/main"
 alias grbm="git rebase -i origin/master"
 alias grbp="git rebase -i origin/primary"
+alias grpo="git remote prune origin"
 
-# Docker shortcuts
+# Docker aliases
 alias dcu="docker-compose up -d"
 alias dcud="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dclf="docker-compose logs -f"
 alias dcl="docker-compose logs"
 
-# Yarn shortcuts
+# Yarn aliases
 alias y="yarn"
 alias ya="yarn add"
 alias yr="yarn remove"
