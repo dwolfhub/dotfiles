@@ -19,7 +19,7 @@ set noeol
 set nowritebackup
 set noshowmode
 set number
-set relativenumber
+set norelativenumber
 set ruler
 set shiftwidth=4
 set showcmd
@@ -88,22 +88,24 @@ Plug 'lumiliet/vim-twig'
 call plug#end()
 
 " fugitive / git
+set diffopt+=vertical
 nmap <leader>gs :2,'}s/pick/s<CR>:wq<CR>
 nmap <leader>gw :g/wip/d<CR>:wq<CR>
+nmap <leader>gD :Gdiffsplit!
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gj :diffget //3<CR>
 
 " vim-session
 let g:session_autosave = 'yes'
 let g:session_default_to_last = 1
-let g:session_autoload = 'prompt'
+let g:session_autoload = 'yes'
 nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
 nnoremap <leader>D :Focus<space>
 nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
 nnoremap <leader>d :up<CR>:Dispatch<CR>
-let g:dispatch_quickfix_height = 25
+let g:dispatch_quickfix_height = 10
 nnoremap <leader>n 3<c-w>jG
 
 nnoremap Y yg_
