@@ -1,5 +1,5 @@
 # Path
-export PATH="/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:/Users/danielwolf/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin"
+export PATH="/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin"
 
 # case-insensitive auto-complete with tab
 #bind "set completion-ignore-case on"
@@ -23,41 +23,56 @@ jv() {
     vi .
 }
 
-# Git shortcuts
+# Git aliases
 alias gs="git status"
 alias gb="git branch"
 alias gcb="git checkout -b"
-alias gc="git checkout"
+alias gco="git checkout"
+alias gcom="git checkout main"
 alias gr="git remote -v"
 alias grh="git reset head"
 alias gst="git stash"
 alias gsa="git stash apply"
-alias ga="git add -p"
+alias ga="git add"
+alias gap="git add -p"
 alias gd="git diff"
+alias gdn="git diff --name-only"
+alias gdm="git diff origin/main"
+alias gdmn="git diff origin/main --name-only"
+alias gdc="git diff --cached"
 alias gp="git push -u origin HEAD"
+alias gps="git push -u origin HEAD"
+alias gpf="git push -u origin HEAD -f"
 alias gpl="git pull"
 alias gpll="git pull --ff"
 alias gbd="git branch -d"
 alias gpo="git push origin"
 alias gcl="git checkout -- "
-alias gcm="git commit -m"
-alias grb="git rebase -i origin/main"
-alias grbm="git rebase -i origin/master"
+alias gc="git commit -m"
+alias grb="git rebase -i"
+alias grbc="git rebase --continue"
+alias grbm="git rebase -i origin/main"
+alias grbma="git rebase -i origin/master"
 alias grbp="git rebase -i origin/primary"
+alias grpo="git remote prune origin"
+alias gm="git merge"
+alias gl="git log --pretty=format:\"%h%x09%an%x09%ar%x09%s\" -n 1000"
+alias gw="git wip"
 
-# Docker shortcuts
+# Docker aliases
 alias dcu="docker-compose up -d"
 alias dcud="docker-compose up -d"
 alias dcd="docker-compose down"
 alias dclf="docker-compose logs -f"
 alias dcl="docker-compose logs"
 
-# Yarn shortcuts
+# Yarn aliases
 alias y="yarn"
 alias ya="yarn add"
 alias yr="yarn remove"
 alias ys="yarn start"
 alias yb="yarn build"
+alias yd="yarn dev"
 
 # nvm aliases
 alias nu="nvm use"
@@ -103,21 +118,29 @@ export FZF_DEFAULT_OPTS='--height 30%'
 export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
-# export FZF_COMPLETION_TRIGGER="'"
+export FZF_COMPLETION_TRIGGER=","
+
 #
 . /usr/local/opt/fzf/shell/key-bindings.zsh
 . /usr/local/opt/fzf/shell/completion.zsh
 
+_fzf_complete_yarn() {
+  _fzf_complete --multi --reverse --prompt="yarn> " -- "$@" < <(
+    jq ".scripts|keys|.[]" package.json | gsed 's/.$//; s/^.//'
+  )
+}
+
 
 PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
-#autoload -Uz vcs_info
-#precmd_vcs_info() { vcs_info }
-#precmd_functions+=( precmd_vcs_info )
-#setopt prompt_subst
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
 #RPROMPT="%F{green}["\$vcs_info_msg_0_"]%f"
-##PROMPT=\$vcs_info_msg_0_'%# '
-#zstyle ':vcs_info:git:*' formats '%b'
+RPROMPT=""
+#PROMPT=\$vcs_info_msg_0_'%# '
+zstyle ':vcs_info:git:*' formats '%b'
 
 # basic
 #PS1='\[\e[0;36m\]$\[\e[0;39m\] '
@@ -144,7 +167,7 @@ zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character t
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
 zstyle ':completion:*' original true
 zstyle ':completion:*' verbose true
-zstyle :compinstall filename '/Users/danielwolf/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -156,7 +179,7 @@ export WORDCHARS=${WORDCHARS/\/}
 # export PATH="/usr/local/opt/php@7.4/bin:$PATH"
 # export PATH="/usr/local/opt/php@7.4/sbin:$PATH"
 
-# export PATH="/usr/local/opt/python@3.7/bin:/Users/danielwolf/Library/Python/3.7/bin:$PATH"
+# export PATH="/usr/local/opt/python@3.7/bin:~/Library/Python/3.7/bin:$PATH"
 # export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
 # export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
 
@@ -167,16 +190,17 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
+[ -f '~/.zshenv' ] && . ~/.zshenv
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/danielwolf/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danielwolf/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '~/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/danielwolf/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/danielwolf/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 export TERM=xterm-256color-italic
 
+if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
 export NVM_DIR="$HOME/.nvm"

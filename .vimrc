@@ -77,6 +77,7 @@ Plug 'junegunn/fzf.vim'
 
 "Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
+Plug 'will133/vim-dirdiff'
 
 Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
@@ -87,15 +88,17 @@ Plug 'lumiliet/vim-twig'
 call plug#end()
 
 " fugitive / git
+set diffopt+=vertical
 nmap <leader>gs :2,'}s/pick/s<CR>:wq<CR>
 nmap <leader>gw :g/wip/d<CR>:wq<CR>
+nmap <leader>gD :Gdiffsplit!
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gj :diffget //3<CR>
 
 " vim-session
 let g:session_autosave = 'yes'
 let g:session_default_to_last = 1
-let g:session_autoload = 'prompt'
+let g:session_autoload = 'yes'
 nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
