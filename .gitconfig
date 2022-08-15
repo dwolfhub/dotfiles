@@ -92,3 +92,5 @@
     email = danwolf@fastmail.com
 [init]
 	defaultBranch = main
+[commit]
+template = /Users/danielwolf/dev/dotfiles/.gitmessage
