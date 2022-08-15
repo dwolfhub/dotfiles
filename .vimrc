@@ -12,7 +12,6 @@ set hidden
 set nohlsearch
 set ignorecase
 set laststatus=2
-set linespace=4
 set mouse=c
 set nobackup
 set noeol
@@ -59,8 +58,27 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" ale
+let g:ale_completion_enabled = 0
+
+ let g:ale_linters = {
+\   'typescript': ['eslint', 'typecheck'],
+\   'typescriptreact': ['eslint', 'typecheck'],
+\}
+
+let g:ale_fixers = {
+ \ 'javascript': ['prettier'],
+ \ 'typescript': ['prettier'],
+ \ 'javascriptreact': ['prettier'],
+ \ 'typescriptreact': ['prettier']
+ \ }
+
+let g:ale_sign_error = 'X'
+let g:ale_sign_warning = '-'
+let g:ale_fix_on_save = 1
+
 call plug#begin('~/.vim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Plug 'itchyny/lightline.vim'
 
@@ -68,47 +86,133 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'dense-analysis/ale'
 
 "Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
-Plug 'will133/vim-dirdiff'
+"Plug 'will133/vim-dirdiff'
 
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
-Plug 'leafgarland/typescript-vim'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'lumiliet/vim-twig'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-session'
+"Plug 'lumiliet/vim-twig'
+
+"Plug 'prabirshrestha/async'
+Plug 'prabirshrestha/vim-lsp'
+"Plug 'ryanolsonx/vim-lsp-typescript'
+
+Plug 'vim-denops/denops.vim'
+" For troubleshooting denops
+" Plug 'rhysd/vim-healthcheck'
+Plug 'Shougo/ddc.vim'
+Plug 'Shougo/pum.vim'
+
+Plug 'Shougo/ddc-around'
+Plug 'shun/ddc-vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+"Plug 'statiolake/ddc-ale'
+"Plug 'LumaKernel/ddc-file'
+
+Plug 'vim-denops/denops-helloworld.vim'
+
+" Install your filters
+Plug 'tani/ddc-fuzzy'
+Plug 'Shougo/ddc-matcher_head'
+Plug 'Shougo/ddc-sorter_rank'
+
+
 call plug#end()
 
+
+" lsp
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 1
+
+nmap <leader>qf :LspCodeAction<cr>
+nmap <silent> [g :LspNextDiagnostic<cr>
+nmap <silent> ]g :LspPreviousDiagnostic<cr>
+nmap <silent> gd :LspDefinition<cr>
+nmap <silent> gh :LspHover<cr>
+nmap <silent> gD :LspPeekDefinition<cr>
+nmap <silent> gt :LspTypeDefinition<cr> 
+nmap <silent> gT :LspPeekTypeDefinition<cr> 
+nmap <silent> gi :LspImplementation<cr>
+nmap <silent> gI :LspPeekImplementation<cr>
+nmap <silent> gr :LspReferences<cr>
+nmap <silent> gn :LspRename<cr>
+
+" pum
+inoremap <C-n> <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p> <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y> <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e> <Cmd>call pum#map#cancel()<CR>
+
+" ddc
+
+call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
+call ddc#custom#patch_global('completionMenu', 'native')
+"call ddc#custom#patch_global('completionMenu', 'pum.vim')
+
+" Use matcher_head and sorter_rank.
+" https://github.com/Shougo/ddc-matcher_head
+" https://github.com/Shougo/ddc-sorter_rank
+call ddc#custom#patch_global('sourceOptions', {
+\ '_': {
+\   'matchers': ['matcher_fuzzy'],
+\   'sorters': ['sorter_fuzzy'],
+\   'converters': ['converter_fuzzy'], },
+\ 'around': { 'mark': 'A', "maxLines": 3 },
+\ })
+"\ 'ale': { 'forceCompletionPattern': '\.|->', 'mark': 'a' },
+
+" Mappings
+
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+\ ddc#map#pum_visible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+
+" Use ddc.
+call ddc#enable()
+
 " fugitive / git
-set diffopt+=vertical
-nmap <leader>gs :2,'}s/pick/s<CR>:wq<CR>
-nmap <leader>gw :g/wip/d<CR>:wq<CR>
-nmap <leader>gD :Gdiffsplit!
-nmap <leader>gf :diffget //2<CR>
-nmap <leader>gj :diffget //3<CR>
+"set diffopt+=vertical
+"nmap <leader>gs :2,'}s/pick/s<CR>:wq<CR>
+"nmap <leader>gw :g/wip/d<CR>:wq<CR>
+"nmap <leader>gD :Gdiffsplit!
+"nmap <leader>gf :diffget //2<CR>
+"nmap <leader>gj :diffget //3<CR>
 
 " vim-session
-let g:session_autosave = 'yes'
-let g:session_default_to_last = 1
-let g:session_autoload = 'yes'
-nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
+"let g:session_autosave = 'yes'
+"let g:session_default_to_last = 1
+"let g:session_autoload = 'yes'
+"nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " dispatch
 nnoremap <leader>D :Focus<space>
 nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
 nnoremap <leader>d :up<CR>:Dispatch<CR>
-let g:dispatch_quickfix_height = 10
+let g:dispatch_quickfix_height = 20
 nnoremap <leader>n 3<c-w>jG
 
+" Y copies to end of line
 nnoremap Y yg_
+
+" Put in visual mode doesn't capture
+vnoremap p "_dP
 
 " edit vimrc
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
@@ -174,7 +278,7 @@ nnoremap <leader>W :wq<CR>
 nnoremap <leader>O :%bd\|e#\|bd#<cr>
 
 " Trim white space on save
-autocmd BufWritePre * %s/\s\+$//e
+"autocmd BufWritePre * %s/\s\+$//e
 
 " incsearch
 " map /  <Plug>(incsearch-forward)
@@ -182,112 +286,112 @@ autocmd BufWritePre * %s/\s\+$//e
 " map g/ <Plug>(incsearch-stay)
 
 " COC
-let g:coc_global_extensions = [
-    \ 'coc-prettier',
-    \ 'coc-eslint',
-    \ 'coc-tsserver',
-    \ 'coc-phpls',
-    \ 'coc-json',
-    \ 'coc-pyright',
-    \ 'coc-pyright',
-    \ 'coc-ultisnips',
-    \ 'coc-react-refactor',
-  \ ]
+" let g:coc_global_extensions = [
+"     \ 'coc-prettier',
+"     \ 'coc-eslint',
+"     \ 'coc-tsserver',
+"     \ 'coc-phpls',
+"     \ 'coc-json',
+"     \ 'coc-pyright',
+"     \ 'coc-pyright',
+"     \ 'coc-ultisnips',
+"     \ 'coc-react-refactor',
+"   \ ]
 " let g:coc_filetype_map = {
 "     \ }
 
-inoremap <silent><expr> <C-j>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <C-j>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+" if has('nvim')
+"   inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"   inoremap <silent><expr> <c-@> coc#refresh()
+" endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD :vsp<CR>gd
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gD :vsp<CR>gd
 " nmap <silent> gt <Plug>(coc-type-definition)
 " nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   elseif (coc#rpc#ready())
+"     call CocActionAsync('doHover')
+"   else
+"     execute '!' . &keywordprg . " " . expand('<cword>')
+"   endif
+" endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+" nmap <leader>rn <Plug>(coc-rename)
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+" augroup mygroup
+"   autocmd!
+"   " Setup formatexpr specified filetype(s).
+"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"   " Update signature help on jump placeholder.
+"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+" augroup end
 
 " " Applying codeAction to the selected region.
 " " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" xmap <leader>a  <Plug>(coc-codeaction-selected)
+" nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+" nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+" nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
+" xmap if <Plug>(coc-funcobj-i)
+" omap if <Plug>(coc-funcobj-i)
+" xmap af <Plug>(coc-funcobj-a)
+" omap af <Plug>(coc-funcobj-a)
+" xmap ic <Plug>(coc-classobj-i)
+" omap ic <Plug>(coc-classobj-i)
+" xmap ac <Plug>(coc-classobj-a)
+" omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
+" if has('nvim-0.4.0') || has('patch-8.2.0750')
+"   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" endif
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
 " nmap <silent> <C-s> <Plug>(coc-range-select)
@@ -300,7 +404,7 @@ endif
 " command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 
 " fu! GetShortFilePath()
@@ -340,13 +444,13 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
 "nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 "nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 " nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
@@ -367,11 +471,11 @@ nmap <silent> <C-p> :cprev<CR>
 " let g:UltiSnipsExpandTrigger="<nop>"
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsEditSplit="vertical"
-let g:snips_author="DWolf"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
-let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
-nnoremap <leader>ue :UltiSnipsEdit<CR>
+" let g:UltiSnipsEditSplit="vertical"
+" let g:snips_author="DWolf"
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
+" let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
+" nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
 " nnoremap <leader>e :NERDTreeToggle<cr>
@@ -386,10 +490,10 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 " nmap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
-if !exists('g:vdebug_options')
-    let g:vdebug_options = {}
-endif
-let g:vdebug_options.port = 9000
+" if !exists('g:vdebug_options')
+"     let g:vdebug_options = {}
+" endif
+" let g:vdebug_options.port = 9000
 " let g:vdebug_options.break_on_open = 0
 
 " corsorline only on current buffer

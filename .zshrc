@@ -1,4 +1,3 @@
-# Path
 export PATH="/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin"
 
 # case-insensitive auto-complete with tab
@@ -27,14 +26,17 @@ jv() {
 alias gs="git status"
 alias gb="git branch"
 alias gcb="git checkout -b"
-alias gco="git checkout"
+#alias gco="git checkout $(git branch | fzf)"
 alias gcom="git checkout main"
 alias gr="git remote -v"
+alias grpo="git remote prune origin"
+alias grao="git remote add origin"
 alias grh="git reset head"
 alias gst="git stash"
 alias gsa="git stash apply"
 alias ga="git add"
 alias gap="git add -p"
+alias gcp="git cherry-pick"
 alias gd="git diff"
 alias gdn="git diff --name-only"
 alias gdm="git diff origin/main"
@@ -54,7 +56,6 @@ alias grbc="git rebase --continue"
 alias grbm="git rebase -i origin/main"
 alias grbma="git rebase -i origin/master"
 alias grbp="git rebase -i origin/primary"
-alias grpo="git remote prune origin"
 alias gm="git merge"
 alias gl="git log --pretty=format:\"%h%x09%an%x09%ar%x09%s\" -n 1000"
 alias gw="git wip"
@@ -73,6 +74,10 @@ alias yr="yarn remove"
 alias ys="yarn start"
 alias yb="yarn build"
 alias yd="yarn dev"
+
+# npm aliases
+alias ni="npm install"
+alias ns="npm start"
 
 # nvm aliases
 alias nu="nvm use"
@@ -120,9 +125,9 @@ export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
 export FZF_COMPLETION_TRIGGER=","
 
-#
-. /usr/local/opt/fzf/shell/key-bindings.zsh
-. /usr/local/opt/fzf/shell/completion.zsh
+
+ . /usr/local/opt/fzf/shell/key-bindings.zsh
+ . /usr/local/opt/fzf/shell/completion.zsh
 
 _fzf_complete_yarn() {
   _fzf_complete --multi --reverse --prompt="yarn> " -- "$@" < <(
@@ -133,44 +138,39 @@ _fzf_complete_yarn() {
 
 PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
 #RPROMPT="%F{green}["\$vcs_info_msg_0_"]%f"
-RPROMPT=""
-#PROMPT=\$vcs_info_msg_0_'%# '
-zstyle ':vcs_info:git:*' formats '%b'
+# RPROMPT=""
+#RPROMPT=\$vcs_info_msg_0_'%# '
+# zstyle ':vcs_info:git:*' formats '%b'
 
 # basic
 #PS1='\[\e[0;36m\]$\[\e[0;39m\] '
 
-autoload -Uz compinit && compinit
-
+# autoload -Uz compinit && compinit
 
 # export PATH=$PATH:$(npm config --global get prefix)/bin
 
 # Android Studio Env Vars
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+# export ANDROID_HOME=$HOME/Library/Android/sdk
+# export PATH=$PATH:$ANDROID_HOME/emulator
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/tools/bin
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # The following lines were added by compinstall
+# zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+# zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+# zstyle ':completion:*' original true
+# zstyle ':completion:*' verbose true
+# zstyle :compinstall filename '~/.zshrc'
 
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-zstyle ':completion:*' original true
-zstyle ':completion:*' verbose true
-zstyle :compinstall filename '~/.zshrc'
-
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit
 # End of lines added by compinstall
 
 # Stop at slashes when jumping around with option+somekey
@@ -190,24 +190,28 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-[ -f '~/.zshenv' ] && . ~/.zshenv
+#[ -f '~/.zshenv' ] && . ~/.zshenv
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+#if [ -f '~/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+#if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 export TERM=xterm-256color-italic
 
-if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
-if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
+#if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
+#if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+
+ if [ -s "$HOME/.nvm/nvm.sh" ]; then
+   export NVM_DIR="$HOME/.nvm"
+   source $HOME/.nvm/nvm.sh --no-use
+ fi
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-setopt share_history          # share command history data
+setopt share_history
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
