@@ -133,8 +133,30 @@ call plug#end()
 
 
 " lsp
+augroup mylspgroup
+    autocmd FileType typescript setlocal omnifunc=lsp#complete
+    autocmd FileType typescript setlocal tagfunc=lsp#tagfunc
+
+    autocmd User lsp_float_opened nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    autocmd User lsp_float_closed nunmap <buffer> <expr><c-f> 
+
+    autocmd User lsp_float_opened nnoremap <buffer> <expr><c-b> lsp#scroll(-4)
+    autocmd User lsp_float_closed nunmap <buffer> <expr><c-b> 
+
+    autocmd User lsp_float_opened nmap <buffer> <silent> <C-c> <Plug>(lsp-preview-close)
+    autocmd User lsp_float_closed nunmap <buffer> <C-c>
+augroup end
+
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 1
+
+" Do not keep the focus in current window.
+" Move the focus to |preview-window|.
+let g:lsp_preview_keep_focus = 0
+let g:lsp_diagnostics_float_cursor = 1
+"let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_ignorecase = 1
+"let g:lsp_semantic_enabled = 1
 
 nmap <leader>qf :LspCodeAction<cr>
 nmap <silent> [g :LspNextDiagnostic<cr>
@@ -149,17 +171,19 @@ nmap <silent> gI :LspPeekImplementation<cr>
 nmap <silent> gr :LspReferences<cr>
 nmap <silent> gn :LspRename<cr>
 
+
 " pum
-inoremap <C-n> <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p> <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-y> <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e> <Cmd>call pum#map#cancel()<CR>
+inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 " ddc
-
 call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
-call ddc#custom#patch_global('completionMenu', 'native')
-"call ddc#custom#patch_global('completionMenu', 'pum.vim')
+"call ddc#custom#patch_global('completionMenu', 'native')
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
 " Use matcher_head and sorter_rank.
 " https://github.com/Shougo/ddc-matcher_head
