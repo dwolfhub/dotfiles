@@ -24,6 +24,7 @@ jv() {
 
 # Git aliases
 alias gs="git status"
+alias gsh="git show"
 alias gb="git branch"
 alias gcb="git checkout -b"
 alias gco='git checkout $(git branch | fzf)'
@@ -204,12 +205,12 @@ export TERM=xterm-256color-italic
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
-# source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 
- if [ -s "$HOME/.nvm/nvm.sh" ]; then
-   export NVM_DIR="$HOME/.nvm"
-   source $HOME/.nvm/nvm.sh --no-use
- fi
+ # if [ -s "$HOME/.nvm/nvm.sh" ]; then
+ #   export NVM_DIR="$HOME/.nvm"
+ #   source $HOME/.nvm/nvm.sh 
+ # fi
 
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 

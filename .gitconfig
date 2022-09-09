@@ -93,4 +93,4 @@
 [init]
 	defaultBranch = main
 [commit]
-template = /Users/danielwolf/dev/dotfiles/.gitmessage
+template = ~/dev/dotfiles/.gitmessage
