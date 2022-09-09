@@ -1,4 +1,4 @@
-export PATH="/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin"
+export PATH="/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
 
 # case-insensitive auto-complete with tab
 #bind "set completion-ignore-case on"
@@ -26,7 +26,7 @@ jv() {
 alias gs="git status"
 alias gb="git branch"
 alias gcb="git checkout -b"
-#alias gco="git checkout $(git branch | fzf)"
+alias gco='git checkout $(git branch | fzf)'
 alias gcom="git checkout main"
 alias gr="git remote -v"
 alias grpo="git remote prune origin"
@@ -46,6 +46,7 @@ alias gp="git push -u origin HEAD"
 alias gps="git push -u origin HEAD"
 alias gpf="git push -u origin HEAD -f"
 alias gpl="git pull"
+alias gf="git fetch"
 alias gpll="git pull --ff"
 alias gbd="git branch -d"
 alias gpo="git push origin"

@@ -134,17 +134,17 @@ call plug#end()
 
 " lsp
 augroup mylspgroup
-    autocmd FileType typescript setlocal omnifunc=lsp#complete
-    autocmd FileType typescript setlocal tagfunc=lsp#tagfunc
+    " autocmd FileType typescript setlocal omnifunc=lsp#complete
+    " autocmd FileType typescript setlocal tagfunc=lsp#tagfunc
 
-    autocmd User lsp_float_opened nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    autocmd User lsp_float_closed nunmap <buffer> <expr><c-f> 
+    " autocmd User lsp_float_opened nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    " autocmd User lsp_float_closed nunmap <buffer> <expr><c-f> 
 
-    autocmd User lsp_float_opened nnoremap <buffer> <expr><c-b> lsp#scroll(-4)
-    autocmd User lsp_float_closed nunmap <buffer> <expr><c-b> 
+    " autocmd User lsp_float_opened nnoremap <buffer> <expr><c-b> lsp#scroll(-4)
+    " autocmd User lsp_float_closed nunmap <buffer> <expr><c-b> 
 
-    autocmd User lsp_float_opened nmap <buffer> <silent> <C-c> <Plug>(lsp-preview-close)
-    autocmd User lsp_float_closed nunmap <buffer> <C-c>
+    " autocmd User lsp_float_opened nmap <buffer> <silent> <C-c> <Plug>(lsp-preview-close)
+    " autocmd User lsp_float_closed nunmap <buffer> <C-c>
 augroup end
 
 let g:lsp_document_code_action_signs_enabled = 0
