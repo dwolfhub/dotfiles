@@ -205,7 +205,7 @@ export TERM=xterm-256color-italic
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
-source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+#source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 
  # if [ -s "$HOME/.nvm/nvm.sh" ]; then
  #   export NVM_DIR="$HOME/.nvm"
