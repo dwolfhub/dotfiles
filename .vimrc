@@ -10,6 +10,7 @@ set expandtab
 set foldcolumn=0
 set hidden
 set nohlsearch
+set incsearch
 set ignorecase
 set laststatus=2
 set mouse=c
@@ -64,6 +65,8 @@ let g:ale_completion_enabled = 0
  let g:ale_linters = {
 \   'typescript': ['eslint', 'typecheck'],
 \   'typescriptreact': ['eslint', 'typecheck'],
+\   'javascript': ['eslint'],
+\   'javascriptreact': ['eslint'],
 \}
 
 let g:ale_fixers = {
@@ -80,7 +83,7 @@ let g:ale_fix_on_save = 1
 call plug#begin('~/.vim/plugged')
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -131,21 +134,17 @@ Plug 'Shougo/ddc-sorter_rank'
 
 call plug#end()
 
+" grep
+if (executable('ag'))
+    set grepprg=ag\ --vimgrep\ '$*'
+    set grepformat^=%f:%l:%c:%m
+endif
+
+nnoremap <leader>s :so %<CR>
 
 " lsp
-augroup mylspgroup
-    autocmd FileType typescript setlocal omnifunc=lsp#complete
-    autocmd FileType typescript setlocal tagfunc=lsp#tagfunc
-
-    autocmd User lsp_float_opened nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    autocmd User lsp_float_closed nunmap <buffer> <expr><c-f> 
-
-    autocmd User lsp_float_opened nnoremap <buffer> <expr><c-b> lsp#scroll(-4)
-    autocmd User lsp_float_closed nunmap <buffer> <expr><c-b> 
-
-    autocmd User lsp_float_opened nmap <buffer> <silent> <C-c> <Plug>(lsp-preview-close)
-    autocmd User lsp_float_closed nunmap <buffer> <C-c>
-augroup end
+set omnifunc=lsp#complete
+set tagfunc=lsp#tagfunc
 
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 1
@@ -163,6 +162,7 @@ nmap <silent> [g :LspNextDiagnostic<cr>
 nmap <silent> ]g :LspPreviousDiagnostic<cr>
 nmap <silent> gd :LspDefinition<cr>
 nmap <silent> gh :LspHover<cr>
+nnoremap <silent> K :LspHover<cr> 
 nmap <silent> gD :LspPeekDefinition<cr>
 nmap <silent> gt :LspTypeDefinition<cr> 
 nmap <silent> gT :LspPeekTypeDefinition<cr> 
@@ -227,8 +227,9 @@ call ddc#enable()
 
 " dispatch
 nnoremap <leader>D :Focus<space>
-nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
-nnoremap <leader>d :up<CR>:Dispatch<CR>
+" nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
+nnoremap <leader>d :up<CR>:AbortDispatch<CR>:Dispatch<CR>
+
 let g:dispatch_quickfix_height = 20
 nnoremap <leader>n 3<c-w>jG
 
@@ -273,8 +274,8 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 
 nnoremap <leader>t :Files .<CR>
 nnoremap <leader>l :Buffers<CR>
-nnoremap <leader>F :AgIn<space>
-nnoremap <leader>f :Ag<CR>
+" nnoremap <leader>F :AgIn<space>
+nnoremap <leader>f :grep<space>
 
 " AgIn: Start ag in the specified directory
 " :AgIn .. foo
@@ -431,9 +432,9 @@ nnoremap <leader>O :%bd\|e#\|bd#<cr>
 " command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 
-" fu! GetShortFilePath()
-"   return pathshorten(substitute(getcwd(), "/Users/d.*wolf/dev/", "~/dev/", "") . "/" . bufname())
-" endfu
+fu! GetShortFilePath()
+  return pathshorten(substitute(getcwd(), "/Users/.*/dev/", "~/dev/", "") . "/" . bufname())
+endfu
 
 " fu LightlineDateTime()
 "   return strftime('%a %b %d %-l:%M%p')
@@ -444,24 +445,24 @@ nnoremap <leader>O :%bd\|e#\|bd#<cr>
 "   let root =
 " endfu
 
-" let g:lightline = {
-"     \ 'colorscheme': 'dracula',
-"     \ 'active': {
-"     \ 'left': [ [ 'mode', 'paste' ],
-"     \           [ 'readonly', 'modified' ] ],
-"     \ 'right': [ [ ],
-"     \            [ ],
-"     \            [ 'shortfilepath' ] ]
-"     \ },
-"     \ 'inactive': {
-"     \    'left': [ [ 'bufnum' ] ],
-"     \    'middle': [ ],
-"     \    'right': [ [ 'shortfilepath' ] ]
-"     \ },
-"     \ 'component_function': {
-"     \   'shortfilepath': 'GetShortFilePath',
-"     \ }
-"     \ }
+let g:lightline = {
+    \ 'colorscheme': 'dracula',
+    \ 'active': {
+    \ 'left': [ [ 'mode', 'paste' ],
+    \           [ 'readonly', 'modified' ] ],
+    \ 'right': [ [ ],
+    \            [ ],
+    \            [ 'shortfilepath' ] ]
+    \ },
+    \ 'inactive': {
+    \    'left': [ [ 'bufnum' ] ],
+    \    'middle': [ ],
+    \    'right': [ [ 'shortfilepath' ] ]
+    \ },
+    \ 'component_function': {
+    \   'shortfilepath': 'GetShortFilePath',
+    \ }
+    \ }
 
 " Use autocmd to force lightline update.
 " autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
