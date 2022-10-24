@@ -297,7 +297,7 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
 " Save shortcut
 nnoremap <leader>w :w<CR>
-nnoremap <leader>W :wq<CR>
+nnoremap <leader>W :wqa<CR>
 
 " Delete all but current buffer
 nnoremap <leader>O :%bd\|e#\|bd#<cr>
