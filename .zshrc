@@ -23,43 +23,45 @@ jv() {
 }
 
 # Git aliases
-alias gs="git status"
-alias gsh="git show"
-alias gb="git branch"
-alias gcb="git checkout -b"
-alias gco='git checkout $(git branch | fzf)'
-alias gcom="git checkout main"
-alias gr="git remote -v"
-alias grpo="git remote prune origin"
-alias grao="git remote add origin"
-alias grh="git reset head"
-alias gst="git stash"
-alias gsa="git stash apply"
 alias ga="git add"
 alias gap="git add -p"
+alias gb="git branch"
+alias gbd="git branch -d"
+alias gc="git commit -m"
+alias gcb="git checkout -b"
+alias gcl="git checkout -- "
+alias gco='git checkout $(git branch | fzf)'
+alias gcom="git checkout main"
 alias gcp="git cherry-pick"
 alias gd="git diff"
-alias gdn="git diff --name-only"
+alias gdc="git diff --cached"
 alias gdm="git diff origin/main"
 alias gdmn="git diff origin/main --name-only"
-alias gdc="git diff --cached"
+alias gdn="git diff --name-only"
+alias gf="git fetch"
+alias gl="git log --pretty=format:\"%h%x09%an%x09%ar%x09%s\" -n 1000"
+alias gm="git merge"
 alias gp="git push -u origin HEAD"
-alias gps="git push -u origin HEAD"
 alias gpf="git push -u origin HEAD -f"
 alias gpl="git pull"
-alias gf="git fetch"
 alias gpll="git pull --ff"
-alias gbd="git branch -d"
 alias gpo="git push origin"
-alias gcl="git checkout -- "
-alias gc="git commit -m"
+alias gpr="gh pr create -f"
+alias gprm="gh pr merge --squash --delete-branch"
+alias gps="git push -u origin HEAD"
+alias gr="git remote -v"
+alias grao="git remote add origin"
 alias grb="git rebase -i"
 alias grbc="git rebase --continue"
 alias grbm="git rebase -i origin/main"
 alias grbma="git rebase -i origin/master"
 alias grbp="git rebase -i origin/primary"
-alias gm="git merge"
-alias gl="git log --pretty=format:\"%h%x09%an%x09%ar%x09%s\" -n 1000"
+alias grh="git reset head"
+alias grpo="git remote prune origin"
+alias gs="git status"
+alias gsa="git stash apply"
+alias gsh="git show"
+alias gst="git stash"
 alias gw="git wip"
 
 # Docker aliases
@@ -80,6 +82,7 @@ alias yd="yarn dev"
 # npm aliases
 alias ni="npm install"
 alias ns="npm start"
+alias nt="npm test"
 
 # nvm aliases
 alias nu="nvm use"
@@ -205,7 +208,7 @@ export TERM=xterm-256color-italic
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
-#source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 
  # if [ -s "$HOME/.nvm/nvm.sh" ]; then
  #   export NVM_DIR="$HOME/.nvm"

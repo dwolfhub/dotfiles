@@ -10,7 +10,7 @@ set expandtab
 set foldcolumn=0
 set hidden
 set nohlsearch
-set incsearch
+set noincsearch
 set ignorecase
 set laststatus=2
 set mouse=c
@@ -59,43 +59,21 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" ale
-let g:ale_completion_enabled = 0
-
- let g:ale_linters = {
-\   'typescript': ['eslint', 'typecheck'],
-\   'typescriptreact': ['eslint', 'typecheck'],
-\   'javascript': ['eslint'],
-\   'javascriptreact': ['eslint'],
-\}
-
-let g:ale_fixers = {
- \ 'javascript': ['prettier'],
- \ 'typescript': ['prettier'],
- \ 'javascriptreact': ['prettier'],
- \ 'typescriptreact': ['prettier']
- \ }
-
-let g:ale_sign_error = 'X'
-let g:ale_sign_warning = '-'
-let g:ale_fix_on_save = 1
-
 call plug#begin('~/.vim/plugged')
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'itchyny/lightline.vim'
 
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
-"Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'dense-analysis/ale'
 
 "Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
@@ -112,6 +90,8 @@ Plug 'dense-analysis/ale'
 Plug 'prabirshrestha/vim-lsp'
 "Plug 'ryanolsonx/vim-lsp-typescript'
 
+Plug 'sbdchd/neoformat'
+
 Plug 'vim-denops/denops.vim'
 " For troubleshooting denops
 " Plug 'rhysd/vim-healthcheck'
@@ -121,7 +101,6 @@ Plug 'Shougo/pum.vim'
 Plug 'Shougo/ddc-around'
 Plug 'shun/ddc-vim-lsp'
 Plug 'mattn/vim-lsp-settings'
-"Plug 'statiolake/ddc-ale'
 "Plug 'LumaKernel/ddc-file'
 
 Plug 'vim-denops/denops-helloworld.vim'
@@ -142,18 +121,36 @@ endif
 
 nnoremap <leader>s :so %<CR>
 
+" Neoformat
+let g:neoformat_try_node_exe = 1
+
+" fu Fmt(...)
+"   let b:winview = winsaveview()
+"   exe ":%!npx prettier --parser " . a:1
+"   call winrestview(b:winview)
+"   unlet b:winview
+" endfu
+
+augroup fmt
+    autocmd!
+    autocmd BufWritePre * Neoformat
+    " autocmd BufWritePre *.ts,*.tsx call Fmt("typescript")
+    " autocmd BufWritePre *.js,*.jsx call Fmt("javascript")
+augroup END
+
 " lsp
 set omnifunc=lsp#complete
 set tagfunc=lsp#tagfunc
 
+let g:lsp_diagnostics_highlights_delay = 200
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 1
 
 " Do not keep the focus in current window.
 " Move the focus to |preview-window|.
-let g:lsp_preview_keep_focus = 0
+" let g:lsp_preview_keep_focus = 0
 let g:lsp_diagnostics_float_cursor = 1
-"let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_ignorecase = 1
 "let g:lsp_semantic_enabled = 1
 
@@ -161,7 +158,7 @@ nmap <leader>qf :LspCodeAction<cr>
 nmap <silent> [g :LspNextDiagnostic<cr>
 nmap <silent> ]g :LspPreviousDiagnostic<cr>
 nmap <silent> gd :LspDefinition<cr>
-nmap <silent> gh :LspHover<cr>
+" nmap <silent> gh :LspHover<cr>
 nnoremap <silent> K :LspHover<cr> 
 nmap <silent> gD :LspPeekDefinition<cr>
 nmap <silent> gt :LspTypeDefinition<cr> 
@@ -170,7 +167,6 @@ nmap <silent> gi :LspImplementation<cr>
 nmap <silent> gI :LspPeekImplementation<cr>
 nmap <silent> gr :LspReferences<cr>
 nmap <silent> gn :LspRename<cr>
-
 
 " pum
 inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
@@ -195,9 +191,6 @@ call ddc#custom#patch_global('sourceOptions', {
 \   'converters': ['converter_fuzzy'], },
 \ 'around': { 'mark': 'A', "maxLines": 3 },
 \ })
-"\ 'ale': { 'forceCompletionPattern': '\.|->', 'mark': 'a' },
-
-" Mappings
 
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
@@ -224,6 +217,11 @@ call ddc#enable()
 "let g:session_default_to_last = 1
 "let g:session_autoload = 'yes'
 "nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
+
+" ragtag
+inoremap <M-o>       <Esc>o
+inoremap <C-j>       <Down>
+let g:ragtag_global_maps = 1
 
 " dispatch
 nnoremap <leader>D :Focus<space>
