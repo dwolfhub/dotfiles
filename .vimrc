@@ -19,7 +19,7 @@ set noeol
 set nowritebackup
 set noshowmode
 set number
-set norelativenumber
+set relativenumber
 set ruler
 set shiftwidth=4
 set showcmd
