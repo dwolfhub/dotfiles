@@ -1,31 +1,37 @@
-snippet rfci "React Functional Component w/ Imports"
-import React, { FC } from "react";
+snippet lo "console.log()" b
+console.log({$0});
+endsnippet
 
-export const ${1:Component}: FC${2:<{$3}>} = (${3:{}}) => {
+snippet drf "React Functional Component Default Export" b
+const ${1:Component}: FC${2:<{$3}>} = (${3:{}}) => {
     return <>${4:hello}</>;
 };
+
+export default $1;
 endsnippet
 
-snippet rfc "React Functional Component"
-${1:export }const ${2:Component}: FC${3:<{$4}>} = (${4:{}}) => {
-    return <>${5:hello}</>;
+snippet fc "React Functional Component" b
+type ${1:Component}Props = {}
+
+const $1 = ({}: $1Props) => {
+  return <>Hello</>;
 };
 endsnippet
 
-snippet disp "useAppDispatch"
-const dispatch = useAppDispatch$1();
-endsnippet
+# snippet disp "useAppDispatch" b
+# const dispatch = useAppDispatch$1();
+# endsnippet
 
-snippet sel "useAppSelector"
-const $1 = useAppSelector$2(select$3);
-endsnippet
+# snippet sel "useAppSelector" b
+# const $1 = useAppSelector$2(select$3);
+# endsnippet
 
-snippet st "useState"
+snippet us "useState" b
 const [$1, set${1/^(.)(.+)/\u$1$2/}] = useState$3($4);
 endsnippet
 
-snippet eff "useEffect"
+snippet ue "useEffect" b
 useEffect(() => {
-    $1
+  $1
 }, []);
 endsnippet
