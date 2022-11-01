@@ -273,7 +273,7 @@ let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 nnoremap <leader>t :Files .<CR>
 nnoremap <leader>l :Buffers<CR>
 " nnoremap <leader>F :AgIn<space>
-nnoremap <leader>f :grep<space>
+nnoremap <leader>f :Ag<CR>
 
 " AgIn: Start ag in the specified directory
 " :AgIn .. foo

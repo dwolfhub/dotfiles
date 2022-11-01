@@ -28,6 +28,7 @@ alias gap="git add -p"
 alias gb="git branch"
 alias gbd="git branch -d"
 alias gc="git commit -m"
+alias gca="git commit --amend"
 alias gcb="git checkout -b"
 alias gcl="git checkout -- "
 alias gco='git checkout $(git branch | fzf)'
@@ -220,4 +221,4 @@ source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 
 setopt share_history
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
