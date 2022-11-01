@@ -76,10 +76,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "Plug 'easymotion/vim-easymotion'
-"Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
 "Plug 'will133/vim-dirdiff'
 
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
 "Plug 'leafgarland/typescript-vim'
 "Plug 'xolox/vim-misc'
@@ -100,10 +100,11 @@ Plug 'Shougo/pum.vim'
 
 Plug 'Shougo/ddc-around'
 Plug 'shun/ddc-vim-lsp'
+Plug 'matsui54/ddc-ultisnips'
 Plug 'mattn/vim-lsp-settings'
 "Plug 'LumaKernel/ddc-file'
 
-Plug 'vim-denops/denops-helloworld.vim'
+" Plug 'vim-denops/denops-helloworld.vim'
 
 " Install your filters
 Plug 'tani/ddc-fuzzy'
@@ -176,10 +177,25 @@ inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
 inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
 inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
+" sneak
+let g:sneak#label = 0
+let g:sneak#use_ic_scs = 1
+
 " ddc
-call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
-"call ddc#custom#patch_global('completionMenu', 'native')
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('sources', ['ultisnips', 'vim-lsp', 'around'])
+call ddc#custom#patch_global('completionMenu', 'native')
+" call ddc#custom#patch_global('completionMenu', 'pum.vim')
+"
+
+" <TAB>: completion.
+" Note: It does not work for pum.vim
+"inoremap <silent><expr> <TAB>
+"\ pumvisible() ? '<C-n>' :
+"\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+"\ '<TAB>' : ddc#map#manual_complete()
+" <S-TAB>: completion back.
+" Note: It does not work for pum.vim
+"inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
 " Use matcher_head and sorter_rank.
 " https://github.com/Shougo/ddc-matcher_head
@@ -190,6 +206,7 @@ call ddc#custom#patch_global('sourceOptions', {
 \   'sorters': ['sorter_fuzzy'],
 \   'converters': ['converter_fuzzy'], },
 \ 'around': { 'mark': 'A', "maxLines": 3 },
+\ 'ultisnips': {'mark': 'US'},
 \ })
 
 " <TAB>: completion.
@@ -490,15 +507,15 @@ nmap <silent> <C-p> :cprev<CR>
 " set emmet short cut
 " let g:user_emmet_leader_key='<c-e>'
 
-"ultisnips configuration
+" ultisnips configuration
 " let g:UltiSnipsExpandTrigger="<nop>"
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-" let g:UltiSnipsEditSplit="vertical"
-" let g:snips_author="DWolf"
-" let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
-" let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
-" nnoremap <leader>ue :UltiSnipsEdit<CR>
+let g:UltiSnipsEditSplit="vertical"
+let g:snips_author="DWolf"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
+let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
+nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
 " nnoremap <leader>e :NERDTreeToggle<cr>
