@@ -1,4 +1,7 @@
 nnoremap <SPACE> <Nop>
+
+
+
 let mapleader=" "
 
 filetype on
@@ -18,8 +21,8 @@ set nobackup
 set noeol
 set nowritebackup
 set noshowmode
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 set ruler
 set shiftwidth=4
 set showcmd
@@ -42,10 +45,26 @@ set novisualbell
 set foldmethod=manual
 set foldlevel=9
 
-let g:dracula_italic = 1
-packadd! dracula
-colorscheme dracula
-let g:dracula_italic = 0
+" COLORSCHEMES --------
+
+" DRACULA
+" let g:dracula_italic = 1
+" packadd! dracula
+" colorscheme dracula
+" let g:dracula_italic = 0
+
+" NIGHTFOX (BROKEN: colorscheme not found at startup)
+" require('nightfox')
+" colorscheme nightfox
+
+" GRUVBOX
+set background=dark
+let g:gruvbox_italic = 1
+let g:gruvbox_sign_column = "bg0"
+"let g:gruvbox_invert_signs = 1
+" let g:gruvbox_transparent_bg = 1
+autocmd vimenter * ++nested colorscheme gruvbox
+
 
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
@@ -75,8 +94,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-"Plug 'easymotion/vim-easymotion'
-Plug 'justinmk/vim-sneak'
+" MOVING AROUND
+Plug 'easymotion/vim-easymotion'
+"Plug 'justinmk/vim-sneak'
 "Plug 'will133/vim-dirdiff'
 
 Plug 'SirVer/ultisnips'
@@ -86,22 +106,24 @@ Plug 'SirVer/ultisnips'
 "Plug 'xolox/vim-session'
 "Plug 'lumiliet/vim-twig'
 
+" LANGUAGE SERVERS
 "Plug 'prabirshrestha/async'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 "Plug 'ryanolsonx/vim-lsp-typescript'
 
 Plug 'sbdchd/neoformat'
 
+" AUTOCOMPLETE
 Plug 'vim-denops/denops.vim'
-" For troubleshooting denops
+" FOR TROUBLESHOOTING DENOPS
 " Plug 'rhysd/vim-healthcheck'
 Plug 'Shougo/ddc.vim'
-Plug 'Shougo/pum.vim'
-
+Plug 'Shougo/ddc-ui-native'
 Plug 'Shougo/ddc-around'
 Plug 'shun/ddc-vim-lsp'
 Plug 'matsui54/ddc-ultisnips'
-Plug 'mattn/vim-lsp-settings'
+
 "Plug 'LumaKernel/ddc-file'
 
 " Plug 'vim-denops/denops-helloworld.vim'
@@ -111,6 +133,9 @@ Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-matcher_head'
 Plug 'Shougo/ddc-sorter_rank'
 
+Plug 'EdenEast/nightfox.nvim'
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 
 call plug#end()
 
@@ -120,7 +145,7 @@ if (executable('ag'))
     set grepformat^=%f:%l:%c:%m
 endif
 
-nnoremap <leader>s :so %<CR>
+nnoremap <leader>S :so %<CR>
 
 " Neoformat
 let g:neoformat_try_node_exe = 1
@@ -170,21 +195,20 @@ nmap <silent> gr :LspReferences<cr>
 nmap <silent> gn :LspRename<cr>
 
 " pum
-inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+" inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
+" inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
+" inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+" inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
+" inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+" inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 " sneak
 let g:sneak#label = 0
 let g:sneak#use_ic_scs = 1
 
 " ddc
+call ddc#custom#patch_global('ui', 'native')
 call ddc#custom#patch_global('sources', ['ultisnips', 'vim-lsp', 'around'])
-call ddc#custom#patch_global('completionMenu', 'native')
-" call ddc#custom#patch_global('completionMenu', 'pum.vim')
 "
 
 " <TAB>: completion.
@@ -211,12 +235,12 @@ call ddc#custom#patch_global('sourceOptions', {
 
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
-\ ddc#map#pum_visible() ? '<C-n>' :
+\ pumvisible() ? '<C-n>' :
 \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
 \ '<TAB>' : ddc#map#manual_complete()
 
 " <S-TAB>: completion back.
-inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
 " Use ddc.
 call ddc#enable()
@@ -448,7 +472,9 @@ nnoremap <leader>O :%bd\|e#\|bd#<cr>
 
 
 fu! GetShortFilePath()
-  return pathshorten(substitute(getcwd(), "/Users/.*/dev/", "~/dev/", "") . "/" . bufname())
+  return bufname()
+  return substitute(getcwd(), "/Users/.*/dev/", "", "") . "/" . bufname()
+  return pathshorten(substitute(getcwd(), "/Users/.*/dev/", "", "") . "/" . bufname())
 endfu
 
 " fu LightlineDateTime()
@@ -461,23 +487,21 @@ endfu
 " endfu
 
 let g:lightline = {
-    \ 'colorscheme': 'dracula',
+    \ 'colorscheme': 'gruvbox',
     \ 'active': {
-    \ 'left': [ [ 'mode', 'paste' ],
-    \           [ 'readonly', 'modified' ] ],
-    \ 'right': [ [ ],
-    \            [ ],
-    \            [ 'shortfilepath' ] ]
+    \   'left': [ [ 'filename' ] ],
+    \   'right': [ [ 'modified', 'lineinfo' ] ]
     \ },
     \ 'inactive': {
-    \    'left': [ [ 'bufnum' ] ],
-    \    'middle': [ ],
-    \    'right': [ [ 'shortfilepath' ] ]
+    \   'left': [ [ 'filename' ] ],
+    \   'right': [ [ 'modified' ] ]
     \ },
     \ 'component_function': {
     \   'shortfilepath': 'GetShortFilePath',
+    \   'longmodified': 'GetLongModified',
+    \ },
     \ }
-    \ }
+
 
 " Use autocmd to force lightline update.
 " autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -523,11 +547,13 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 " let NERDTreeQuitOnOpen=1
 
 " " easy-motion
-"map <Leader> <Plug>(easymotion-prefix)
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings
-" nmap s <Plug>(easymotion-s)
-" map <Leader>s <Plug>(easymotion-s)
-" nmap <Leader>s <Plug>(easymotion-s)
+" map <Leader> <Plug>(easymotion-prefix)
+let g:EasyMotion_do_mapping = 0
+" <Leader>f{char} to move to {char}
+" map  <Leader>f <Plug>(easymotion-bd-f)
+" nmap <Leader>f <Plug>(easymotion-overwin-f)
+noremap s <Plug>(easymotion-s)
+nnoremap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 " if !exists('g:vdebug_options')
