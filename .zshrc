@@ -127,7 +127,7 @@ alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git bran
 eval "$(hub alias -s)"
 
 export FZF_DEFAULT_OPTS='--height 30%'
-export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
 export FZF_COMPLETION_TRIGGER=","
@@ -162,11 +162,11 @@ PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 # export PATH=$PATH:$(npm config --global get prefix)/bin
 
 # Android Studio Env Vars
-# export ANDROID_HOME=$HOME/Library/Android/sdk
-# export PATH=$PATH:$ANDROID_HOME/emulator
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/tools/bin
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # The following lines were added by compinstall
 # zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -220,5 +220,8 @@ source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 setopt share_history
+if ! type "$rbenv" > /dev/null; then
+    eval "$(rbenv init - zsh)"
+fi
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -1,7 +1,5 @@
 nnoremap <SPACE> <Nop>
 
-
-
 let mapleader=" "
 
 filetype on
@@ -44,13 +42,14 @@ set visualbell t_vb=
 set novisualbell
 set foldmethod=manual
 set foldlevel=9
+set ttimeoutlen=0
 
 " COLORSCHEMES --------
 
 " DRACULA
-" let g:dracula_italic = 1
+let g:dracula_italic = 1
 " packadd! dracula
-" colorscheme dracula
+colorscheme dracula
 " let g:dracula_italic = 0
 
 " NIGHTFOX (BROKEN: colorscheme not found at startup)
@@ -58,19 +57,19 @@ set foldlevel=9
 " colorscheme nightfox
 
 " GRUVBOX
-set background=dark
-let g:gruvbox_italic = 1
-let g:gruvbox_sign_column = "bg0"
+" set background=dark
+" let g:gruvbox_italic = 1
+" let g:gruvbox_sign_column = "bg0"
 "let g:gruvbox_invert_signs = 1
 " let g:gruvbox_transparent_bg = 1
-autocmd vimenter * ++nested colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
 
 
-let &t_SI.="\e[5 q" "SI = INSERT mode
+let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
-let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 
-set fillchars+=vert:│
+"set fillchars+=vert:
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -81,12 +80,14 @@ endif
 call plug#begin('~/.vim/plugged')
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'itchyny/lightline.vim'
 
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -95,11 +96,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " MOVING AROUND
-Plug 'easymotion/vim-easymotion'
+"Plug 'easymotion/vim-easymotion'
 "Plug 'justinmk/vim-sneak'
+
 "Plug 'will133/vim-dirdiff'
 
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
 "Plug 'leafgarland/typescript-vim'
 "Plug 'xolox/vim-misc'
@@ -107,45 +109,44 @@ Plug 'SirVer/ultisnips'
 "Plug 'lumiliet/vim-twig'
 
 " LANGUAGE SERVERS
-"Plug 'prabirshrestha/async'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
-"Plug 'ryanolsonx/vim-lsp-typescript'
 
 Plug 'sbdchd/neoformat'
 
 " AUTOCOMPLETE
 Plug 'vim-denops/denops.vim'
-" FOR TROUBLESHOOTING DENOPS
-" Plug 'rhysd/vim-healthcheck'
 Plug 'Shougo/ddc.vim'
 Plug 'Shougo/ddc-ui-native'
 Plug 'Shougo/ddc-around'
 Plug 'shun/ddc-vim-lsp'
-Plug 'matsui54/ddc-ultisnips'
-
+"Plug 'matsui54/ddc-ultisnips'
 "Plug 'LumaKernel/ddc-file'
 
-" Plug 'vim-denops/denops-helloworld.vim'
+" FOR TROUBLESHOOTING DENOPS
+" Plug 'rhysd/vim-healthcheck'
+"Plug 'vim-denops/denops-helloworld.vim'
 
-" Install your filters
+" ddc filters
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-matcher_head'
 Plug 'Shougo/ddc-sorter_rank'
 
-Plug 'EdenEast/nightfox.nvim'
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
+" Themes
+Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'EdenEast/nightfox.nvim'
+"Plug 'morhetz/gruvbox'
+"Plug 'shinchu/lightline-gruvbox.vim'
 
 call plug#end()
 
 " grep
-if (executable('ag'))
-    set grepprg=ag\ --vimgrep\ '$*'
-    set grepformat^=%f:%l:%c:%m
-endif
+" if (executable('ag'))
+"     set grepprg=ag\ --vimgrep\ '$*'
+"     set grepformat^=%f:%l:%c:%m
+" endif
 
-nnoremap <leader>S :so %<CR>
+"nnoremap <leader>S :so %<CR>
 
 " Neoformat
 let g:neoformat_try_node_exe = 1
@@ -189,10 +190,10 @@ nnoremap <silent> K :LspHover<cr>
 nmap <silent> gD :LspPeekDefinition<cr>
 nmap <silent> gt :LspTypeDefinition<cr> 
 nmap <silent> gT :LspPeekTypeDefinition<cr> 
-nmap <silent> gi :LspImplementation<cr>
-nmap <silent> gI :LspPeekImplementation<cr>
+" nmap <silent> gi :LspImplementation<cr>
+" nmap <silent> gI :LspPeekImplementation<cr>
 nmap <silent> gr :LspReferences<cr>
-nmap <silent> gn :LspRename<cr>
+nmap <silent> gR :LspRename<cr>
 
 " pum
 " inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
@@ -203,12 +204,12 @@ nmap <silent> gn :LspRename<cr>
 " inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 " sneak
-let g:sneak#label = 0
-let g:sneak#use_ic_scs = 1
+" let g:sneak#label = 0
+" let g:sneak#use_ic_scs = 1
 
 " ddc
 call ddc#custom#patch_global('ui', 'native')
-call ddc#custom#patch_global('sources', ['ultisnips', 'vim-lsp', 'around'])
+" call ddc#custom#patch_global('sources', ['ultisnips', 'vim-lsp', 'around'])
 "
 
 " <TAB>: completion.
@@ -229,18 +230,17 @@ call ddc#custom#patch_global('sourceOptions', {
 \   'matchers': ['matcher_fuzzy'],
 \   'sorters': ['sorter_fuzzy'],
 \   'converters': ['converter_fuzzy'], },
-\ 'around': { 'mark': 'A', "maxLines": 3 },
-\ 'ultisnips': {'mark': 'US'},
+\   'around': { 'mark': 'A', "maxLines": 3 },
 \ })
 
 " <TAB>: completion.
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? '<C-n>' :
-\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-\ '<TAB>' : ddc#map#manual_complete()
+" inoremap <silent><expr> <TAB>
+" \ pumvisible() ? '<C-n>' :
+" \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+" \ '<TAB>' : ddc#map#manual_complete()
 
 " <S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+" inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
 " Use ddc.
 call ddc#enable()
@@ -265,12 +265,12 @@ inoremap <C-j>       <Down>
 let g:ragtag_global_maps = 1
 
 " dispatch
-nnoremap <leader>D :Focus<space>
+" nnoremap <leader>D :Focus<space>
 " nnoremap <leader>pD :up<CR>:Focus python -m unittest %<cr>:Dispatch<CR>
-nnoremap <leader>d :up<CR>:AbortDispatch<CR>:Dispatch<CR>
+" nnoremap <leader>d :up<CR>:AbortDispatch<CR>:Dispatch<CR>
 
-let g:dispatch_quickfix_height = 20
-nnoremap <leader>n 3<c-w>jG
+" let g:dispatch_quickfix_height = 20
+" nnoremap <leader>n 3<c-w>jG
 
 " Y copies to end of line
 nnoremap Y yg_
@@ -311,7 +311,8 @@ let g:fzf_action = {
     \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 
-nnoremap <leader>t :Files .<CR>
+nnoremap <leader>d :Files .<CR>
+" nnoremap <leader>t :Files .<CR>
 nnoremap <leader>l :Buffers<CR>
 " nnoremap <leader>F :AgIn<space>
 nnoremap <leader>f :Ag<CR>
@@ -319,24 +320,24 @@ nnoremap <leader>f :Ag<CR>
 " AgIn: Start ag in the specified directory
 " :AgIn .. foo
 " @see https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
-function! s:ag_in(bang, ...)
-  if !isdirectory(a:1)
-    throw 'not a valid directory: ' .. a:1
-  endif
+"function! s:ag_in(bang, ...)
+"  if !isdirectory(a:1)
+"    throw 'not a valid directory: ' .. a:1
+"  endif
 
-  " Press `?' to enable preview window.
-  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
+"  " Press `?' to enable preview window.
+"  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
 
-  " If you don't want preview option, use this
-  "call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
-endfunction
+"  " If you don't want preview option, use this
+"  "call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+"endfunction
 
-command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+" command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
 
 " Save shortcut
-nnoremap <leader>w :w<CR>
-nnoremap <leader>W :wqa<CR>
+nnoremap <leader>s :w<CR>
+nnoremap <leader>S :wqa<CR>
 
 " Delete all but current buffer
 nnoremap <leader>O :%bd\|e#\|bd#<cr>
@@ -487,7 +488,7 @@ endfu
 " endfu
 
 let g:lightline = {
-    \ 'colorscheme': 'gruvbox',
+    \ 'colorscheme': 'dracula',
     \ 'active': {
     \   'left': [ [ 'filename' ] ],
     \   'right': [ [ 'modified', 'lineinfo' ] ]
@@ -535,11 +536,11 @@ nmap <silent> <C-p> :cprev<CR>
 " let g:UltiSnipsExpandTrigger="<nop>"
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-let g:UltiSnipsEditSplit="vertical"
-let g:snips_author="DWolf"
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
-let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
-nnoremap <leader>ue :UltiSnipsEdit<CR>
+" let g:UltiSnipsEditSplit="vertical"
+" let g:snips_author="DWolf"
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
+" let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
+" nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
 " nnoremap <leader>e :NERDTreeToggle<cr>
@@ -548,12 +549,12 @@ nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " " easy-motion
 " map <Leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_do_mapping = 0
+" let g:EasyMotion_do_mapping = 0
 " <Leader>f{char} to move to {char}
 " map  <Leader>f <Plug>(easymotion-bd-f)
 " nmap <Leader>f <Plug>(easymotion-overwin-f)
-noremap s <Plug>(easymotion-s)
-nnoremap <Leader>s <Plug>(easymotion-s)
+" noremap s <Plug>(easymotion-s)
+" nnoremap <Leader>s <Plug>(easymotion-s)
 
 " Vdebug
 " if !exists('g:vdebug_options')
@@ -572,5 +573,5 @@ augroup END
 " File specific
 autocmd FileType gitcommit set textwidth=50
 
-autocmd FileType python nnoremap <leader>y :call CocAction('format')<CR>
-autocmd FileType python let b:coc_root_patterns = ['app', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+" autocmd FileType python nnoremap <leader>y :call CocAction('format')<CR>
+" autocmd FileType python let b:coc_root_patterns = ['app', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
