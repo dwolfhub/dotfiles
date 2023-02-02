@@ -1,7 +1,6 @@
 nnoremap <SPACE> <Nop>
 
 
-
 let mapleader=" "
 
 filetype on
@@ -168,7 +167,7 @@ augroup END
 set omnifunc=lsp#complete
 set tagfunc=lsp#tagfunc
 
-let g:lsp_diagnostics_highlights_delay = 200
+let g:lsp_diagnostics_highlights_delay = 0
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 1
 
