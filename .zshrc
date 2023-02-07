@@ -126,7 +126,7 @@ alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git bran
 # hub aliased to git
 eval "$(hub alias -s)"
 
-export FZF_DEFAULT_OPTS='--height 30%'
+export FZF_DEFAULT_OPTS='--height 30% --bind ctrl-n:down,ctrl-p:up'
 export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"

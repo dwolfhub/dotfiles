@@ -101,7 +101,7 @@ Plug 'junegunn/fzf.vim'
 
 "Plug 'will133/vim-dirdiff'
 
-"Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 "Plug 'mlaursen/vim-react-snippets'
 "Plug 'leafgarland/typescript-vim'
 "Plug 'xolox/vim-misc'
@@ -120,12 +120,12 @@ Plug 'Shougo/ddc.vim'
 Plug 'Shougo/ddc-ui-native'
 Plug 'Shougo/ddc-around'
 Plug 'shun/ddc-vim-lsp'
-"Plug 'matsui54/ddc-ultisnips'
+" Plug 'matsui54/ddc-ultisnips'
 "Plug 'LumaKernel/ddc-file'
 
 " FOR TROUBLESHOOTING DENOPS
 " Plug 'rhysd/vim-healthcheck'
-"Plug 'vim-denops/denops-helloworld.vim'
+Plug 'vim-denops/denops-helloworld.vim'
 
 " ddc filters
 Plug 'tani/ddc-fuzzy'
@@ -169,17 +169,19 @@ augroup END
 set omnifunc=lsp#complete
 set tagfunc=lsp#tagfunc
 
-let g:lsp_diagnostics_highlights_delay = 0
-let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_diagnostics_virtual_text_enabled = 1
 
-" Do not keep the focus in current window.
-" Move the focus to |preview-window|.
-" let g:lsp_preview_keep_focus = 0
-let g:lsp_diagnostics_float_cursor = 1
-let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_ignorecase = 1
-"let g:lsp_semantic_enabled = 1
+let g:lsp_use_native_client = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 1
+let g:lsp_diagnostics_float_cursor = 1
+
+
+let g:lsp_diagnostics_highlights_delay = 0
+let g:lsp_diagnostics_signs_delay = 0
+let g:lsp_semantic_enabled = 1
+
 
 nmap <leader>qf :LspCodeAction<cr>
 nmap <silent> [g :LspNextDiagnostic<cr>
@@ -210,17 +212,18 @@ nmap <silent> gR :LspRename<cr>
 " ddc
 call ddc#custom#patch_global('ui', 'native')
 " call ddc#custom#patch_global('sources', ['ultisnips', 'vim-lsp', 'around'])
+call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
 "
 
 " <TAB>: completion.
 " Note: It does not work for pum.vim
-"inoremap <silent><expr> <TAB>
-"\ pumvisible() ? '<C-n>' :
-"\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-"\ '<TAB>' : ddc#map#manual_complete()
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? '<C-n>' :
+\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+\ '<TAB>' : ddc#map#manual_complete()
 " <S-TAB>: completion back.
 " Note: It does not work for pum.vim
-"inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
 " Use matcher_head and sorter_rank.
 " https://github.com/Shougo/ddc-matcher_head
@@ -230,7 +233,13 @@ call ddc#custom#patch_global('sourceOptions', {
 \   'matchers': ['matcher_fuzzy'],
 \   'sorters': ['sorter_fuzzy'],
 \   'converters': ['converter_fuzzy'], },
-\   'around': { 'mark': 'A', "maxLines": 3 },
+\ 'vim-lsp': { 'mark': 'L' },
+\ 'around': { 'mark': 'A' },
+\ })
+" \ 'ultisnips': { 'mark': 'U' },
+"
+call ddc#custom#patch_global('sourceParams', {
+\   'around': { 'maxSize': 500 },
 \ })
 
 " <TAB>: completion.
@@ -260,8 +269,8 @@ call ddc#enable()
 "nmap <leader>s :wa<CR>:call feedkeys(':OpenSession<space><tab>','t')<cr>
 
 " ragtag
-inoremap <M-o>       <Esc>o
-inoremap <C-j>       <Down>
+" inoremap <M-o>       <Esc>o
+" inoremap <C-j>       <Down>
 let g:ragtag_global_maps = 1
 
 " dispatch
@@ -311,10 +320,10 @@ let g:fzf_action = {
     \ 'ctrl-v': 'vsplit' }
 let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 
-nnoremap <leader>d :Files .<CR>
+nnoremap <leader>t :Files .<CR>
 " nnoremap <leader>t :Files .<CR>
 nnoremap <leader>l :Buffers<CR>
-" nnoremap <leader>F :AgIn<space>
+nnoremap <leader>F :AgIn<space>
 nnoremap <leader>f :Ag<CR>
 
 " AgIn: Start ag in the specified directory
@@ -534,12 +543,14 @@ nmap <silent> <C-p> :cprev<CR>
 
 " ultisnips configuration
 " let g:UltiSnipsExpandTrigger="<nop>"
+" nnoremap <leader>ue :UltiSnipsEdit<CR>
+
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 " let g:UltiSnipsEditSplit="vertical"
 " let g:snips_author="DWolf"
 " let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
-" let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
+" let g: UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
 " nnoremap <leader>ue :UltiSnipsEdit<CR>
 
 " nerdtree
