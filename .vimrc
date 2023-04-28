@@ -11,7 +11,7 @@ set expandtab
 set foldcolumn=0
 set hidden
 set nohlsearch
-set noincsearch
+set incsearch
 set ignorecase
 set laststatus=2
 set mouse=c
@@ -78,7 +78,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -97,7 +97,7 @@ Plug 'junegunn/fzf.vim'
 
 " MOVING AROUND
 "Plug 'easymotion/vim-easymotion'
-"Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 
 "Plug 'will133/vim-dirdiff'
 
@@ -109,28 +109,31 @@ Plug 'junegunn/fzf.vim'
 "Plug 'lumiliet/vim-twig'
 
 " LANGUAGE SERVERS
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'mattn/vim-lsp-settings'
 
-Plug 'sbdchd/neoformat'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Plug 'sbdchd/neoformat'
 
 " AUTOCOMPLETE
-Plug 'vim-denops/denops.vim'
-Plug 'Shougo/ddc.vim'
-Plug 'Shougo/ddc-ui-native'
-Plug 'Shougo/ddc-around'
-Plug 'shun/ddc-vim-lsp'
+" Plug 'vim-denops/denops.vim'
+" Plug 'Shougo/ddc.vim'
+" Plug 'Shougo/ddc-ui-native'
+" Plug 'Shougo/ddc-around'
+" Plug 'shun/ddc-vim-lsp'
 " Plug 'matsui54/ddc-ultisnips'
 "Plug 'LumaKernel/ddc-file'
 
 " FOR TROUBLESHOOTING DENOPS
 " Plug 'rhysd/vim-healthcheck'
-Plug 'vim-denops/denops-helloworld.vim'
+" Plug 'vim-denops/denops-helloworld.vim'
 
 " ddc filters
-Plug 'tani/ddc-fuzzy'
-Plug 'Shougo/ddc-matcher_head'
-Plug 'Shougo/ddc-sorter_rank'
+" Plug 'tani/ddc-fuzzy'
+" Plug 'Shougo/ddc-matcher_head'
+" Plug 'Shougo/ddc-sorter_rank'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -148,26 +151,16 @@ call plug#end()
 
 "nnoremap <leader>S :so %<CR>
 
+
+" asyncomplete
+let g:asyncomplete_min_chars = 2
+
 " Neoformat
-let g:neoformat_try_node_exe = 1
-
-" fu Fmt(...)
-"   let b:winview = winsaveview()
-"   exe ":%!npx prettier --parser " . a:1
-"   call winrestview(b:winview)
-"   unlet b:winview
-" endfu
-
-augroup fmt
-    autocmd!
-    " autocmd BufWritePre * Neoformat
-    " autocmd BufWritePre *.ts,*.tsx call Fmt("typescript")
-    " autocmd BufWritePre *.js,*.jsx call Fmt("javascript")
-augroup END
+" let g:neoformat_try_node_exe = 1
 
 " lsp
-set omnifunc=lsp#complete
-set tagfunc=lsp#tagfunc
+" set omnifunc=lsp#complete
+" set tagfunc=lsp#tagfunc
 
 
 let g:lsp_ignorecase = 1
@@ -183,19 +176,20 @@ let g:lsp_diagnostics_signs_delay = 0
 let g:lsp_semantic_enabled = 1
 
 
-nmap <leader>qf :LspCodeAction<cr>
-nmap <silent> [g :LspNextDiagnostic<cr>
-nmap <silent> ]g :LspPreviousDiagnostic<cr>
-nmap <silent> gd :LspDefinition<cr>
+" nmap <leader>qf :LspCodeAction<cr>
+" nmap <silent> [g :LspNextDiagnostic<cr>
+" nmap <silent> ]g :LspPreviousDiagnostic<cr>
+" nmap <silent> gd :LspDefinition<cr>
+" nmap <silent> gD :vsplit<cr>:LspDefinition<cr>
 " nmap <silent> gh :LspHover<cr>
-nnoremap <silent> K :LspHover<cr> 
-nmap <silent> gD :LspPeekDefinition<cr>
-nmap <silent> gt :LspTypeDefinition<cr> 
-nmap <silent> gT :LspPeekTypeDefinition<cr> 
+" nnoremap <silent> K :LspHover<cr> 
+" nmap <silent> gD :LspPeekDefinition<cr>
+" nmap <silent> gt :LspTypeDefinition<cr> 
+" nmap <silent> gT :LspPeekTypeDefinition<cr> 
 " nmap <silent> gi :LspImplementation<cr>
 " nmap <silent> gI :LspPeekImplementation<cr>
-nmap <silent> gr :LspReferences<cr>
-nmap <silent> gR :LspRename<cr>
+" nmap <silent> gr :LspReferences<cr>
+" nmap <silent> gR :LspRename<cr>
 
 " pum
 " inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
@@ -206,41 +200,41 @@ nmap <silent> gR :LspRename<cr>
 " inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 " sneak
-" let g:sneak#label = 0
+" let g:sneak#label = 1
 " let g:sneak#use_ic_scs = 1
 
 " ddc
-call ddc#custom#patch_global('ui', 'native')
+" call ddc#custom#patch_global('ui', 'native')
 " call ddc#custom#patch_global('sources', ['ultisnips', 'vim-lsp', 'around'])
-call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
+" call ddc#custom#patch_global('sources', ['vim-lsp', 'around'])
 "
 
 " <TAB>: completion.
 " Note: It does not work for pum.vim
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? '<C-n>' :
-\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-\ '<TAB>' : ddc#map#manual_complete()
+" inoremap <silent><expr> <TAB>
+" \ pumvisible() ? '<C-n>' :
+" \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+" \ '<TAB>' : ddc#map#manual_complete()
 " <S-TAB>: completion back.
 " Note: It does not work for pum.vim
-inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+" inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
 " Use matcher_head and sorter_rank.
 " https://github.com/Shougo/ddc-matcher_head
 " https://github.com/Shougo/ddc-sorter_rank
-call ddc#custom#patch_global('sourceOptions', {
-\ '_': {
-\   'matchers': ['matcher_fuzzy'],
-\   'sorters': ['sorter_fuzzy'],
-\   'converters': ['converter_fuzzy'], },
-\ 'vim-lsp': { 'mark': 'L' },
-\ 'around': { 'mark': 'A' },
-\ })
+" call ddc#custom#patch_global('sourceOptions', {
+" \ '_': {
+" \   'matchers': ['matcher_fuzzy'],
+" \   'sorters': ['sorter_fuzzy'],
+" \   'converters': ['converter_fuzzy'], },
+" \ 'vim-lsp': { 'mark': 'L' },
+" \ 'around': { 'mark': 'A' },
+" \ })
 " \ 'ultisnips': { 'mark': 'U' },
 "
-call ddc#custom#patch_global('sourceParams', {
-\   'around': { 'maxSize': 500 },
-\ })
+" call ddc#custom#patch_global('sourceParams', {
+" \   'around': { 'maxSize': 500 },
+" \ })
 
 " <TAB>: completion.
 " inoremap <silent><expr> <TAB>
@@ -252,7 +246,7 @@ call ddc#custom#patch_global('sourceParams', {
 " inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 
 " Use ddc.
-call ddc#enable()
+" call ddc#enable()
 
 " fugitive / git
 "set diffopt+=vertical
@@ -321,6 +315,7 @@ let g:fzf_action = {
 let $FZF_DEFAULT_OPTS = '--bind ctrl-g:select-all'
 
 nnoremap <leader>t :Files .<CR>
+nnoremap <leader>d :Files .<CR>
 " nnoremap <leader>t :Files .<CR>
 nnoremap <leader>l :Buffers<CR>
 nnoremap <leader>F :AgIn<space>
@@ -329,19 +324,19 @@ nnoremap <leader>f :Ag<CR>
 " AgIn: Start ag in the specified directory
 " :AgIn .. foo
 " @see https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
-"function! s:ag_in(bang, ...)
-"  if !isdirectory(a:1)
-"    throw 'not a valid directory: ' .. a:1
-"  endif
+function! s:ag_in(bang, ...)
+  if !isdirectory(a:1)
+    throw 'not a valid directory: ' .. a:1
+  endif
 
-"  " Press `?' to enable preview window.
-"  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
+  " Press `?' to enable preview window.
+  "call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
 
-"  " If you don't want preview option, use this
-"  "call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
-"endfunction
+  " If you don't want preview option, use this
+  call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+endfunction
 
-" command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
 
 " Save shortcut
@@ -360,126 +355,109 @@ nnoremap <leader>O :%bd\|e#\|bd#<cr>
 " map g/ <Plug>(incsearch-stay)
 
 " COC
-" let g:coc_global_extensions = [
-"     \ 'coc-prettier',
-"     \ 'coc-eslint',
-"     \ 'coc-tsserver',
-"     \ 'coc-phpls',
-"     \ 'coc-json',
-"     \ 'coc-pyright',
-"     \ 'coc-pyright',
-"     \ 'coc-ultisnips',
-"     \ 'coc-react-refactor',
-"   \ ]
-" let g:coc_filetype_map = {
-"     \ }
+let g:coc_global_extensions = [
+    \ 'coc-prettier',
+    \ 'coc-eslint',
+    \ 'coc-tsserver',
+    \ 'coc-json',
+    \ 'coc-yaml',
+  \ ]
+    " \ 'coc-phpls',
+    " \ 'coc-pyright',
+    " \ 'coc-ultisnips',
+    " \ 'coc-react-refactor',
+let g:coc_filetype_map = {
+    \ }
 
-" inoremap <silent><expr> <C-j>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <C-j>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Use <c-space> to trigger completion.
-" if has('nvim')
-"   inoremap <silent><expr> <c-space> coc#refresh()
-" else
-"   inoremap <silent><expr> <c-@> coc#refresh()
-" endif
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gD :vsp<CR>gd
-" nmap <silent> gt <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" function! s:show_documentation()
-"   if (index(['vim','help'], &filetype) >= 0)
-"     execute 'h '.expand('<cword>')
-"   elseif (coc#rpc#ready())
-"     call CocActionAsync('doHover')
-"   else
-"     execute '!' . &keywordprg . " " . expand('<cword>')
-"   endif
-" endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-" nmap <leader>rn <Plug>(coc-rename)
-
-" augroup mygroup
-"   autocmd!
-"   " Setup formatexpr specified filetype(s).
-"   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-"   " Update signature help on jump placeholder.
-"   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-" augroup end
-
-" " Applying codeAction to the selected region.
-" " Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-" nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-" nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :vsp<CR>gd
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-rename)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-" xmap if <Plug>(coc-funcobj-i)
-" omap if <Plug>(coc-funcobj-i)
-" xmap af <Plug>(coc-funcobj-a)
-" omap af <Plug>(coc-funcobj-a)
-" xmap ic <Plug>(coc-classobj-i)
-" omap ic <Plug>(coc-classobj-i)
-" xmap ac <Plug>(coc-classobj-a)
-" omap ac <Plug>(coc-classobj-a)
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-" if has('nvim-0.4.0') || has('patch-8.2.0750')
-"   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-"   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-" endif
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
-" nmap <silent> <C-s> <Plug>(coc-range-select)
-" xmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " Add `:Format` command to format current buffer.
-" command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
+command! -nargs=0 Format :call CocAction('format')
 " Add `:OR` command for organize imports of the current buffer.
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 fu! GetShortFilePath()
   return bufname()
@@ -586,3 +564,6 @@ autocmd FileType gitcommit set textwidth=50
 
 " autocmd FileType python nnoremap <leader>y :call CocAction('format')<CR>
 " autocmd FileType python let b:coc_root_patterns = ['app', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
+"
+"
+inoremap <c-l> console.log();<left><left>
