@@ -160,7 +160,7 @@ let g:neoformat_try_node_exe = 1
 
 augroup fmt
     autocmd!
-    autocmd BufWritePre * Neoformat
+    " autocmd BufWritePre * Neoformat
     " autocmd BufWritePre *.ts,*.tsx call Fmt("typescript")
     " autocmd BufWritePre *.js,*.jsx call Fmt("javascript")
 augroup END
