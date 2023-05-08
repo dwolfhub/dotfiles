@@ -158,11 +158,6 @@ let g:asyncomplete_min_chars = 2
 " Neoformat
 " let g:neoformat_try_node_exe = 1
 
-" augroup fmt
-"     autocmd!
-"     autocmd BufWritePre *.ts*,*.js* Neoformat
-" augroup END
-
 " lsp
 " set omnifunc=lsp#complete
 " set tagfunc=lsp#tagfunc
