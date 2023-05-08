@@ -366,11 +366,11 @@ let g:coc_global_extensions = [
     \ 'coc-tsserver',
     \ 'coc-json',
     \ 'coc-yaml',
+    \ 'coc-react-refactor',
   \ ]
     " \ 'coc-phpls',
     " \ 'coc-pyright',
     " \ 'coc-ultisnips',
-    " \ 'coc-react-refactor',
 let g:coc_filetype_map = {
     \ }
 
@@ -405,11 +405,14 @@ nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-rename)
+xmap <leader>gq  <Plug>(coc-codeaction-refactor-selected)
+nmap <leader>gq  <Plug>(coc-codeaction-refactor-selected)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -470,20 +473,11 @@ fu! GetShortFilePath()
   return pathshorten(substitute(getcwd(), "/Users/.*/dev/", "", "") . "/" . bufname())
 endfu
 
-" fu LightlineDateTime()
-"   return strftime('%a %b %d %-l:%M%p')
-" endfu
-
-
-" fu LightlineFilename()
-"   let root =
-" endfu
-
 let g:lightline = {
     \ 'colorscheme': 'dracula',
     \ 'active': {
     \   'left': [ [ 'filename' ] ],
-    \   'right': [ [ 'modified', 'lineinfo' ] ]
+    \   'right': [ [ 'modified', 'lineinfo' ], [ 'cocstatus' ]  ]
     \ },
     \ 'inactive': {
     \   'left': [ [ 'filename' ] ],
@@ -492,6 +486,7 @@ let g:lightline = {
     \ 'component_function': {
     \   'shortfilepath': 'GetShortFilePath',
     \   'longmodified': 'GetLongModified',
+    \   'cocstatus': 'coc#status'
     \ },
     \ }
 
