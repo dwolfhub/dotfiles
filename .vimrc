@@ -87,17 +87,21 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'nikvdp/ejs-syntax'
 
 " MOVING AROUND
 "Plug 'easymotion/vim-easymotion'
-" Plug 'justinmk/vim-sneak'
+Plug 'justinmk/vim-sneak'
+" Plug 'ggandor/lightspeed.nvim'
 
 "Plug 'will133/vim-dirdiff'
 
@@ -107,6 +111,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'xolox/vim-misc'
 "Plug 'xolox/vim-session'
 "Plug 'lumiliet/vim-twig'
+Plug 'lepture/vim-jinja'
 
 " LANGUAGE SERVERS
 " Plug 'prabirshrestha/vim-lsp'
@@ -149,7 +154,7 @@ call plug#end()
 "     set grepformat^=%f:%l:%c:%m
 " endif
 
-"nnoremap <leader>S :so %<CR>
+nnoremap <leader>S :so %<CR>
 
 
 " asyncomplete
@@ -200,8 +205,12 @@ let g:lsp_semantic_enabled = 1
 " inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
 " sneak
-" let g:sneak#label = 1
+let g:sneak#label = 1
 " let g:sneak#use_ic_scs = 1
+highlight Sneak guifg=black guibg=white ctermfg=black ctermbg=white
+highlight SneakScope guifg=black guibg=white ctermfg=black ctermbg=white
+highlight SneakLabel guifg=black guibg=white ctermfg=black ctermbg=white
+
 
 " ddc
 " call ddc#custom#patch_global('ui', 'native')
@@ -341,7 +350,7 @@ command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
 
 " Save shortcut
 nnoremap <leader>s :w<CR>
-nnoremap <leader>S :wqa<CR>
+" nnoremap <leader>S :wqa<CR>
 
 " Delete all but current buffer
 nnoremap <leader>O :%bd\|e#\|bd#<cr>
@@ -358,13 +367,16 @@ nnoremap <leader>O :%bd\|e#\|bd#<cr>
 let g:coc_global_extensions = [
     \ 'coc-prettier',
     \ 'coc-eslint',
+    \ 'coc-emmet',
     \ 'coc-tsserver',
     \ 'coc-json',
     \ 'coc-yaml',
+    \ 'coc-snippets',
+    \ 'coc-htmldjango',
+    \ 'coc-html',
   \ ]
     " \ 'coc-phpls',
     " \ 'coc-pyright',
-    " \ 'coc-ultisnips',
     " \ 'coc-react-refactor',
 let g:coc_filetype_map = {
     \ }
@@ -437,8 +449,11 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 augroup mygroup
   autocmd!
+  autocmd BufRead,BufNewFile *.ejs setfiletype html
+  autocmd BufNewFile,BufRead *.njk set ft=htmldjango
+
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " autocmd FileType scss,sass,ejs,javascript,typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -453,6 +468,25 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
+
+" Use <C-l> for trigger snippet expand.
+" imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -521,15 +555,13 @@ nmap <silent> <C-p> :cprev<CR>
 
 " ultisnips configuration
 " let g:UltiSnipsExpandTrigger="<nop>"
-" nnoremap <leader>ue :UltiSnipsEdit<CR>
-
 " let g:UltiSnipsJumpForwardTrigger="<c-n>"
 " let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 " let g:UltiSnipsEditSplit="vertical"
 " let g:snips_author="DWolf"
 " let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME."/dev/dotfiles/vim-snippets"]
-" let g: UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
-" nnoremap <leader>ue :UltiSnipsEdit<CR>
+" let g:UltiSnipsSnippetStorageDirectoryForUltiSnipsEdit=$HOME."/dev/dotfiles/vim-snippets"
+nnoremap <leader>ue :CocCommand snippets.editSnippets<CR>
 
 " nerdtree
 " nnoremap <leader>e :NERDTreeToggle<cr>
@@ -566,4 +598,4 @@ autocmd FileType gitcommit set textwidth=50
 " autocmd FileType python let b:coc_root_patterns = ['app', '.git', '.env', 'venv', '.venv', 'setup.cfg', 'setup.py', 'pyproject.toml', 'pyrightconfig.json']
 "
 "
-inoremap <c-l> console.log();<left><left>
+autocmd FileType typescript,javascript inoremap <c-l> console.log();<left><left>
