@@ -44,13 +44,6 @@ set foldmethod=manual
 set foldlevel=9
 set ttimeoutlen=0
 
-" COLORSCHEMES --------
-
-" DRACULA
-let g:dracula_italic = 1
-" packadd! dracula
-colorscheme dracula
-" let g:dracula_italic = 0
 
 " NIGHTFOX (BROKEN: colorscheme not found at startup)
 " require('nightfox')
@@ -79,6 +72,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -147,6 +141,14 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'shinchu/lightline-gruvbox.vim'
 
 call plug#end()
+
+" COLORSCHEMES --------
+
+" DRACULA
+let g:dracula_italic = 1
+" packadd! dracula
+colorscheme dracula
+" let g:dracula_italic = 0
 
 " grep
 " if (executable('ag'))
