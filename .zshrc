@@ -1,4 +1,4 @@
-export PATH="/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
+export PATH="/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
 
 # case-insensitive auto-complete with tab
 #bind "set completion-ignore-case on"
@@ -28,6 +28,7 @@ alias gap="git add -p"
 alias gb="git branch"
 alias gbd="git branch -d"
 alias gc="git commit -m"
+alias gclo="git clone"
 alias gca="git commit --amend"
 alias gcb="git checkout -b"
 alias gcl="git checkout -- "
@@ -124,17 +125,13 @@ alias my-ips="ifconfig | grep \"inet \" | cut -f2 | cut -d\" \" -f 2"
 alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 # hub aliased to git
-eval "$(hub alias -s)"
+# eval "$(hub alias -s)"
 
 export FZF_DEFAULT_OPTS='--height 30% --bind ctrl-n:down,ctrl-p:up'
 export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
 export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
 export FZF_COMPLETION_TRIGGER=","
-
-
- . /usr/local/opt/fzf/shell/key-bindings.zsh
- . /usr/local/opt/fzf/shell/completion.zsh
 
 _fzf_complete_yarn() {
   _fzf_complete --multi --reverse --prompt="yarn> " -- "$@" < <(
@@ -205,23 +202,19 @@ export LC_CTYPE="en_US.UTF-8"
 # The next line enables shell command completion for gcloud.
 #if [ -f '~/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-export TERM=xterm-256color-italic
+# export TERM=xterm-256color-italic
 
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
-#if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
-source ~/.zsh-nvm/zsh-nvm.plugin.zsh
-
- # if [ -s "$HOME/.nvm/nvm.sh" ]; then
- #   export NVM_DIR="$HOME/.nvm"
- #   source $HOME/.nvm/nvm.sh 
- # fi
-
-[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 setopt share_history
-if ! type "$rbenv" > /dev/null; then
-    eval "$(rbenv init - zsh)"
-fi
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
