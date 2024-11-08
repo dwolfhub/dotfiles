@@ -1,4 +1,4 @@
-export PATH="/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
+export PATH="/Users/danielwolf/Library/Python/3.11/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
 
 # case-insensitive auto-complete with tab
 #bind "set completion-ignore-case on"
@@ -128,7 +128,7 @@ alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git bran
 # eval "$(hub alias -s)"
 
 export FZF_DEFAULT_OPTS='--height 30% --bind ctrl-n:down,ctrl-p:up'
-export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore "*.swp" -l -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore venv --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore out --ignore dist --ignore "*.swp" -l -g ""'
 export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
 export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
 export FZF_COMPLETION_TRIGGER=","
@@ -218,3 +218,6 @@ export NVM_DIR="$HOME/.nvm"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
