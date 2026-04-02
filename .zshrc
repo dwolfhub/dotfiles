@@ -1,5 +1,3 @@
-export PATH="/Users/danielwolf/Library/Python/3.11/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
-
 # case-insensitive auto-complete with tab
 #bind "set completion-ignore-case on"
 
@@ -21,6 +19,9 @@ jv() {
     j $1
     vi .
 }
+
+alias vi="nvim"
+alias vim="nvim"
 
 # Git aliases
 alias ga="git add"
@@ -66,6 +67,8 @@ alias gsa="git stash apply"
 alias gsh="git show"
 alias gst="git stash"
 alias gw="git wip"
+# clear git branches that are already merged
+alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 # Docker aliases
 alias dcu="docker-compose up -d"
@@ -121,8 +124,8 @@ parseurl() {
 # what is my IP?
 alias my-ips="ifconfig | grep \"inet \" | cut -f2 | cut -d\" \" -f 2"
 
-# clear git branches that are already merged
-alias git-branch-clear='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+
+
 
 # hub aliased to git
 # eval "$(hub alias -s)"
@@ -156,6 +159,8 @@ PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
 # autoload -Uz compinit && compinit
 
+export PATH="$HOME/dev/homebrew/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
+
 # export PATH=$PATH:$(npm config --global get prefix)/bin
 
 # Android Studio Env Vars
@@ -187,8 +192,12 @@ export WORDCHARS=${WORDCHARS/\/}
 # export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
 # export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
 
-export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+# export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+# export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+
+# export PATH="/Users/wolfdx3/dev/homebrew/opt/openssl@1.1/bin:$PATH"
+# export LDFLAGS="-L/Users/wolfdx3/dev/homebrew/opt/openssl@1.1/lib"
+# export CPPFLAGS="-I/Users/wolfdx3/dev/homebrew/opt/openssl@1.1/include"
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -206,7 +215,7 @@ export LC_CTYPE="en_US.UTF-8"
 
 #if [ -f '/usr/local/opt/asdf/asdf.sh' ]; then . /usr/local/opt/asdf/asdf.sh; fi
 
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+[ -f /Users/wolfdx3/dev/homebrew/etc/profile.d/autojump.sh ] && . /Users/wolfdx3/dev/homebrew/etc/profile.d/autojump.sh
 
 setopt share_history
 
@@ -217,7 +226,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
-export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
-export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+# export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
+# export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+# export PATH="/Users/wolfdx3/.pyenv/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+export PATH="/Users/wolfdx3/.bin:$PATH"
+export PATH="/Users/wolfdx3/dev/aws-cli:$PATH"
+export HOMEBREW_PREFIX=$(brew --prefix)
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+# export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_CELLAR/openssl@3/3.4.0/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+# export DYLD_LIBRARY_PATH="$HOMEBREW_CELLAR/openssl@3/3.4.0/lib:$DYLD_LIBRARY_PATH"
