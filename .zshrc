@@ -221,3 +221,6 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+
+# opencode
+export PATH=/Users/danielwolf/.opencode/bin:$PATH

@@ -11,8 +11,8 @@ let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 
 " disable netrw
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrw = 1
+" let g:loaded_netrwPlugin = 1
 
 filetype on
 syntax enable
