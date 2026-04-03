@@ -130,20 +130,28 @@ alias my-ips="ifconfig | grep \"inet \" | cut -f2 | cut -d\" \" -f 2"
 # hub aliased to git
 # eval "$(hub alias -s)"
 
-export FZF_DEFAULT_OPTS='--height 30% --bind ctrl-n:down,ctrl-p:up'
-export FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore venv --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore out --ignore dist --ignore "*.swp" -l -g ""'
-export FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\""
-export FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME"
-export FZF_COMPLETION_TRIGGER=","
+FZF_DEFAULT_OPTS='--layout reverse --bind ctrl-n:down,ctrl-p:up' \
+FZF_DEFAULT_COMMAND='ag --hidden --skip-vcs-ignores --ignore venv --ignore ios --ignore vendor --ignore "**/__snapshots__/" --ignore .git --ignore node_modules --ignore out --ignore dist --ignore "*.swp" -l' \
+FZF_CTRL_T_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\"" \
+FZF_ALT_C_COMMAND="ag --hidden --skip-vcs-ignores --ignore .git --ignore node_modules --ignore \"*.swp\" -l -g \"\" $HOME" \
+FZF_COMPLETION_TRIGGER="," \
+FZF_CTRL_R_OPTS="
+  --bind 'ctrl-r:up'
+  --bind 'ctrl-s:down'
+" \
+
+source <(fzf --zsh)
+
+# Set up fzf key bindings and fuzzy completion
+# fzf --version
+# source <(fzf --zsh)
+
 
 _fzf_complete_yarn() {
   _fzf_complete --multi --reverse --prompt="yarn> " -- "$@" < <(
     jq ".scripts|keys|.[]" package.json | gsed 's/.$//; s/^.//'
   )
 }
-
-
-PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
 # autoload -Uz vcs_info
 # precmd_vcs_info() { vcs_info }
@@ -159,7 +167,9 @@ PROMPT='%B%F{blue}%1~%f%b %(?.%F{green}>.%F{magenta}>)%f '
 
 # autoload -Uz compinit && compinit
 
-export PATH="$HOME/dev/homebrew/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables"
+export PATH="$HOME/dev/homebrew/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables:/Users/wolfdx3/.local/bin"
+export PATH="/Users/wolfdx3/aws-cli:$PATH"
+
 
 # export PATH=$PATH:$(npm config --global get prefix)/bin
 

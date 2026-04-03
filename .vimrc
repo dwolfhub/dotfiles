@@ -11,8 +11,8 @@ let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 
 " disable netrw
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrw = 1
+" let g:loaded_netrwPlugin = 1
 
 filetype on
 syntax enable
@@ -66,7 +66,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ap/vim-css-color'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
@@ -80,11 +80,14 @@ Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 " Plug 'tpope/vim-unimpaired'
+
+Plug 'TabbyML/vim-tabby'
 
 call plug#end()
 
-packadd comment
+packadd! comment
 let g:dracula_italic = 1
 colorscheme dracula
 
