@@ -1,0 +1,14 @@
+{{- $machine := promptChoiceOnce . "machine" "Which machine is this" (list "personal" "work") -}}
+{{- $brewPrefix := "/opt/homebrew" -}}
+{{- if stat (joinPath .chezmoi.homeDir "dev/homebrew/bin/brew") -}}
+{{-   $brewPrefix = joinPath .chezmoi.homeDir "dev/homebrew" -}}
+{{- end -}}
+sourceDir = {{ joinPath .chezmoi.homeDir "dev/dotfiles" | quote }}
+mode = "symlink"
+
+[data]
+    machine = {{ $machine | quote }}
+    brewPrefix = {{ $brewPrefix | quote }}
+
+[onepassword]
+    prompt = true

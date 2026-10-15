@@ -1,0 +1,79 @@
+{
+  "attribution": {
+    "commit": "",
+    "sessionUrl": false
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@claude-plugins-official": true
+  },
+  "spinnerTipsEnabled": false,
+  "tui": "fullscreen",
+  "theme": "dark",
+  "permissions": {
+    "allow": [
+      "Grep",
+      "Read",
+      "Edit",
+      "Write",
+      "WebFetch",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(awk:*)",
+      "Bash(cat:*)",
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(find:*)",
+      "Bash(jq:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(pwd)",
+      "Bash(rg:*)",
+      "Bash(sleep:*)",
+      "Bash(sort:*)",
+      "Bash(stat:*)",
+      "Bash(test:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(xargs grep:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(docker build:*)",
+      "Bash(docker images:*)",
+      "Bash(docker pull:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh run view:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git blame:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git fetch:*)",
+      "Bash(git add:*)",
+      "Bash(git describe:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git merge-base:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git shortlog:*)",
+      "Bash(git stash list:*)",
+      "Bash(git stash show:*)",
+      "Bash(git stash push:*)",
+      "Bash(git worktree list:*)",
+      "Bash(git tag -l:*)",
+      "Bash(git tag --list:*)",
+      "Bash(git config --get:*)",
+      "Bash(git config --list:*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

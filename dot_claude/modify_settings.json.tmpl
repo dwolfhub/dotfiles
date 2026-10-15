@@ -1,0 +1,22 @@
+#!/bin/sh
+# chezmoi passes the current ~/.claude/settings.json on stdin and writes stdout
+# back to it. Claude Code edits this file itself, so instead of overwriting it we
+# merge: current file <- shared repo settings <- untracked machine-local overlay.
+# Permission lists are unioned rather than replaced.
+set -e
+
+shared={{ joinPath .chezmoi.sourceDir "claude-settings.json" | quote }}
+overlay="$HOME/.claude/settings.local-overlay.json"
+[ -f "$overlay" ] || overlay=/dev/null
+
+current=$(cat)
+[ -n "$current" ] || current='{}'
+
+printf '%s' "$current" | jq --slurpfile shared "$shared" --slurpfile overlay "$overlay" '
+  # order-preserving union of one permissions list across all layers
+  def union($k): reduce ([ .[].permissions[$k] // [] ] | add)[] as $x ([]; if index([$x]) then . else . + [$x] end);
+  [ ., $shared[0], ($overlay[0] // {}) ] as $layers
+  | reduce ("allow", "ask", "deny") as $k
+      ($layers | reduce .[] as $l ({}; . * $l);
+       ($layers | union($k)) as $v | if $v == [] then . else .permissions[$k] = $v end)
+'

@@ -1,0 +1,11 @@
+README.md
+misc
+claude-settings.json
+
+# Machine-local overlays are never managed (see README)
+.zshrc.local
+.gitconfig.local
+.tmux.local.conf
+.config/kitty/local.conf
+.config/nvim/lua/local.lua
+.claude/settings.local-overlay.json

@@ -1,0 +1,31 @@
+return {
+    -- "olimorris/codecompanion.nvim",
+    -- dependencies = {
+    --   "nvim-lua/plenary.nvim",
+    --   "nvim-treesitter/nvim-treesitter",
+    -- },
+    -- config = function()
+    --   require("codecompanion").setup({
+    --     strategies = {
+    --       chat = { adapter = "tabby" },
+    --       inline = { adapter = "tabby" },
+    --     },
+    --     adapters = {
+    --      tabby = function()
+    --         return require("codecompanion.adapters").extend("openai_compatible", {
+    --           env = {
+    --             url = "http://0.0.0.0:8080", -- optional: default value is ollama url http://127.0.0.1:11434
+    --             api_key = "auth_fcf61b1a30f44641aedf6f598a56b75d", -- optional: if your endpoint is authenticated
+    --           },
+    --           schema = {
+    --             model = {
+    --               default = "Qwen2.5-Coder-7B-Instruct",
+    --               choices = { "Qwen2.5-Coder-7B-Instruct" },
+    --             },
+    --           },
+    --         })
+    --       end,
+    --     },
+    --   })
+    -- end,
+  }
