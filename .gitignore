@@ -20,3 +20,6 @@ env35
 .php_cs.cache
 Session.vim
 .kompose
+
+**/.claude/settings.local.json
+.zshrc.local

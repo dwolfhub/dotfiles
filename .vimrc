@@ -65,7 +65,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'ap/vim-css-color'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dracula/vim', { 'as': 'dracula' }
 " Plug 'github/copilot.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -88,8 +87,6 @@ Plug 'TabbyML/vim-tabby'
 call plug#end()
 
 packadd! comment
-let g:dracula_italic = 1
-colorscheme dracula
 
 nnoremap <leader>v :vsplit ~/.vimrc<CR>
 nnoremap <leader>S :so %<CR>
@@ -99,10 +96,7 @@ nnoremap <leader>O :%bd\|e#\|bd#<cr>
 nnoremap <leader>s :w<CR>
 nnoremap <leader>w :set wrap!<CR>
 
-let g:copilot_workspace_folders = ["/Users/danielwolf/dev"]
-
-highlight Sneak guifg=black guibg=white ctermfg=black ctermbg=white
-highlight SneakScope guifg=black guibg=white ctermfg=black ctermbg=white
+let g:copilot_workspace_folders = ["/Users/wolfdx3/dev"]
 
 let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],

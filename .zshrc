@@ -12,7 +12,7 @@ alias sudo='sudo '
 alias connmouse='blueutil --pair 04-f1-3e-f0-49-df'
 
 # listing directory shortcuts
-alias ll="ls -lah"
+alias ll="ls -lahF --color=auto"
 
 # jump to path and open vim
 jv() {
@@ -113,6 +113,11 @@ alias sprox="symfony local:proxy:start"
 alias k="kubectl"
 alias kn="kubens"
 
+# Pyton VENV
+alias sv="source venv/bin/activate"
+alias nv="python3.12 -m venv venv && sv"
+alias dv="deactivate"
+
 # Random Helpers
 portsearch() {
     lsof -nP -i4TCP:$1 | grep LISTEN
@@ -123,9 +128,6 @@ parseurl() {
 
 # what is my IP?
 alias my-ips="ifconfig | grep \"inet \" | cut -f2 | cut -d\" \" -f 2"
-
-
-
 
 # hub aliased to git
 # eval "$(hub alias -s)"
@@ -140,18 +142,13 @@ FZF_CTRL_R_OPTS="
   --bind 'ctrl-s:down'
 " \
 
-source <(fzf --zsh)
-
-# Set up fzf key bindings and fuzzy completion
-# fzf --version
-# source <(fzf --zsh)
-
-
 _fzf_complete_yarn() {
   _fzf_complete --multi --reverse --prompt="yarn> " -- "$@" < <(
     jq ".scripts|keys|.[]" package.json | gsed 's/.$//; s/^.//'
   )
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # autoload -Uz vcs_info
 # precmd_vcs_info() { vcs_info }
@@ -167,9 +164,8 @@ _fzf_complete_yarn() {
 
 # autoload -Uz compinit && compinit
 
-export PATH="$HOME/dev/homebrew/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables:/Users/wolfdx3/.local/bin"
+export PATH="$HOME/dev/homebrew/bin:/opt/homebrew/bin:/opt/local/bin:/opt/local/sbin:$HOME/.gem/ruby/2.6.0/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/sbin:/sbin:$HOME/.composer/vendor/bin:/usr/bin:$HOME/.symfony/bin:$HOME/.ebcli-virtual-env/executables:/Users/wolfdx3/.local/bin"
 export PATH="/Users/wolfdx3/aws-cli:$PATH"
-
 
 # export PATH=$PATH:$(npm config --global get prefix)/bin
 
@@ -179,6 +175,9 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
 
 # The following lines were added by compinstall
 # zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -208,6 +207,8 @@ export WORDCHARS=${WORDCHARS/\/}
 # export PATH="/Users/wolfdx3/dev/homebrew/opt/openssl@1.1/bin:$PATH"
 # export LDFLAGS="-L/Users/wolfdx3/dev/homebrew/opt/openssl@1.1/lib"
 # export CPPFLAGS="-I/Users/wolfdx3/dev/homebrew/opt/openssl@1.1/include"
+export LDFLAGS="-L/Users/wolfdx3/dev/homebrew/opt/openssl@3/lib"
+export CPPFLAGS="-I/Users/wolfdx3/dev/homebrew/opt/openssl@3/include"
 
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
@@ -232,21 +233,62 @@ setopt share_history
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 #
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-source <(fzf --zsh)
+# Sourcing nvm.sh costs ~2s per shell. Instead, put the newest installed node
+# matching the default alias on PATH directly, and only load nvm itself the
+# first time `nvm` is actually called.
+_nvm_default_bin=($NVM_DIR/versions/node/v$(<$NVM_DIR/alias/default)*(N/nOn[1]))
+[[ -n $_nvm_default_bin ]] && export PATH="$_nvm_default_bin/bin:$PATH"
+unset _nvm_default_bin
+nvm() {
+  unfunction nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  nvm "$@"
+}
 
 # export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
-# export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+# export PATH="/opt/homebrew/opt/php@9.3/bin:$PATH"
 # export PATH="/Users/wolfdx3/.pyenv/bin:$PATH"
 # export PYENV_ROOT="$HOME/.pyenv"
 # [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
 export PATH="/Users/wolfdx3/.bin:$PATH"
-export PATH="/Users/wolfdx3/dev/aws-cli:$PATH"
-export HOMEBREW_PREFIX=$(brew --prefix)
+export HOMEBREW_PREFIX="$HOME/dev/homebrew"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
-# export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_CELLAR/openssl@3/3.4.0/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-# export DYLD_LIBRARY_PATH="$HOMEBREW_CELLAR/openssl@3/3.4.0/lib:$DYLD_LIBRARY_PATH"
+export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_CELLAR/openssl@3/3.4.1/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+export DYLD_LIBRARY_PATH="$HOMEBREW_CELLAR/openssl@3/3.4.1/lib:$DYLD_LIBRARY_PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/wolfdx3/.docker/completions $fpath)
+# Full compinit security audit costs ~1.5s; only do it once a day and use
+# the cached dump otherwise.
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# End of Docker CLI completions
+
+source "$HOMEBREW_PREFIX/opt/gitstatus/gitstatus.prompt.zsh"
+
+# Disable the default virtualenv prompt change
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# Function to display virtual environment info
+virtualenv_info() {
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        echo "🐍 "
+    fi
+}
+
+PROMPT='$(virtualenv_info)$GITSTATUS_PROMPT %B%F{blue}%1~%f%b %(?.%F{green}>.%F{red}>)%f '
+
+RPROMPT=''  # right prompt: git status
+
+export DISABLE_TELEMETRY=1
+#export NODE_TLS_REJECT_UNAUTHORIZED=0
+
+# Secrets and machine-local overrides (untracked)
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
