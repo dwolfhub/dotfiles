@@ -75,5 +75,6 @@
       "Bash(git commit:*)",
       "Bash(git push:*)"
     ]
-  }
+  },
+  "model": "sonnet"
 }
