@@ -12,7 +12,7 @@
   },
   "spinnerTipsEnabled": false,
   "tui": "fullscreen",
-  "theme": "dark",
+  "theme": "dark-ansi",
   "permissions": {
     "allow": [
       "Grep",
