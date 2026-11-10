@@ -76,5 +76,10 @@
       "Bash(git push:*)"
     ]
   },
-  "model": "sonnet"
+  "model": "sonnet",
+  "defaultView": "chat",
+  "showTurnDuration": false,
+  "promptSuggestionEnabled": false,
+  "todoFeatureEnabled": false,
+  "emojiCompletionEnabled": false
 }

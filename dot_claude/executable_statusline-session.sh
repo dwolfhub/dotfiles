@@ -1,5 +1,5 @@
 #!/bin/bash
-# Claude Code status line: session name | dir basename | git branch | model
+# Claude Code status line: session name | dir basename | model (only if not sonnet)
 input=$(cat)
 
 # Parse three fields, one per line (jq if present, else python3)
@@ -30,19 +30,12 @@ dir=$(basename "$cwd")
 # Short model name: "Sonnet 5.5" -> "sonnet"
 model=$(printf '%s' "${model%% *}" | tr '[:upper:]' '[:lower:]')
 
-branch=""
-if [ -d "$cwd" ]; then
-  branch=$(git --no-optional-locks -C "$cwd" symbolic-ref --short HEAD 2>/dev/null)
-  [ -z "$branch" ] && branch=$(git --no-optional-locks -C "$cwd" rev-parse --short HEAD 2>/dev/null)
-fi
-
 sep=$(printf ' \033[2m|\033[0m ')
 out=""
 add() { if [ -z "$out" ]; then out="$1"; else out="$out$sep$1"; fi; }
 
 [ -n "$name" ]   && add "$(printf '\033[1;33m%s\033[0m' "$name")"
 [ -n "$dir" ]    && add "$(printf '\033[34m%s\033[0m' "$dir")"
-[ -n "$branch" ] && add "$(printf '\033[32m%s\033[0m' "$branch")"
-[ -n "$model" ]  && add "$(printf '\033[36m%s\033[0m' "$model")"
+[ -n "$model" ] && [ "$model" != "sonnet" ] && add "$(printf '\033[1;31m%s\033[0m' "$model")"
 
 printf '%s' "$out"
