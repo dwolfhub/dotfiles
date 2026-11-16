@@ -12,7 +12,6 @@
   },
   "spinnerTipsEnabled": false,
   "tui": "fullscreen",
-  "theme": "light-ansi",
   "permissions": {
     "allow": [
       "Grep",

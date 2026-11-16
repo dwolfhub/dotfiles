@@ -1,0 +1,43 @@
+#!/bin/sh
+# Switch Solarized light/dark across kitty, tmux, nvim and Claude Code.
+# Usage: theme [light|dark|toggle]   (no args: print current mode)
+set -e
+
+# kitty-launched processes get a minimal PATH; make sure tmux/jq are found
+PATH="$HOME/dev/homebrew/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+state="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
+mkdir -p "$(dirname "$state")"
+current=$(cat "$state" 2>/dev/null || echo light)
+
+case "${1:-}" in
+  "")     echo "$current"; exit 0 ;;
+  toggle) if [ "$current" = light ]; then mode=dark; else mode=light; fi ;;
+  light|dark) mode=$1 ;;
+  *) echo "usage: theme [light|dark|toggle]" >&2; exit 2 ;;
+esac
+
+echo "$mode" > "$state"          # nvim re-reads this on focus
+
+# kitty: repoint the override, then SIGUSR1 reloads config in all instances
+ln -sf "solarized-$mode.conf" "$HOME/.config/kitty/current-theme.conf"
+# Name matching (pgrep -x) finds nothing when launched from a kitty keybind, so
+# also use $KITTY_PID, but only after confirming that pid really is kitty.
+for pid in "${KITTY_PID:-}" $(pgrep -x kitty 2>/dev/null); do
+  [ -n "$pid" ] || continue
+  ps -p "$pid" -o command= 2>/dev/null | grep -q kitty && kill -USR1 "$pid" 2>/dev/null
+done || true
+
+# tmux
+ln -sf "solarized-$mode.conf" "$HOME/.config/tmux/current-theme.conf"
+tmux source-file "$HOME/.tmux.conf" 2>/dev/null || true
+
+# Claude Code (theme is deliberately not pinned in the shared settings)
+settings="$HOME/.claude/settings.json"
+if [ -f "$settings" ]; then
+  tmp=$(mktemp)
+  jq --arg t "$mode-ansi" '.theme = $t' "$settings" > "$tmp" && cat "$tmp" > "$settings"
+  rm -f "$tmp"
+fi
+
+echo "$mode"

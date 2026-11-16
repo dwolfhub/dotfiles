@@ -130,7 +130,6 @@ cmp.setup({
 })
 
 
-vim.o.background = 'light'
 
 vim.diagnostic.config({virtual_text = false})
 vim.api.nvim_set_keymap(
